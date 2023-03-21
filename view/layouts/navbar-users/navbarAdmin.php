@@ -7,6 +7,6 @@
         <a href="/inventario_dgtic/view/admin/manage-downloads.php">Gestionar Descargas</a>
         <a href="">Gestionar Secciones</a>
         <a href="">Gestionar Diplomados</a>
-        <a href="">Cerrar Sesión</a>
+        <a href="/inventario_dgtic/index.php">Cerrar Sesión</a>
     </nav>
 </div>
