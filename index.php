@@ -21,8 +21,8 @@
         <a href="">
             <button type="button" class="btn btn-primary btn-tabla">Vista Consultor</button>
         </a>
-        <a href="">
-            <button type="button" class="btn btn-primary btn-tabla">Vista Esitor</button>
+        <a href="/inventario_dgtic/view/editor/editor-welcome.php">
+            <button type="button" class="btn btn-primary btn-tabla">Vista Editor</button>
         </a>
         <a href="">
             <button type="button" class="btn btn-primary btn-tabla">Vista CE</button>

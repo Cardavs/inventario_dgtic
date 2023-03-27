@@ -1,23 +1,4 @@
-<?php
-
-/********************************
- * pantalla: registrar material *
- * date: 09/03/2023             *
- * autor: Roan                  *
- ********************************/
-
-include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
-?>
-
-<!DOCTYPE html>
-<html lang="es">
-<?php include(LAYOUT . '/head.php'); ?>
-
-<body>
-    <?php include(LAYOUT . '/header.php'); ?>
-    <?php include(LAYOUT . '/navbar.php'); ?>
-
-    <h2 class="titulo">Registrar Material</h2>
+<h2 class="titulo">Registrar Material</h2>
     <form class="container col-md-12 col-sm-4 formulario" action="" method="post">
         <div class="row g-3 mb-3">
             <div class="col">
@@ -102,8 +83,3 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
         </div>
 
     </form>
-
-    <?php include(LAYOUT . '/footer.php'); ?>
-</body>
-
-</html>

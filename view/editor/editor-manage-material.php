@@ -17,10 +17,11 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
 </head>
 <body>
     <?php include(LAYOUT."/header.php");?>
-    <?php include(LAYOUT."/navbar-users/navbarAdmin.php");?>
+    <?php include(LAYOUT."/navbar-users/navbarEditor.php");?>
+    
     <h2 class="titulo">Gestionar Material</h2>
     <div class="container search">
-        <a href="/inventario_dgtic/view/admin/admin-material-register.php">
+        <a href="/inventario_dgtic/view/editor/editor-material-register.php">
             <button class="btn btn-primary btn-subir-material" type="button">Subir Material</button>
         </a>
         <form class="d-flex col-md-2 form-search" role="search">
