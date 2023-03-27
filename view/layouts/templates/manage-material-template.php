@@ -75,7 +75,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="/inventario_dgtic/view/layouts/manage-material/pdfView.php">
+                        <a href="/inventario_dgtic/view/editor/editor-pdf-view.php">
                             <button type="button" class="btn btn-primary btn-tabla">Índice</button>
                         </a>
                         <button type="button" class="btn btn-primary btn-tabla">Habilitar</button>
