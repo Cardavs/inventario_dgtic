@@ -1,3 +1,4 @@
+<h2 class="titulo mb-4">Cambiar Contraseña</h2>
 <div class="container text-center">
     <form action="" class="formulario g-3">
         <div class="mb-3 col ">

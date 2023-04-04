@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="/inventario_dgtic/view/admin/admin-pdfView.php">
+                        <a href="/inventario_dgtic/public/pdf/DocumentoPrueba.pdf">
                             <button type="button" class="btn btn-primary btn-tabla">Índice</button>
                         </a>
                         <button type="button" class="btn btn-primary btn-tabla">Habilitar</button>
@@ -75,7 +75,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="/inventario_dgtic/view/editor/editor-pdf-view.php">
+                        <a href="/inventario_dgtic/public/pdf/DocumentoPrueba.pdf">
                             <button type="button" class="btn btn-primary btn-tabla">Índice</button>
                         </a>
                         <button type="button" class="btn btn-primary btn-tabla">Habilitar</button>
