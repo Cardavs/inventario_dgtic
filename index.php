@@ -18,7 +18,7 @@
         <a href="/inventario_dgtic/view/admin/admin_welcome.php">
             <button type="button" class="btn btn-primary btn-tabla">Vista Admin</button>
         </a>
-        <a href="">
+        <a href="/inventario_dgtic/view/consultor/consultor-welcome.php">
             <button type="button" class="btn btn-primary btn-tabla">Vista Consultor</button>
         </a>
         <a href="/inventario_dgtic/view/editor/editor-welcome.php">
