@@ -24,7 +24,7 @@
         <a href="/inventario_dgtic/view/editor/editor-welcome.php">
             <button type="button" class="btn btn-primary btn-tabla">Vista Editor</button>
         </a>
-        <a href="">
+        <a href="/inventario_dgtic/view/CE/CE-welcome.php">
             <button type="button" class="btn btn-primary btn-tabla">Vista CE</button>
         </a>
     </div>
