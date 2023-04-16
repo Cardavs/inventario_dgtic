@@ -10,4 +10,5 @@
     <link rel="stylesheet" href="/inventario_dgtic/view/css/normalize.css">
     <link rel="stylesheet" href="/inventario_dgtic/view/css/styles.css">
     <script src="/inventario_dgtic/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>

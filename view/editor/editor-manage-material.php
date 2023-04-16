@@ -24,13 +24,16 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
         <a href="/inventario_dgtic/view/editor/editor-material-register.php">
             <button class="btn btn-primary btn-subir-material" type="button">Subir Material</button>
         </a>
-        <form class="d-flex col-md-2 form-search" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex col-md-2 form-search needs-validation text-container" role="search" novalidate>
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" required>
+            <div class="invalid-feedback">
+                Es necesario colocar un filtro.
+            </div>
             <button class="btn btn-primary" type="submit">Buscar</button>
         </form>
     </div>
     <?php include(LAYOUT."/templates/manage-material-template.php");?>
-
+    <script src="/inventario_dgtic/controllers/validation/js/form-validation-empty.js"></script>
     <?php include(LAYOUT."/footer.php");?>
 </body>
 </html>

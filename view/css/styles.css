@@ -169,12 +169,7 @@ header{
 .form-search
 {
     margin:.5rem 2rem 2rem 2rem;
-    width: 20%;
-}
-
-.search{
-    display: flex;
-    justify-content: space-between;
+    width: 50%;
 }
 
 

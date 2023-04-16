@@ -19,9 +19,12 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
 
     <h2 class="titulo">Gestionar Cuentas</h2>
 
-    <div class="container search">
-        <form class="d-flex col-md-2 form-search" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <div class="container">
+        <form class="d-flex col-md-2 form-search needs-validation text-container" role="search" novalidate>
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" required>
+            <div class="invalid-feedback">
+                Es necesario colocar un filtro.
+            </div>
             <button class="btn btn-primary" type="submit">Buscar</button>
         </form>
     </div>
@@ -101,7 +104,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
             </tbody>
         </table>
     </div>
-
+    <script src="/inventario_dgtic/controllers/validation/js/form-validation-empty.js"></script>
 
     <?php include(LAYOUT . '/footer.php'); ?>
 </body>
