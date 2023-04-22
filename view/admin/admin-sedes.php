@@ -25,14 +25,14 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
         <table class="table tabla-sede">
             <thead class="encabezado">
                 <tr>
-                    <th>Sede</th>
-                    <th>Siglas</th>
-                    <th></th>
+                    <th scope="col">Sede</th>
+                    <th scope="col">Siglas</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <th>Ciudad Universitaria</th>
+                    <th scope="row">Ciudad Universitaria</th>
                     <td>CU</td>
                     <td class="btn-tabla-container">
                         <button type="button" class="btn btn-primary btn-tabla">Habilitar</button>
@@ -42,7 +42,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
                     </td>
                 </tr>
                 <tr>
-                    <th>Centro Mascarones</th>
+                    <th scope="row">Centro Mascarones</th>
                     <td>CM</td>
                     <td class="btn-tabla-container">
                          <button type="button" class="btn btn-primary btn-tabla">Habilitar</button>
@@ -52,7 +52,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
                     </td>
                 </tr>
                 <tr>
-                    <th>Centro Polanco</th>
+                    <th scope="row">Centro Polanco</th>
                     <td>CP</td>
                     <td class="btn-tabla-container">
                         <button type="button" class="btn btn-primary btn-tabla">Habilitar</button>
@@ -63,14 +63,16 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
                 </tr>
             </tbody>
         </table>
-        <div class="container text-center">
+        <div id="sedeDynamic" class="row"></div>
+        <div class="container text-center ms-1">
             <div class="row justify-content-start">
-                <div class="col-2 ">
-                    <button type="button" class="btn btn-primary btn-tabla">Agregar Sede</button>
+                <div class="col-2">
+                    <button id="agregarSede" type="button" class="btn btn-primary btn-tabla">Agregar Sede</button>
                 </div>
             </div>
         </div>
     </div>
+    <script src="/inventario_dgtic/view/js/dynamic_inputs/addSede.js"></script>
     <?php include(LAYOUT."/footer.php");?>
 </body>
 </html>

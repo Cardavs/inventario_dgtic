@@ -34,11 +34,13 @@
                 </tr>
             </tbody>
         </table>
+        <div class="row" id="sectionDynamic"></div>
         <div class="container text-center">
             <div class="row justify-content-start">
                 <div class="col-2 ">
-                    <button type="button" class="btn btn-primary btn-tabla">Agregar Sección</button>
+                    <button type="button" id="addInput" class="btn btn-primary btn-tabla">Agregar Sección</button>
                 </div>
             </div>
         </div>
     </div>
+    <script src="/inventario_dgtic/view/js/dynamic_inputs/addSection.js"></script>

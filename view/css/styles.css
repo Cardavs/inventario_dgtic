@@ -213,6 +213,14 @@ button{
     margin: .5rem;
     width: 97%;
 }
+.addInput{
+    width: 100%;
+}
+.btn-tablaAdd{
+    font-size: 1.5rem;
+    margin: .5rem;
+    width: 20%;
+}
 
 .btn-tabla:hover{
     background-color: var(--secundario);
@@ -243,7 +251,8 @@ button{
 
 .btn-subir-material{
     font-size: 1.5rem;
-    width: 100%;
+    width: 15%;
+    margin-left: 2rem;
 }
 
 .btn-subir-material:hover{
