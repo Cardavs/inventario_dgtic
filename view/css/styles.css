@@ -259,6 +259,13 @@ button{
     background-color: var(--secundario);
 }
 
+#ISBN{
+    display: none;
+}
+#Tiraje{
+    display: none;
+}
+
 /*VISTA PDF*/
 
 .pdfview{

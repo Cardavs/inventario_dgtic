@@ -17,16 +17,19 @@
                                     <div class="col p-4">
                                         <label for="inicio">Fecha de Inicio</label>
                                         <div class="row">
-                                            <input class="form-control form-control-lg" type="date" name="fechainicio" id="inicio" required>
+                                            <input class="form-control form-control-lg" type="date" name="fechainicio" id="finicio" required>
                                             <div class="invalid-feedback">
                                                 Es necesario colocar una fecha inicial.
+                                            </div>
+                                            <div id="errorFecha" class="invalid-feedback">
+
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col p-4">
                                         <label for="inicio">Fecha de Fin</label>
                                         <div class="row">
-                                            <input class="form-control form-control-lg" type="date" name="fechafin" id="fin" required>
+                                            <input class="form-control form-control-lg" type="date" name="fechafin" id="ffin" required>
                                             <div class="invalid-feedback">
                                                 Es necesario colocar una fecha final.
                                             </div>
@@ -55,9 +58,10 @@
             </table>
             <div class="row">
                 <div class="col-md-6 offset-md-3">
-                    <button type="submit" class="btn btn-primary btn-tabla">Buscar</button>
+                    <button type="submit" id="buscarButton" class="btn btn-primary btn-tabla">Buscar</button>
                 </div>
             </div>
         </form>
     </div>
     <script src="/inventario_dgtic/controllers/validation/js/form-validation-empty.js"></script>
+    <script src="/inventario_dgtic/view/js/validationFrontend/dateValidation.js"></script>
