@@ -11,7 +11,8 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
 
 <!DOCTYPE html>
 <html lang="es">
-<?php include(LAYOUT . '/head.php'); ?>
+    <?php include(VALIDATION_PHP . '/validate-createUser.php'); ?>
+    <?php include(LAYOUT . '/head.php'); ?>
 
 <body>
     <?php include(LAYOUT . '/header.php'); ?>
@@ -47,9 +48,9 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
                 <label for="Sede">Sede</label>
                 <select class="form-select form-select-lg mb-3" name="sede" aria-label=".form-select-lg example" required>
                     <option selected disabled value="">Selecciona una Sede</option>
-                    <option value="Ciudad Universitaria">Ciudad Universitaria</option>
-                    <option value="Centro Mascarones">Centro Mascarones</option>
-                    <option value="Centro Polanco">Centro Polanco</option>
+                    <option value="1">Centro Mascarones</option>
+                    <option value="2">Ciudad Universitaria</option>
+                    <option value="3">Centro Polanco</option>
                 </select>
                 <div class="invalid-feedback">
                         Es necesario elegir una sede.
@@ -60,8 +61,8 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
                 <select class="form-select form-select-lg mb-3" name="rol" aria-label="" required>
                     <option selected disabled value="">Selecciona un rol</option>
                     <option value="CE">Control Escolar</option>
-                    <option value="C">Consultor</option>
-                    <option value="E">Editor</option>
+                    <option value="Consultor">Consultor</option>
+                    <option value="Editor">Editor</option>
                 </select>
                 <div class="invalid-feedback">
                     Es necesario elegir un tipo de usuario.
@@ -91,13 +92,12 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
         <div class="row g-3 mb-3">
             <div class="col-md-12">
                 <label for="CrearUsuario"> </label>
-                <input name="CrearUsuario" class="btn btn-primary botonCreateuser" type="submit" value="Crear Usuario">
+                <button name="CrearUsuario" class="btn btn-primary botonCreateuser" type="submit" value="createUser">Crear Usuario</button>
             </div>
         </div>
     </form>
     <script src="/inventario_dgtic/controllers/password/generate-password.js" type="text/javascript"></script>
     <script src="/inventario_dgtic/controllers/validation/js/form-validation-empty.js"></script>
-    <?php include(VALIDATION_PHP . '/validate-createUser.php'); ?>
     <?php include(LAYOUT . '/footer.php'); ?>
 </body>
 
