@@ -7,6 +7,11 @@
  *********************************/
 
 include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
+include(BD_SELECT . 'select-users.php');
+
+//Instancia para la consulta de datos de usuario
+$datosUser = new SelectUser();
+$userInfo = $datosUser -> getDatosUser();
 ?>
 
 <!DOCTYPE html>
@@ -55,21 +60,29 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
             </thead>
 
             <tbody>
+                <?php 
+                    foreach($userInfo as $userInfo){
+                ?>
                 <tr class="usuario">
                     <th scope="col">
-                        Usuario1
+                        <?php echo $userInfo['UsuarioNombre'] . ' ' . $userInfo['UsuarioApaterno'] . ' ' . $userInfo['UsuarioAmaterno']; ?>
                     </th>
                     <td>
-                        Correo@correo.com
+                        <?php echo $userInfo['UsuarioCorreo'];?>
                     </td>
                     <td>
-                        Control Escolar
+                        <?php echo $userInfo['UsuarioRol'];?>
                     </td>
                     <td>
-                        Ciudad Universitaria
+                        <?php echo $userInfo['sedeNombre']; ?>
                     </td>
                     <td>
-                        Habilitado
+                        <?php if($userInfo['UsuarioEstado'] == 1){ 
+                            echo 'Activo'; 
+                            }elseif($userInfo['UsuarioEstado'] == 0){
+                                echo 'Inactivo';
+                            }  
+                        ?>
                     </td>
                     <td class="btn-tabla-container">
                         <button type="button" class="btn btn-primary btn-tabla">Habilitar</button>
@@ -78,29 +91,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
                         <button type="button" class="btn btn-primary btn-tabla">Eliminar</button>
                     </td>
                 </tr>
-                <tr class="usuario">
-                    <th scope="col">
-                        Usuario2
-                    </th>
-                    <td>
-                        usuario2@correo.com
-                    </td>
-                    <td>
-                        Consultor
-                    </td>
-                    <td>
-                        Centro Mascarones
-                    </td>
-                    <td>
-                        Deshabilitado
-                    </td>
-                    <td class="btn-tabla-container">
-                        <button type="button" class="btn btn-primary btn-tabla">Habilitar</button>
-                        <button type="button" class="btn btn-primary btn-tabla">Deshabilitar</button>
-                        <button type="button" class="btn btn-primary btn-tabla">Editar</button>
-                        <button type="button" class="btn btn-primary btn-tabla">Eliminar</button>
-                    </td>
-                </tr>
+                <?php } ?>
             </tbody>
         </table>
     </div>

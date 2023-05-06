@@ -4,4 +4,5 @@
     define('VALIDATION_PHP', ROOT_PATH . 'controllers/validation/php');
     define('CONNECTION_BD', ROOT_PATH . 'models/Connection.php');
     define('BD_INSERT', ROOT_PATH . 'models/Qinsert/');
+    define('BD_SELECT', ROOT_PATH . 'models/Qselect/');
 ?>

@@ -12,7 +12,6 @@
             $this -> connection = new Conexion();
         }
 
-        //Insert para usuario
         /**
         * Realiza el INSERT en la tabla de usuario.
         * @param integer $datosUser arreglo que contiene los datos del usuario
