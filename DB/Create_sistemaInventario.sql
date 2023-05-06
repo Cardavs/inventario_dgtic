@@ -83,6 +83,7 @@ CREATE TABLE Secciones (
     Seccion_Id INT NOT NULL AUTO_INCREMENT,
     SeccionNombre VARCHAR (100) NOT NULL,
     TipoSeccion VARCHAR(30) NOT NULL,
+    EstadoSeccion INT NOT NULL,
 
     CONSTRAINT PkSeccionId PRIMARY KEY (Seccion_Id ASC)
 );

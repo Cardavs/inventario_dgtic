@@ -1,3 +1,10 @@
+<?php 
+    include(BD_SELECT . 'select-section.php');
+    //Instancia de la clase SelectSection
+    $section = new SelectSection();
+    //Guardar información de secciones
+    $infoSection = $section -> getSection();
+?>
 <h1 class="titulo">Administrar Secciones</h1>
     <div class="container text-container sombra">
         <table class="table tabla-sede">
@@ -10,10 +17,19 @@
                 </tr>
             </thead>
             <tbody>
+                <?php 
+                    foreach($infoSection as $infoSection){
+                ?>
                 <tr>
-                    <th>Área temática 1</th>
-                    <td>Curso de actualización</td>
-                    <td>Activo</td>
+                    <th><?php echo $infoSection['SeccionNombre']; ?></th>
+                    <td><?php echo $infoSection['TipoSeccion']; ?></td>
+                    <td><?php 
+                        if($infoSection['EstadoSeccion'] == 1){
+                            echo 'Activo';
+                        }elseif($infoSection['EstadoSeccion'] == 0){
+                            echo 'Inactivo';
+                        }
+                    ?></td>
                     <td class="btn-tabla-container">
                         <button type="button" class="btn btn-primary btn-tabla">Habilitar</button>
                         <button type="button" class="btn btn-primary btn-tabla">Deshabilitar</button>
@@ -21,17 +37,7 @@
                         <button type="button" class="btn btn-primary btn-tabla">Eliminar</button>
                     </td>
                 </tr>
-                <tr>
-                    <th>Curso de Institución 1</th>
-                    <td>Institucionales</td>
-                    <td>Activo</td>
-                    <td class="btn-tabla-container">
-                         <button type="button" class="btn btn-primary btn-tabla">Habilitar</button>
-                        <button type="button" class="btn btn-primary btn-tabla">Deshabilitar</button>
-                        <button type="button" class="btn btn-primary btn-tabla">Editar</button>
-                        <button type="button" class="btn btn-primary btn-tabla">Eliminar</button>
-                    </td>
-                </tr>
+                <?php } ?>
             </tbody>
         </table>
         <div class="row" id="sectionDynamic"></div>

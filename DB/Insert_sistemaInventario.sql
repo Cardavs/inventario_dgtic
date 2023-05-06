@@ -18,13 +18,13 @@ INSERT INTO Area (AreaNombre, AreaTipo, AreaEstado)
                     ('Area4', 'Tipo4', TRUE),
                     ('Area5', 'Tipo5', FALSE);
 
-INSERT INTO Secciones (SeccionNombre, TipoSeccion)
-            VALUES ('Curso 1', 'Curso de actualización'),
-                    ('Área 1', 'Institucionales'),
-                    ('Curso 2', 'Curso de actualización'),
-                    ('Área 2', 'Institucionales'),
-                    ('Curso 3', 'Curso de actualización'),
-                    ('Área 3', 'Institucionales');
+INSERT INTO Secciones (SeccionNombre, TipoSeccion, EstadoSeccion)
+            VALUES ('Curso 1', 'Curso de actualización', 1),
+                    ('Área 1', 'Institucionales', 0),
+                    ('Curso 2', 'Curso de actualización', 1),
+                    ('Área 2', 'Institucionales', 1),
+                    ('Curso 3', 'Curso de actualización', 0),
+                    ('Área 3', 'Institucionales', 1);
 
 INSERT INTO Diplomado (DiplomadoNombre, DiplomadoEmision, DiplomadoEstado)
             VALUES ('Diplomado1', '8', 1),
