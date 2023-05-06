@@ -7,6 +7,12 @@
  *********************************/
 
 include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
+include(BD_SELECT . 'select-sedes.php');
+
+/* INSTANCIA PARA LA CLASE "SelectSedes"*/
+$sedes = new SelectSedes();
+//Llamás al método sedes y guardar los datos en la variable "infoSedes"
+$infoSedes = $sedes -> getSedes();
 ?>
 
 
@@ -31,29 +37,12 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
                 </tr>
             </thead>
             <tbody>
+                <?php
+                    foreach ($infoSedes as $infoSedes){
+                ?>
                 <tr>
-                    <th scope="row">Ciudad Universitaria</th>
-                    <td>CU</td>
-                    <td class="btn-tabla-container">
-                        <button type="button" class="btn btn-primary btn-tabla">Habilitar</button>
-                        <button type="button" class="btn btn-primary btn-tabla">Deshabilitar</button>
-                        <button type="button" class="btn btn-primary btn-tabla">Editar</button>
-                        <button type="button" class="btn btn-primary btn-tabla">Eliminar</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">Centro Mascarones</th>
-                    <td>CM</td>
-                    <td class="btn-tabla-container">
-                         <button type="button" class="btn btn-primary btn-tabla">Habilitar</button>
-                        <button type="button" class="btn btn-primary btn-tabla">Deshabilitar</button>
-                        <button type="button" class="btn btn-primary btn-tabla">Editar</button>
-                        <button type="button" class="btn btn-primary btn-tabla">Eliminar</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">Centro Polanco</th>
-                    <td>CP</td>
+                    <th scope="row"><?php echo $infoSedes['SedeNombre']; ?></th>
+                    <td><?php echo $infoSedes['SedeSiglas']; ?></td>
                     <td class="btn-tabla-container">
                         <button type="button" class="btn btn-primary btn-tabla">Habilitar</button>
                         <button type="button" class="btn btn-primary btn-tabla">Deshabilitar</button>
@@ -62,6 +51,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
                     </td>
                 </tr>
             </tbody>
+            <?php } ?>
         </table>
         <div id="sedeDynamic" class="row"></div>
         <div class="container text-center ms-1">

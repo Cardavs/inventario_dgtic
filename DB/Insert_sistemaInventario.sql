@@ -5,7 +5,7 @@ INSERT INTO Sedes (SedeNombre, SedeSiglas)
 
 INSERT INTO Usuario (Sede_Id, UsuarioNombre, UsuarioApaterno, UsuarioAMaterno, UsuarioCorreo, UsuarioPassword, UsuarioEstado, UsuarioRol)
             VALUES (1, 'Angel', 'Argonza', 'Roblero', 'correo1@correo.com', 'password1', TRUE, 'Administrador'),
-                    (2, 'Rogelio', 'Sánchez', 'Gómez', 'correo2@correo.com', 'password2', FALSE, 'CE'),
+                    (3, 'Rogelio', 'Sánchez', 'Gómez', 'correo2@correo.com', 'password2', FALSE, 'CE'),
                     (3, 'Fernando', 'Robles', 'Pérez', 'correo3@correo.com', 'password3', TRUE, 'CE'),
                     (2, 'Sandra', 'Mendez', 'Chavez', 'correo4@correo.com', 'password4', FALSE, 'consultor'),
                     (1, 'María', 'Rosal', 'Hernández', 'correo5@correo.com', 'password5', TRUE, 'editor'),
@@ -18,14 +18,29 @@ INSERT INTO Area (AreaNombre, AreaTipo, AreaEstado)
                     ('Area4', 'Tipo4', TRUE),
                     ('Area5', 'Tipo5', FALSE);
 
-INSERT INTO Administrador
-    SELECT (Usuario_Id) FROM Usuario WHERE UsuarioRol = 'Administrador';
+INSERT INTO Secciones (SeccionNombre, TipoSeccion)
+            VALUES ('Curso 1', 'Curso de actualización'),
+                    ('Área 1', 'Institucionales'),
+                    ('Curso 2', 'Curso de actualización'),
+                    ('Área 2', 'Institucionales'),
+                    ('Curso 3', 'Curso de actualización'),
+                    ('Área 3', 'Institucionales');
 
-INSERT INTO ControlEscolar 
-    SELECT (Usuario_Id) FROM Usuario WHERE UsuarioRol = 'CE';
+INSERT INTO Diplomado (DiplomadoNombre, DiplomadoEmision, DiplomadoEstado)
+            VALUES ('Diplomado1', '8', 1),
+                    ('Diplomado2', '5', 0),
+                    ('Diplomado3', '7', 1),
+                    ('Diplomado4', '9', 0),
+                    ('Diplomado5', '10', 1);
 
-INSERT INTO editor
-    SELECT (Usuario_Id) FROM Usuario WHERE UsuarioRol = 'editor';
+-- INSERT INTO Administrador
+--     SELECT (Usuario_Id) FROM Usuario WHERE UsuarioRol = 'Administrador';
 
-INSERT INTO Consultor 
-    SELECT (Usuario_Id) FROM Usuario WHERE UsuarioRol = 'consultor';
+-- INSERT INTO ControlEscolar 
+--     SELECT (Usuario_Id) FROM Usuario WHERE UsuarioRol = 'CE';
+
+-- INSERT INTO editor
+--     SELECT (Usuario_Id) FROM Usuario WHERE UsuarioRol = 'editor';
+
+-- INSERT INTO Consultor 
+--     SELECT (Usuario_Id) FROM Usuario WHERE UsuarioRol = 'consultor';

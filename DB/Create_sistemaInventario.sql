@@ -79,23 +79,12 @@ CREATE TABLE Area (
     CONSTRAINT PkAreaId PRIMARY KEY (Area_Id ASC)
 );
 
-CREATE TABLE TipoSeccion(
-    TipoSeccion_Id INT NOT NULL AUTO_INCREMENT,
-    Diplomado_Id INT NOT NULL,
-    Area_Id INT NOT NULL,
-
-    CONSTRAINT PKtipoSeccion PRIMARY KEY (TipoSeccion_Id ASC),
-    FOREIGN KEY (Diplomado_Id) REFERENCES Diplomado (Diplomado_Id),
-    FOREIGN KEY (Area_Id) REFERENCES Area (Area_Id)
-);
-
 CREATE TABLE Secciones (
     Seccion_Id INT NOT NULL AUTO_INCREMENT,
     SeccionNombre VARCHAR (100) NOT NULL,
-    TipoSeccion_Id INT NOT NULL,
+    TipoSeccion VARCHAR(30) NOT NULL,
 
-    CONSTRAINT PkSeccionId PRIMARY KEY (Seccion_Id ASC),
-    FOREIGN KEY (TipoSeccion_Id) REFERENCES TipoSeccion (TipoSeccion_Id)
+    CONSTRAINT PkSeccionId PRIMARY KEY (Seccion_Id ASC)
 );
 
 CREATE TABLE Material (
@@ -127,13 +116,23 @@ CREATE TABLE Descargas(
     FOREIGN KEY (Material_Id) REFERENCES Material (Material_Id) ON DELETE CASCADE
 );
 
--- TRIGGER PARA LAS TABLAS: ControlEscolar, Consultor, Editor.
+-- TRIGGER PARA LAS TABLAS: Administrador, ControlEscolar, Consultor, Editor.
 DELIMITER $$
 CREATE TRIGGER NewUserConsultor AFTER INSERT ON usuario
 FOR EACH ROW
 BEGIN
     IF NEW.UsuarioRol = 'consultor' THEN BEGIN
         INSERT INTO consultor (Usuario_Id) VALUES (NEW.Usuario_Id);
+    END; END IF;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER NewUserAdmin AFTER INSERT ON usuario
+FOR EACH ROW
+BEGIN
+    IF NEW.UsuarioRol = 'Administrador' THEN BEGIN
+        INSERT INTO Administrador (Usuario_Id) VALUES (NEW.Usuario_Id);
     END; END IF;
 END$$
 DELIMITER ;
