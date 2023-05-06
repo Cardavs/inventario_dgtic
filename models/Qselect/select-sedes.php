@@ -3,8 +3,6 @@
  * date: 06/05/2023              *
  * autor: Roan                   *
  *********************************/
-    include(CONNECTION_BD);
-
     class SelectSedes{
         
         public $connection;

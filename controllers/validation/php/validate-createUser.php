@@ -29,7 +29,7 @@
             'estado' => $estado
         );
             
-    
+        //Instancia de la clase InsertUser para realizar el registro.
         $insertUser = new InsertUser();
         if($insertUser->insertUser($createUser)){
             echo 'Usuario registrado';

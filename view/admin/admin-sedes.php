@@ -7,7 +7,10 @@
  *********************************/
 
 include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
+include(CONNECTION_BD);
+
 include(BD_SELECT . 'select-sedes.php');
+include(VALIDATION_PHP . '/validate-createSede.php');
 
 /* INSTANCIA PARA LA CLASE "SelectSedes"*/
 $sedes = new SelectSedes();
@@ -53,7 +56,10 @@ $infoSedes = $sedes -> getSedes();
             </tbody>
             <?php } ?>
         </table>
-        <div id="sedeDynamic" class="row"></div>
+        <form class="needs-validation" action="" method="POST" novalidate>
+            <div id="sedeDynamic" class="row">
+            </div>
+        </form>
         <div class="container text-center ms-1">
             <div class="row justify-content-start">
                 <div class="col-2">
@@ -63,6 +69,7 @@ $infoSedes = $sedes -> getSedes();
         </div>
     </div>
     <script src="/inventario_dgtic/view/js/dynamic_inputs/addSede.js"></script>
+    <script src="/inventario_dgtic/controllers/validation/js/form-validation-empty.js"></script>
     <?php include(LAYOUT."/footer.php");?>
 </body>
 </html>
