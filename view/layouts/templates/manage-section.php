@@ -23,13 +23,7 @@
                 <tr>
                     <th><?php echo $infoSection['SeccionNombre']; ?></th>
                     <td><?php echo $infoSection['TipoSeccion']; ?></td>
-                    <td><?php 
-                        if($infoSection['EstadoSeccion'] == 1){
-                            echo 'Activo';
-                        }elseif($infoSection['EstadoSeccion'] == 0){
-                            echo 'Inactivo';
-                        }
-                    ?></td>
+                    <td><?php echo ($infoSection['EstadoSeccion'] == 1) ? "Activo" : "Inactivo" ;?></td>
                     <td class="btn-tabla-container">
                         <button type="button" class="btn btn-primary btn-tabla">Habilitar</button>
                         <button type="button" class="btn btn-primary btn-tabla">Deshabilitar</button>

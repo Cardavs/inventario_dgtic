@@ -77,12 +77,7 @@ $userInfo = $datosUser -> getDatosUser();
                         <?php echo $userInfo['sedeNombre']; ?>
                     </td>
                     <td>
-                        <?php if($userInfo['UsuarioEstado'] == 1){ 
-                            echo 'Activo'; 
-                            }elseif($userInfo['UsuarioEstado'] == 0){
-                                echo 'Inactivo';
-                            }  
-                        ?>
+                        <?php echo ($userInfo['UsuarioEstado'] == 1) ? "Activo" : "Inactivo"; ?>
                     </td>
                     <td class="btn-tabla-container">
                         <button type="button" class="btn btn-primary btn-tabla">Habilitar</button>
