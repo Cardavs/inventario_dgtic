@@ -3,9 +3,6 @@
  * date: 28/04/2023              *
  * autor: Roan                   *
  *********************************/
-
- include(CONNECTION_BD);
-
  class SelectSection{
     public $connection;
 

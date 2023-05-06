@@ -1,5 +1,7 @@
 <?php 
+    include(CONNECTION_BD);
     include(BD_SELECT . 'select-section.php');
+    include(VALIDATION_PHP . '/validate-createSection.php');
     //Instancia de la clase SelectSection
     $section = new SelectSection();
     //Guardar información de secciones
@@ -23,7 +25,7 @@
                 <tr>
                     <th><?php echo $infoSection['SeccionNombre']; ?></th>
                     <td><?php echo $infoSection['TipoSeccion']; ?></td>
-                    <td><?php echo ($infoSection['EstadoSeccion'] == 1) ? "Activo" : "Inactivo" ;?></td>
+                    <td><?php echo ($infoSection['EstadoSeccion'] == 1) ? "Activo" : "Inactivo";?></td>
                     <td class="btn-tabla-container">
                         <button type="button" class="btn btn-primary btn-tabla">Habilitar</button>
                         <button type="button" class="btn btn-primary btn-tabla">Deshabilitar</button>
@@ -34,7 +36,9 @@
                 <?php } ?>
             </tbody>
         </table>
-        <div class="row" id="sectionDynamic"></div>
+        <form action="" method="post">
+            <div class="row" id="sectionDynamic"></div>
+        </form>
         <div class="container text-center">
             <div class="row justify-content-start">
                 <div class="col-2 ">
