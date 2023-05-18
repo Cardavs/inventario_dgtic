@@ -10,6 +10,7 @@
         //Se crean atributos de la clase conexión
         private $host;
         private $dbName;
+        private $port;
         private $user;
         private $password;
         //Conexión estática
@@ -22,6 +23,8 @@
             $this -> host = 'localhost';
             //nombre de la base de datos
             $this -> dbName = 'sistemainventario';
+            //Puerto de la base de datos
+            $this -> port = '3306';
             //Usuario con el que se va a identificar
             $this -> user = 'root';
             //Contraseña para acceder a la bd
@@ -33,7 +36,7 @@
             try {
                 if (is_null(self::$connection)) {
                     //Realizar la conexión
-                    self::$connection = new PDO("mysql:host=$this->host; dbname=$this->dbName", $this->user, $this->password);
+                    self::$connection = new PDO("mysql:host=$this->host; port=$this->port; dbname=$this->dbName", $this->user, $this->password);
                 }
                 return self::$connection;
             } catch (Error $e) {

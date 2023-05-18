@@ -36,7 +36,7 @@
                 <?php } ?>
             </tbody>
         </table>
-        <form action="" method="post">
+        <form class="needs-validation" action="" method="POST" novalidate>
             <div class="row" id="sectionDynamic"></div>
         </form>
         <div class="container text-center">

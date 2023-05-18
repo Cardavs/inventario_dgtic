@@ -90,17 +90,21 @@ CREATE TABLE Secciones (
 
 CREATE TABLE Material (
     Material_Id INT NOT NULL AUTO_INCREMENT,
-    Seccion_Id INT NOT NULL, 
     MaterialNombre VARCHAR (100) NOT NULL,
-    MaterialAuditoria INT NOT NULL,
-    MaterialCompilacion INT NULL,
+    MaterialAuditoria INT,
+    MaterialCompilacion INT,
     MaterialISBN VARCHAR (100) NULL,
     MaterialTiraje INT NOT NULL,
     MaterialAutor VARCHAR (100) NOT NULL,
     MaterialVersion VARCHAR (50) NOT NULL,
+    MaterialEdicion INT,
+    MaterialPaginas INT,
+    MaterialSeccion VARCHAR(50) NOT NULL, 
+    MaterialArea VARCHAR(50) NOT NULL, 
+    MaterialPDF VARCHAR(200) NOT NULL,
+    MaterialIndice VARCHAR(200) NOT NULL,
 
-    CONSTRAINT PkMaterialId PRIMARY KEY (Material_Id ASC),
-    FOREIGN KEY (Seccion_Id) REFERENCES Secciones (Seccion_Id)
+    CONSTRAINT PkMaterialId PRIMARY KEY (Material_Id ASC)
 );
 
 CREATE TABLE Descargas(

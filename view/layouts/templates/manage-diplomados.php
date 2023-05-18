@@ -1,5 +1,6 @@
 <?php 
     include(BD_SELECT . 'select-diplomados.php');
+    include(VALIDATION_PHP . '/validate-createDiplomado.php');
     
     //instancia de la clase SelectDiplomados
     $diplomado = new SelectDiplomados();
@@ -37,7 +38,9 @@
                 <?php } ?>
             </tbody>
         </table>
-        <div class="row" id="diplomaedDynamic"></div>
+        <form class="needs-validation" action="" method="POST" novalidate>
+            <div class="row" id="diplomaedDynamic"></div>
+        </form>
         <div class="container text-center">
             <div class="row justify-content-start">
                 <div class="col-2 ">
