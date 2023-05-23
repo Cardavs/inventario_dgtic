@@ -63,9 +63,35 @@ $userInfo = $datosUser -> getDatosUser();
 
             <tbody>
                 <?php 
-                    foreach($userInfo as $userInfo){
+                    foreach($userInfo as $userInfo):
                 ?>
                 <form action="" method="post">
+                    <?php if(isset($_POST['editar'])):?>
+                        <tr class="usuario">
+                        <th scope="col">
+                            <input type="text" class="form-control" name="NombreUser" value="<?php echo $userInfo['UsuarioNombre'] . ' ' . $userInfo['UsuarioApaterno'] . ' ' . $userInfo['UsuarioAmaterno']; ?>">
+                        </th>
+                        <td>
+                            <input type="text" class="form-control" name="usuarioCorreo" value="<?php echo $userInfo['UsuarioCorreo'];?>">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="usuarioRol" value="<?php echo $userInfo['UsuarioRol'];?>">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="usuarioSede" value="<?php echo $userInfo['sedeNombre']; ?>">
+                        </td>
+                        <td>
+                        <select class="form-select form-select-lg mb-3" name="rol" aria-label="" required>
+                            <option selected value="<?php echo ($userInfo['UsuarioEstado'] == 1) ? "1" : "0"; ?>"><?php echo ($userInfo['UsuarioEstado'] == 1) ? "Activo" : "Inactivo"; ?></option>
+                            <option value="<?php echo ($userInfo['UsuarioEstado'] == 1) ? "0" : "1"; ?>""><?php echo ($userInfo['UsuarioEstado'] == 1) ? "Inactivo" : "Activo"; ?></option>
+                        </select>
+                        </td>
+                        <td class="btn-tabla-container">
+                            <button name="habilitar" type="submit" class="btn btn-primary btn-tabla">Actualizar</button>
+                            <button name="deshabilitar" type="submit" class="btn btn-primary btn-tabla">Cancelar</button>
+                        </td>
+                    </tr>
+                    <?php else:?>
                     <tr class="usuario">
                         <th scope="col">
                             <input type="text" readonly class="form-control-plaintext" name="NombreUser" value="<?php echo $userInfo['UsuarioNombre'] . ' ' . $userInfo['UsuarioApaterno'] . ' ' . $userInfo['UsuarioAmaterno']; ?>">
@@ -89,8 +115,9 @@ $userInfo = $datosUser -> getDatosUser();
                             <button name="eliminar" type="submit" class="btn btn-primary btn-tabla">Eliminar</button>
                         </td>
                     </tr>
+                    <?php endif;?>
                 </form>
-                <?php } ?>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>
