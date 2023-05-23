@@ -9,7 +9,7 @@
 include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
 include(CONNECTION_BD);
 include(BD_SELECT . 'select-users.php');
-include(VALIDATION_PHP . '/validate-deshabilitarUser.php');
+include(VALIDATION_PHP . '/validate-UpdateUser.php');
 
 //Instancia para la consulta de datos de usuario
 $datosUser = new SelectUser();
