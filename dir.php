@@ -5,4 +5,5 @@
     define('CONNECTION_BD', ROOT_PATH . 'models/Connection.php');
     define('BD_INSERT', ROOT_PATH . 'models/Qinsert/');
     define('BD_SELECT', ROOT_PATH . 'models/Qselect/');
+    define('BD_UPDATE', ROOT_PATH . 'models/Qupdate/');
 ?>

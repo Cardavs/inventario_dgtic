@@ -7,7 +7,9 @@
  *********************************/
 
 include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
+include(CONNECTION_BD);
 include(BD_SELECT . 'select-users.php');
+include(VALIDATION_PHP . '/validate-deshabilitarUser.php');
 
 //Instancia para la consulta de datos de usuario
 $datosUser = new SelectUser();
@@ -63,29 +65,31 @@ $userInfo = $datosUser -> getDatosUser();
                 <?php 
                     foreach($userInfo as $userInfo){
                 ?>
-                <tr class="usuario">
-                    <th scope="col">
-                        <?php echo $userInfo['UsuarioNombre'] . ' ' . $userInfo['UsuarioApaterno'] . ' ' . $userInfo['UsuarioAmaterno']; ?>
-                    </th>
-                    <td>
-                        <?php echo $userInfo['UsuarioCorreo'];?>
-                    </td>
-                    <td>
-                        <?php echo $userInfo['UsuarioRol'];?>
-                    </td>
-                    <td>
-                        <?php echo $userInfo['sedeNombre']; ?>
-                    </td>
-                    <td>
-                        <?php echo ($userInfo['UsuarioEstado'] == 1) ? "Activo" : "Inactivo"; ?>
-                    </td>
-                    <td class="btn-tabla-container">
-                        <button type="button" class="btn btn-primary btn-tabla">Habilitar</button>
-                        <button type="button" class="btn btn-primary btn-tabla">Deshabilitar</button>
-                        <button type="button" class="btn btn-primary btn-tabla">Editar</button>
-                        <button type="button" class="btn btn-primary btn-tabla">Eliminar</button>
-                    </td>
-                </tr>
+                <form action="" method="post">
+                    <tr class="usuario">
+                        <th scope="col">
+                            <input type="text" readonly class="form-control-plaintext" name="NombreUser" value="<?php echo $userInfo['UsuarioNombre'] . ' ' . $userInfo['UsuarioApaterno'] . ' ' . $userInfo['UsuarioAmaterno']; ?>">
+                        </th>
+                        <td>
+                            <input type="text" readonly class="form-control-plaintext" name="usuarioCorreo" value="<?php echo $userInfo['UsuarioCorreo'];?>">
+                        </td>
+                        <td>
+                            <input type="text" readonly class="form-control-plaintext" name="usuarioRol" value="<?php echo $userInfo['UsuarioRol'];?>">
+                        </td>
+                        <td>
+                            <input type="text" readonly class="form-control-plaintext" name="usuarioSede" value="<?php echo $userInfo['sedeNombre']; ?>">
+                        </td>
+                        <td>
+                            <?php echo ($userInfo['UsuarioEstado'] == 1) ? "Activo" : "Inactivo"; ?>
+                        </td>
+                        <td class="btn-tabla-container">
+                            <button name="habilitar" type="submit" class="btn btn-primary btn-tabla">Habilitar</button>
+                            <button name="deshabilitar" type="submit" class="btn btn-primary btn-tabla">Deshabilitar</button>
+                            <button name="editar" type="submit" class="btn btn-primary btn-tabla">Editar</button>
+                            <button name="eliminar" type="submit" class="btn btn-primary btn-tabla">Eliminar</button>
+                        </td>
+                    </tr>
+                </form>
                 <?php } ?>
             </tbody>
         </table>
