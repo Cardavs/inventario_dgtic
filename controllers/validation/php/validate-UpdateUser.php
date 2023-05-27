@@ -95,5 +95,20 @@
             echo 'error';
         }
     }
+
+    //ACTUALIZAR A UN USUARIO
+    if(isset($_POST['editar'])){
+        //url de la pestaña admin update user
+        $adminUpdateUser = 'admin-update-user.php';
+
+        $userId = $_POST['idUser'];
+        $nombreCompleto =  $_POST['NombreUser'];
+        $correo = $_POST['usuarioCorreo'];
+        $rol = $_POST['usuarioRol'];
+        $sede = $_POST['usuarioSede'];
+
+        header("location: $adminUpdateUser?id=$userId&nombre=$nombreCompleto&correo=$correo&rol=$rol&sede=$sede&estado=$estado");
+        die();
+    }
     
 ?>
