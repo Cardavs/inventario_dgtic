@@ -5,10 +5,13 @@
  * date: 30/02/2023              *
  * autor: Roan                   *
  *********************************/
-
 include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
+
+ //CLASES
 include(CONNECTION_BD);
+ //DOCUMENTOS
 include(BD_SELECT . 'select-users.php');
+include(BD_UPDATE . 'update-user.php');
 include(VALIDATION_PHP . '/validate-UpdateUser.php');
 
 //Instancia para la consulta de datos de usuario
@@ -21,7 +24,9 @@ $userInfo = $datosUser -> getDatosUser();
 <?php include(LAYOUT . '/head.php'); ?>
 
 <body>
-    <?php include(LAYOUT . '/header.php'); ?>
+    <?php 
+        include(LAYOUT . '/header.php');
+     ?>
     <?php include(LAYOUT . "/navbar-users/navbarAdmin.php"); ?>
 
     <h2 class="titulo">Gestionar Cuentas</h2>
@@ -37,7 +42,7 @@ $userInfo = $datosUser -> getDatosUser();
     </div>
 
     <div class="container sombra">
-        <table class="table tabla-cuenta">
+        <table class="table tabla-cuenta text-container">
             <thead class="encabezado">
                 <tr>
                     <th scope="col" class="encabezado-col">
@@ -69,7 +74,7 @@ $userInfo = $datosUser -> getDatosUser();
                     foreach($userInfo as $userInfo):
                 ?>
                 <form action="" method="post">
-                    <tr class="usuario">
+                    <tr>
                         <th>
                         <input type="hidden" name="idUser" value="<?php echo $userInfo['Usuario_Id']; ?>">
                         </th>
@@ -96,12 +101,11 @@ $userInfo = $datosUser -> getDatosUser();
                         </td>
                     </tr>
                 </form>
-                <?php endforeach; ?>
+                <?php endforeach ?>
             </tbody>
         </table>
     </div>
     <script src="/inventario_dgtic/controllers/validation/js/form-validation-empty.js"></script>
-
     <?php include(LAYOUT . '/footer.php'); ?>
 </body>
 

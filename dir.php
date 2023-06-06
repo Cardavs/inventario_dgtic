@@ -8,4 +8,5 @@
     define('BD_UPDATE', ROOT_PATH . 'models/Qupdate/');
     define('BD_UPDATE_USER', ROOT_PATH . 'view/admin/admin-update-user.php');
     define('MANAGE-ACCOUNT', ROOT_PATH . 'view/admin/manage-account.php');
+    define('ALERT', ROOT_PATH . 'controllers/alertas.php');
 ?>

@@ -1,5 +1,4 @@
 <?php
-    include(BD_UPDATE . 'update-user.php');
     /********************************************************
      * Archivo: realiza la configuracion para deshabilitrar *
      *          a un usuario                                *
@@ -7,7 +6,8 @@
      * Date: 05/22/23                                       *  
      *******************************************************/
 
-     //DESHABILITAR A UN USUARIO
+     //DESHABILITAR A UN USUARIO\
+    require_once(ALERT);
     if(isset($_POST['deshabilitar'])){
         //SEPARAR STRINGS POR ESPACIOS
         $nombreCompleto = explode(" ", $_POST['NombreUser']);
@@ -31,9 +31,13 @@
         //Instancia de la clase DeshabilitarUser para realizar el registro.
         $UpdateUser = new UpdateUser();
         if($UpdateUser->deshabilitarUser($deshabilitarUser)){
-            echo 'Usuario deshabilitado';
+            $alertaInstance = new Alerta("Usuario deshabilitado", "Hecho");
+            $alerta = $alertaInstance -> success();
+            echo $alerta;
         }else{
-            echo 'error';
+            $alertaInstance = new Alerta("Error al deshabilitar usuario", "Reintentar");
+            $alerta = $alertaInstance -> error();
+            echo $alerta;
         }
     }
 
