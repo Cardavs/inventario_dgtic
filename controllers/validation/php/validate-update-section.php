@@ -78,4 +78,33 @@
     if(isset($_POST['cancelar'])){
         header('location: admin-manage-section.php');
     }
+    //Dentro de la ventana para editar la seccion
+    //si selecciona el boton de actualizar
+    if(isset($_POST['actualizarEditor'])){
+        //recibiendo el id por el metodo GET
+        $seccionId = $_GET['id'];
+        //recibiendo los campos que se actualizaran
+        $newsection = $_POST['seccionNombre'];
+        $newTipo = $_POST['TipoSeccion'];
+        //Guardando todos los datos en un array
+        $datosSection = array(
+            'id' => $seccionId,
+            'nombre' => $newsection,
+            'tipo' => $newTipo
+        );
+
+        //llamando al metodo para actualizar informacion
+        if($section -> updateSection($datosSection)){
+            echo 'Actualizado';
+            header('location: editor-manage-section.php');
+        }else{
+            echo 'error';
+        }
+    }
+
+    //Dentro de la ventana para editar la seccion
+    //si selecciona el boton de actualizar
+    if(isset($_POST['cancelarEditor'])){
+        header('location: editor-manage-section.php');
+    }
 ?>

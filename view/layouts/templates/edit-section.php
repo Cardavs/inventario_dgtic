@@ -42,8 +42,8 @@ $infoSection = $section->getSectionById($sectionId);
                             </select>
                         </td>
                         <td class="btn-tabla-container">
-                            <button type="submit" name="actualizar" class="btn btn-primary btn-tabla">Actualizar</button>
-                            <button type="submit" name="cancelar" class="btn btn-primary btn-tabla">Cancelar</button>
+                            <button type="submit" name="actualizarEditor" class="btn btn-primary btn-tabla">Actualizar</button>
+                            <button type="submit" name="cancelarEditor" class="btn btn-primary btn-tabla">Cancelar</button>
                         </td>
                     </tr>
                 </form>
