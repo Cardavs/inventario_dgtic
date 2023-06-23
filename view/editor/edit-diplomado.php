@@ -1,4 +1,15 @@
-<?php
+<?php include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php'); ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <?php include(LAYOUT . "/head.php"); ?>
+</head>
+
+<body>
+    <?php include(LAYOUT . "/header.php"); ?>
+    <?php include(LAYOUT . "/navbar-users/navbarEditor.php"); ?>
+    <?php
 include(BD_SELECT . 'select-diplomados.php');
 include(VALIDATION_PHP . '/validate-createDiplomado.php');
 include(VALIDATION_PHP . '/validate-update-diplomado.php');
@@ -32,8 +43,8 @@ $infoDiplomado = $diplomado->getDiplomadoById($diplomadoId);
                             <input type="text" name="diplomadoEmision" class="form-control form-control-lg g-3" value="<?php echo $infoDiplomado['DiplomadoEmision']; ?>">
                         </td>
                         <td class="btn-tabla-container">
-                            <button type="submit" name="actualizar" class="btn btn-primary btn-tabla">Actualizar</button>
-                            <button type="submit" name="cancelar" class="btn btn-primary btn-tabla">Cancelar</button>
+                            <button type="submit" name="actualizarEditor" class="btn btn-primary btn-tabla">Actualizar</button>
+                            <button type="submit" name="cancelarEditor" class="btn btn-primary btn-tabla">Cancelar</button>
                         </td>
                     </tr>
                 </form>
@@ -41,3 +52,6 @@ $infoDiplomado = $diplomado->getDiplomadoById($diplomadoId);
         </tbody>
     </table>
 </div>
+</body>
+
+</html>

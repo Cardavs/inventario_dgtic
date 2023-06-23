@@ -78,4 +78,33 @@
     if(isset($_POST['cancelar'])){
         header('location: admin-manage-diplomado.php');
     }
+    //Dentro de la ventana para editar la diplomado
+    //si selecciona el boton de actualizar
+    if(isset($_POST['actualizarEditor'])){
+        //recibiendo el id por el metodo GET
+        $diplomadoId = $_GET['id'];
+        //recibiendo los campos que se actualizaran
+        $newdiplomado = $_POST['diplomadoNombre'];
+        $newEmision = $_POST['diplomadoEmision'];
+        //Guardando todos los datos en un array
+        $datosdiplomado = array(
+            'id' => $diplomadoId,
+            'nombre' => $newdiplomado,
+            'emision' => $newEmision
+        );
+
+        //llamando al metodo para actualizar informacion
+        if($diplomado -> updatediplomado($datosdiplomado)){
+            echo 'Actualizado';
+            header('location: editor-manage-diplomados.php');
+        }else{
+            echo 'error';
+        }
+    }
+
+    //Dentro de la ventana para editar la diplomado
+    //si selecciona el boton de actualizar
+    if(isset($_POST['cancelarEditor'])){
+        header('location: editor-manage-diplomados.php');
+    }
 ?>
