@@ -1,67 +1,30 @@
-<?php 
+<?php
 include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
 include(CONNECTION_BD);
 include(BD_UPDATE . 'update-user.php');
-
-
-$correo = $_GET['correo'];
-$nombreCompleto = $_GET['nombre'];
-$rol = $_GET['rol'];
-$sede = $_GET['sede'];
+include(BD_SELECT . 'select-users.php');
+//Obtieniendo Id del usuario para mostrar datos.
 $id = $_GET['id'];
+
+//Instanciando clase para obtener datos del usuario.
+$datosUser = new SelectUser();
+
+//Llamando a la funcion para realizar el select del usuario a editar
+$userInfo = $datosUser->getDatosUserById($id);
+
+//Archivo para actualizar al usuario
+include(VALIDATION_PHP . '/validate-UpdateUser.php');
+
+
 //url de la pestaña manage account
 $manageAccount = 'manage-account.php';
-
-if(isset($_POST['actualizar'])){
-
-    //Obtener datos que se van a actualizar.
-    $nombreCompletoUpdate = explode(" ", $_POST['NombreUser']);//SEPARAR STRINGS POR ESPACIOS  
-
-    //ALMACENAR LOS STRINGS SEPARADOS EN VARIABLES
-    $nombreUpdate = $nombreCompletoUpdate[0];
-    $apaternoUpdate = $nombreCompletoUpdate[1];
-
-    //Si ingresa el apellido materno lo asigna si no lo deja vacio.
-    if(isset($nombreCompletoUpdate[2])){
-        $amaternoUpdate = $nombreCompletoUpdate[2];
-    }else{
-        $amaternoUpdate = " ";
-    }
-
-    $correoUpdate = trim($_POST['usuarioCorreo'], ' \t\n\r\0\x0B');
-    $rolUpdate = $_POST['usuarioRol'];
-    $sedeUpdate = $_POST['usuarioSede'];
-
-    // almacenar en un array todos los valores ya limpios.
-    $updateUserdata = array (
-        'id' => $id,
-        'nombre' => $nombreUpdate,
-        'apaterno' => $apaternoUpdate,
-        'amaterno' => $amaternoUpdate,
-        'correo' => $correoUpdate,
-        'rol' => $rolUpdate,
-        'sede'=> $sedeUpdate,
-    );
-        
-    //Instancia de la clase actulazarDataUser para realizar el registro.
-    $UpdateUser = new UpdateUser();
-    if($UpdateUser->actulazarDataUser($updateUserdata)){
-        header("location: $manageAccount");
-        die();
-    }else{
-        echo 'error';
-    }
-}elseif(isset($_POST['cancelar'])){
-    header("location: $manageAccount");
-    die();
-}
 ?>
 <!DOCTYPE html>
 <html lang="es">
-    <?php 
-        include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
-        include(LAYOUT . '/head.php'); 
-    ?>
+<?php
+include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
+include(LAYOUT . '/head.php');
+?>
 
 <body>
     <?php include(LAYOUT . '/header.php'); ?>
@@ -73,7 +36,16 @@ if(isset($_POST['actualizar'])){
             <thead class="encabezado">
                 <tr>
                     <th scope="col" class="encabezado-col">
+
+                    </th>
+                    <th scope="col" class="encabezado-col">
                         Nombre
+                    </th>
+                    <th scope="col" class="encabezado-col">
+                        Apellido Paterno
+                    </th>
+                    <th scope="col" class="encabezado-col">
+                        Apellido Materno
                     </th>
                     <th scope="col" class="encabezado-col">
                         Correo
@@ -84,7 +56,7 @@ if(isset($_POST['actualizar'])){
                     <th scope="col" class="encabezado-col">
                         Sede
                     </th>
-                    <th scope="col" class="encabezado-col">  
+                    <th scope="col" class="encabezado-col">
 
                     </th>
                 </tr>
@@ -94,23 +66,32 @@ if(isset($_POST['actualizar'])){
                 <form class="container col-md-12 col-sm-4 formulario needs-validation" method="post" novalidate>
                     <tr class="usuario">
                         <th scope="col">
-                            <input type="text" class="form-control form-control-lg g-3" name="NombreUser" value="<?php echo $nombreCompleto?>">
+                            <input type="hidden" class="form-control form-control-lg g-3" name="idUser" value="<?php echo $userInfo[0]['Usuario_Id'] ?>">
+                        </th>
+                        <th scope="col">
+                            <input type="text" class="form-control form-control-lg g-3" name="nombreUser" value="<?php echo $userInfo[0]['UsuarioNombre'] ?>">
+                        </th>
+                        <th scope="col">
+                            <input type="text" class="form-control form-control-lg g-3" name="apaternoUser" value="<?php echo $userInfo[0]['UsuarioApaterno'] ?>">
+                        </th>
+                        <th scope="col">
+                            <input type="text" class="form-control form-control-lg g-3" name="amaternoUser" value="<?php echo $userInfo[0]['UsuarioAmaterno'] ?>">
                         </th>
                         <td>
-                            <input type="text" class="form-control form-control-lg" name="usuarioCorreo" value="<?php echo $correo?> ">
+                            <input type="text" class="form-control form-control-lg" name="correoUser" value="<?php echo $userInfo[0]['UsuarioCorreo'] ?> ">
                         </td>
                         <td>
-                            <select class="form-select form-select-lg mb-3 form-control-lg" name="usuarioRol" aria-label="" required>
-                                <option <?php echo ($rol == 'CE') ? "selected" : " "?> value="CE">Control Escolar</option>
-                                <option <?php echo ($rol == 'Consultor') ? "selected" : " "?> value="Consultor">Consultor</option>
-                                <option <?php echo ($rol == 'editor') ? "selected" : " "?> value="Editor">Editor</option>
+                            <select class="form-select form-select-lg mb-3 form-control-lg" name="rolUser" aria-label="" required>
+                                <option <?php echo ($userInfo[0]['UsuarioRol'] == 'CE') ? "selected" : " " ?> value="CE">Control Escolar</option>
+                                <option <?php echo ($userInfo[0]['UsuarioRol'] == 'Consultor') ? "selected" : " " ?> value="Consultor">Consultor</option>
+                                <option <?php echo ($userInfo[0]['UsuarioRol'] == 'editor') ? "selected" : " " ?> value="editor">Editor</option>
                             </select>
                         </td>
                         <td>
-                            <select class="form-select form-select-lg mb-3 form-control-lg" name="usuarioSede" aria-label=".form-select-lg example" required>
-                                <option <?php echo ($sede == 'Centro Mascarones') ? "selected" : " "?> value="1">Centro Mascarones</option>
-                                <option <?php echo ($sede == 'Ciudad Universitaria') ? "selected" : " "?> value="2">Ciudad Universitaria</option>
-                                <option <?php echo ($sede == 'Centro Polanco') ? "selected" : " "?> value="3">Centro Polanco</option>
+                            <select class="form-select form-select-lg mb-3 form-control-lg" name="sedeUser" aria-label=".form-select-lg example" required>
+                                <option <?php echo ($userInfo[0]['sedeNombre'] == 'Centro Mascarones') ? "selected" : " " ?> value="1">Centro Mascarones</option>
+                                <option <?php echo ($userInfo[0]['sedeNombre'] == 'Ciudad Universitaria') ? "selected" : " " ?> value="2">Ciudad Universitaria</option>
+                                <option <?php echo ($userInfo[0]['sedeNombre'] == 'Centro Polanco') ? "selected" : " " ?> value="3">Centro Polanco</option>
                             </select>
                         </td>
                         <td class="btn-tabla-container">

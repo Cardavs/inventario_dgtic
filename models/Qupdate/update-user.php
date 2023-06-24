@@ -15,26 +15,20 @@
 
         /**
         * Realiza el UPDATE para deshabilitar un usuario en la tabla de usuario.
-        * @param integer $datosUser arreglo que contiene:
-        *                $datosUser['nombre'], $datosUser['apaterno'], $datosUser['amaterno'],
-        *               $datosUser['correo'], $datosUser['rol']
+        * @param integer $datosUser arreglo que contiene: el id del usuario para ser deshabilitado.
         */
-        public function deshabilitarUser($datosUser){
+        public function deshabilitarUser($idUser){
             try {
                 $connect = $this->connection -> conectar();
                 
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $connect->beginTransaction();
                 
-                $query = "UPDATE usuario SET UsuarioEstado = 0 WHERE UsuarioNombre = :UsuarioNombre AND UsuarioApaterno = :UsuarioApaterno AND UsuarioAmaterno = :UsuarioAmaterno AND UsuarioCorreo=:UsuarioCorreo AND UsuarioRol =:UsuarioRol";
+                $query = "UPDATE usuario SET UsuarioEstado = 0 WHERE Usuario_id = :Usuario_id";
     
                 $queryP = $connect -> prepare($query);
     
-                $queryP->bindValue(":UsuarioNombre", $datosUser['nombre']);
-                $queryP->bindValue(":UsuarioApaterno", $datosUser['apaterno']);
-                $queryP->bindValue(":UsuarioAmaterno", $datosUser['amaterno']);
-                $queryP->bindValue(":UsuarioCorreo", $datosUser['correo']);
-                $queryP->bindValue(":UsuarioRol", $datosUser['rol']);
+                $queryP->bindValue(":Usuario_id", $idUser);
                 
                 $queryP -> execute();
                 
@@ -48,26 +42,54 @@
 
         /**
         * Realiza el UPDATE para habilitar a un usuario en la tabla de usuario.
-        * @param integer $datosUser arreglo que contiene:
-        *                $datosUser['nombre'], $datosUser['apaterno'], $datosUser['amaterno'],
-        *               $datosUser['correo'], $datosUser['rol']
+        * @param integer $datosUser arreglo que contiene:el id del usuario que se va a habilitar
         */
-        public function habilitarUser($datosUser){
+        public function habilitarUser($idUser){
             try {
                 $connect = $this->connection -> conectar();
                 
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $connect->beginTransaction();
                 
-                $query = "UPDATE usuario SET UsuarioEstado = 1 WHERE UsuarioNombre = :UsuarioNombre AND UsuarioApaterno = :UsuarioApaterno AND UsuarioAmaterno = :UsuarioAmaterno AND UsuarioCorreo=:UsuarioCorreo AND UsuarioRol =:UsuarioRol";
+                $query = "UPDATE usuario SET UsuarioEstado = 1 WHERE Usuario_id = :Usuario_id";
     
                 $queryP = $connect -> prepare($query);
     
-                $queryP->bindValue(":UsuarioNombre", $datosUser['nombre']);
-                $queryP->bindValue(":UsuarioApaterno", $datosUser['apaterno']);
-                $queryP->bindValue(":UsuarioAmaterno", $datosUser['amaterno']);
-                $queryP->bindValue(":UsuarioCorreo", $datosUser['correo']);
-                $queryP->bindValue(":UsuarioRol", $datosUser['rol']);
+                $queryP->bindValue(":Usuario_id", $idUser);
+                
+                $queryP -> execute();
+                
+                return $connect->commit();
+    
+            } catch (PDOException $ex) {
+                echo 'Error: ' .$ex->getMessage() . die();
+                return FALSE;
+            }
+        }
+        /**
+        * Realiza el UPDATE para actualizar1 a un usuario en la tabla de usuario.
+        * @param integer $datosUsuario arreglo que contiene:
+        *                $datosUsuario['id'], $datosUsuario['nombre'], $datosUsuario['apaterno'], $datosUsuario['amaterno'],
+        *               $datosUsuario['correo'], $datosUsuario['rol']
+        */
+        public function actualizarUsuario($datosUsuario){
+            try {
+                $connect = $this->connection -> conectar();
+                
+                $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $connect->beginTransaction();
+                
+                $query = "UPDATE usuario SET UsuarioNombre = :UsuarioNombre, UsuarioApaterno = :UsuarioApaterno, UsuarioAmaterno = :UsuarioAmaterno, UsuarioCorreo = :UsuarioCorreo, UsuarioRol = :UsuarioRol, Sede_Id = :Sede_Id WHERE Usuario_Id = :Usuario_Id";
+    
+                $queryP = $connect -> prepare($query);
+    
+                $queryP->bindValue(":Usuario_Id", $datosUsuario['UserId']);
+                $queryP->bindValue(":UsuarioNombre", $datosUsuario['NombreUser']);
+                $queryP->bindValue(":UsuarioApaterno", $datosUsuario['ApaternoUser']);
+                $queryP->bindValue(":UsuarioAmaterno", $datosUsuario['AmaternoUser']);
+                $queryP->bindValue(":UsuarioCorreo", $datosUsuario['CorreoUser']);
+                $queryP->bindValue(":UsuarioRol", $datosUsuario['RolUser']);
+                $queryP->bindValue(":Sede_Id", $datosUsuario['SedeUser']);
                 
                 $queryP -> execute();
                 
@@ -85,57 +107,18 @@
         *                $datosUser['nombre'], $datosUser['apaterno'], $datosUser['amaterno'],
         *               $datosUser['correo'], $datosUser['rol']
         */
-        public function eliminarUser($datosUser){
+        public function eliminarUser($idUser){
             try {
                 $connect = $this->connection -> conectar();
                 
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $connect->beginTransaction();
                 
-                $query = "DELETE FROM usuario WHERE UsuarioNombre = :UsuarioNombre AND UsuarioApaterno = :UsuarioApaterno AND UsuarioAmaterno = :UsuarioAmaterno AND UsuarioCorreo=:UsuarioCorreo AND UsuarioRol =:UsuarioRol";
+                $query = "DELETE FROM usuario WHERE Usuario_id = :Usuario_id";
     
                 $queryP = $connect -> prepare($query);
     
-                $queryP->bindValue(":UsuarioNombre", $datosUser['nombre']);
-                $queryP->bindValue(":UsuarioApaterno", $datosUser['apaterno']);
-                $queryP->bindValue(":UsuarioAmaterno", $datosUser['amaterno']);
-                $queryP->bindValue(":UsuarioCorreo", $datosUser['correo']);
-                $queryP->bindValue(":UsuarioRol", $datosUser['rol']);
-                
-                $queryP -> execute();
-                
-                return $connect->commit();
-    
-            } catch (PDOException $ex) {
-                echo 'Error: ' .$ex->getMessage() . die();
-                return FALSE;
-            }
-        }
-        /**
-        * Realiza el UPDATE para actualizar1 a un usuario en la tabla de usuario.
-        * @param integer $datosUser arreglo que contiene:
-        *                $datosUser['nombre'], $datosUser['apaterno'], $datosUser['amaterno'],
-        *               $datosUser['correo'], $datosUser['rol']
-        */
-        public function actulazarDataUser($datosUser){
-            try {
-                $connect = $this->connection -> conectar();
-                
-                $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $connect->beginTransaction();
-                
-                $query = "UPDATE usuario SET UsuarioNombre = :UsuarioNombre, UsuarioApaterno = :UsuarioApaterno, UsuarioAmaterno = :UsuarioAmaterno, UsuarioCorreo=:UsuarioCorreo, UsuarioRol =:UsuarioRol, Sede_Id = :UsuarioSede, UsuarioEstado = :UsuarioEstado WHERE Usuario_id = :Usuario_id";
-    
-                $queryP = $connect -> prepare($query);
-    
-                $queryP->bindValue(":UsuarioNombre", $datosUser['nombre']);
-                $queryP->bindValue(":UsuarioApaterno", $datosUser['apaterno']);
-                $queryP->bindValue(":UsuarioAmaterno", $datosUser['amaterno']);
-                $queryP->bindValue(":UsuarioCorreo", $datosUser['correo']);
-                $queryP->bindValue(":UsuarioRol", $datosUser['rol']);
-                $queryP->bindValue(":UsuarioSede", $datosUser['sede']);
-                $queryP->bindValue(":UsuarioEstado", $datosUser['estado']);
-                $queryP->bindValue(":Usuario_id", $datosUser['id']);
+                $queryP->bindValue(":Usuario_id", $idUser);
                 
                 $queryP -> execute();
                 

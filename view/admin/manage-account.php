@@ -17,13 +17,8 @@ include(VALIDATION_PHP . '/validate-UpdateUser.php');
 //Instancia para la consulta de datos de usuario
 $datosUser = new SelectUser();
 
-//Si hay un evento de tipo post para buscar un registro.
-if (isset($_POST['search'])) {
-    include(VALIDATION_PHP . '/validate-search.php');
-} else {
-    //Trae todos los usuarios registrados en la base de datos.
-    $userInfo = $datosUser->getDatosUser();
-}
+//Trae todos los usuarios registrados en la base de datos.
+$userInfo = $datosUser->getDatosUser();
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +33,7 @@ if (isset($_POST['search'])) {
 
     <h2 class="titulo">Gestionar Cuentas</h2>
 
-    <div class="container">
+    <!-- <div class="container">
         <form class="d-flex col-md-2 form-search needs-validation text-container" role="search" method="post" novalidate>
             <input name="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" required>
             <div class="input-group mb-3">
@@ -60,7 +55,7 @@ if (isset($_POST['search'])) {
             </div>
             <button name="search" class="btn btn-primary" type="submit">Buscar</button>
         </form>
-    </div>
+    </div> -->
 
     <div class="container sombra">
         <table class="table tabla-cuenta text-container">
@@ -100,19 +95,19 @@ if (isset($_POST['search'])) {
                                 <input type="hidden" name="idUser" value="<?php echo $userInfo['Usuario_Id']; ?>">
                             </th>
                             <th scope="col">
-                                <input type="text" readonly class="form-control-plaintext" name="NombreUser" value="<?php echo $userInfo['UsuarioNombre'] . ' ' . $userInfo['UsuarioApaterno'] . ' ' . $userInfo['UsuarioAmaterno']; ?>">
+                                <?php echo $userInfo['UsuarioNombre'] . ' ' . $userInfo['UsuarioApaterno'] . ' ' . $userInfo['UsuarioAmaterno']; ?>
                             </th>
                             <td>
-                                <input type="text" readonly class="form-control-plaintext" name="usuarioCorreo" value="<?php echo $userInfo['UsuarioCorreo']; ?>">
+                                <?php echo $userInfo['UsuarioCorreo']; ?>
                             </td>
                             <td>
-                                <input type="text" readonly class="form-control-plaintext" name="usuarioRol" value="<?php echo $userInfo['UsuarioRol']; ?>">
+                                <?php echo $userInfo['UsuarioRol']; ?>
                             </td>
                             <td>
-                                <input type="text" readonly class="form-control-plaintext" name="usuarioSede" value="<?php echo $userInfo['sedeNombre']; ?>">
+                                <?php echo $userInfo['sedeNombre']; ?>
                             </td>
                             <td>
-                                <input type="text" readonly class="form-control-plaintext" name="usuarioEstado" value="<?php echo ($userInfo['UsuarioEstado'] == 1) ? "Activo" : "Inactivo"; ?>">
+                                <?php echo ($userInfo['UsuarioEstado'] == 1) ? "Activo" : "Inactivo"; ?>
                             </td>
                             <td class="btn-tabla-container">
                                 <button name="habilitar" type="submit" class="btn btn-primary btn-tabla">Habilitar</button>
