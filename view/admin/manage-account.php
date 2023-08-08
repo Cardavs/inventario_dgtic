@@ -58,7 +58,7 @@ $userInfo = $datosUser->getDatosUser();
     </div> -->
 
     <div class="container sombra">
-        <table class="table tabla-cuenta text-container">
+        <table class="table tabla-cuenta text-container" id="myTable">
             <thead class="encabezado">
                 <tr>
                     <th scope="col" class="encabezado-col">
@@ -79,9 +79,8 @@ $userInfo = $datosUser->getDatosUser();
                     <th scope="col" class="encabezado-col">
                         Estado
                     </th>
-                    <th scope="col" class="encabezado-col">
-
-                    </th>
+                    <td scope="col" class="encabezado-col">
+                    </td>
                 </tr>
             </thead>
 
@@ -91,12 +90,12 @@ $userInfo = $datosUser->getDatosUser();
                 ?>
                     <form action="" method="post">
                         <tr>
-                            <th>
+                            <td>
                                 <input type="hidden" name="idUser" value="<?php echo $userInfo['Usuario_Id']; ?>">
-                            </th>
-                            <th scope="col">
+                            </td>
+                            <td scope="col">
                                 <?php echo $userInfo['UsuarioNombre'] . ' ' . $userInfo['UsuarioApaterno'] . ' ' . $userInfo['UsuarioAmaterno']; ?>
-                            </th>
+                            </td>
                             <td>
                                 <?php echo $userInfo['UsuarioCorreo']; ?>
                             </td>
@@ -122,6 +121,28 @@ $userInfo = $datosUser->getDatosUser();
         </table>
     </div>
     <script src="/inventario_dgtic/controllers/validation/js/form-validation-empty.js"></script>
+    <script>
+
+        $(document).ready( function () {
+            $('#myTable').DataTable({
+                "responsive": true,
+                "pagingType": "simple_numbers",
+                "columnDefs": [
+                    {
+                        "searchable": false,
+                        "orderable": false,
+                        "targets": [-1]
+                    },
+
+                    { 
+                        "visible": false, 
+                        "targets": 0 
+                    },
+                ]
+            });
+        } );
+
+    </script>
     <?php include(LAYOUT . '/footer.php'); ?>
 </body>
 
