@@ -10,13 +10,13 @@
             </div>
             <div class="col p-3">
                 <div class="form-check m-2">
-                    <input class="form-check-input" onclick="showISBN();" type="radio" name="tipo" id="auditoria" value="checked" checked>
+                    <input class="form-check-input" onclick="showTiraje();" type="radio" name="tipo" id="auditoria" value="checked">
                     <label class="form-check-label" for="tipo">
                         Auditoría
                     </label>
                 </div>
                 <div class="form-check m-2">
-                    <input class="form-check-input" onclick="showTiraje()" type="radio" name="tipo" id="compilacion" value="checked" >
+                    <input class="form-check-input" onclick="showISBN();" type="radio" name="tipo" id="compilacion" value="checked">
                     <label class="form-check-label" for="tipo">
                         Compilación
                     </label>
@@ -97,19 +97,19 @@
         <div class="row g-3 mb-3">
             <div class="col">
                 <label for="subirMaterial" class="form-label">Subir material</label>
-                <input class="form-control" type="file" id="subirMaterial" required>
+                <input name="material" class="form-control" type="file" id="subirMaterial" required>
                 <div class="invalid-feedback">
                     Es necesario subir un archivo.
                 </div>
             </div>
             <div class="col">
                 <label for="subirIndice" class="form-label">Subir índice</label>
-                <input class="form-control" type="file" id="subirIndice" required>
+                <input name="indice" class="form-control" type="file" id="subirIndice" required>
                 <div class="invalid-feedback">
                     Es necesario subir un archivo.
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 text-center">
                 <label for="guardarMaterial"> </label>
                 <input name="guardarMaterial" class="btn btn-primary botonCreateuser" type="submit" value="Guardar material">
             </div>
