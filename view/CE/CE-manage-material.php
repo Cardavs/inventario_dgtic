@@ -6,7 +6,16 @@
  * autor: Roan                   *
  *********************************/
 
-include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
+ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
+ include(CONNECTION_BD);
+
+ include(BD_SELECT . 'select-material.php');
+
+
+ /* INSTANCIA PARA LA CLASE "SelectMaterials"*/
+$materials = new SelectMaterials();
+//Llamás al método sedes y guardar los datos en la variable "infoSedes"
+$infoMaterials = $materials -> getMaterials();
 ?>
 
 
@@ -20,9 +29,6 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
     <?php include(LAYOUT."/navbar-users/navbarCE.php");?>
     <h2 class="titulo">Gestionar Material</h2>
     <div class="container search">
-        <a href="/inventario_dgtic/view/CE/CE-material-register.php">
-            <button class="btn btn-primary btn-subir-material" type="button">Subir Material</button>
-        </a>
         <form class="d-flex col-md-2 form-search needs-validation text-container" role="search" novalidate>
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" required>
             <div class="invalid-feedback">
@@ -31,7 +37,8 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
             <button class="btn btn-primary" type="submit">Buscar</button>
         </form>
     </div>
-    <?php include(LAYOUT."/templates/manage-material-template.php");?>
+
+    <?php include(LAYOUT."/templates/manage-material-templateCE.php");?>
     <script src="/inventario_dgtic/controllers/validation/js/form-validation-empty.js"></script>
     <?php include(LAYOUT."/footer.php");?>
 </body>
