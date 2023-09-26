@@ -7,6 +7,8 @@
  ********************************/
 
 include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
+
+include(VALIDATION_PHP . '/validate-createMaterial.php');
 ?>
 
 <!DOCTYPE html>
