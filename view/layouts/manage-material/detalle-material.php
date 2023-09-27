@@ -4,6 +4,8 @@
             <label for="NombreMaterial">Nombre de Material</label>
             <input id="NombreMaterial" class="form-control form-control-lg" type="text" placeholder="<?php echo $infoMaterials['MaterialNombre'];?>" disabled>
         </div>
+        <?php if (!is_null($infoMaterials['MaterialISBN']) and !is_null($infoMaterials['MaterialTiraje'])) {
+        ?>
         <div class="col p-3">
             <div class="form-check m-2">
                 <input class="form-check-input" type="radio" name="tipo" id="auditoria" checked disabled>
@@ -20,6 +22,16 @@
             <label for="Tiraje">Tiraje</label>
             <input name="Tiraje" class="form-control form-control-lg" type="text" placeholder=<?php echo $infoMaterials['MaterialTiraje']; ?> disabled>
         </div>
+        <?php }else{?>
+            <div class="col p-3">
+            <div class="form-check m-2">
+                <input class="form-check-input" type="radio" name="tipo" id="auditoria" checked disabled>
+                <label class="form-check-label m-2" for="tipo">
+                    Compilación
+                </label>
+            </div>
+        </div>
+            <?php } ?>
     </div>
     <div class="row g-3 mb-3">
         <div class="col">

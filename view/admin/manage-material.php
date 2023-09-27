@@ -6,7 +6,16 @@
  * autor: Roan                   *
  *********************************/
 
-include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
+ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
+ include(CONNECTION_BD);
+
+ include(BD_SELECT . 'select-material.php');
+
+
+ /* INSTANCIA PARA LA CLASE "SelectMaterials"*/
+$materials = new SelectMaterials();
+//Llamás al método sedes y guardar los datos en la variable "infoSedes"
+$infoMaterials = $materials -> getMaterials();
 ?>
 
 

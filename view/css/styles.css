@@ -213,6 +213,11 @@ button{
     margin: .5rem;
     width: 85%;
 }
+
+.btn-CE{
+    width: 92%;
+}
+
 .addInput{
     width: 100%;
 }

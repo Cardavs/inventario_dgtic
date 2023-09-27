@@ -27,7 +27,7 @@ $infoMaterials = $materials -> getMaterials();
 <body>
     <?php include(LAYOUT."/header.php");?>
     <?php include(LAYOUT."/navbar-users/navbarCE.php");?>
-    <h2 class="titulo">Gestionar Material</h2>
+    <h2 class="titulo">Descarga y Consulta de Material</h2>
     <div class="container search">
         <form class="d-flex col-md-2 form-search needs-validation text-container" role="search" novalidate>
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" required>
