@@ -1,5 +1,5 @@
 <h2 class="titulo">Registrar Material</h2>
-    <form class="container col-md-12 col-sm-4 formulario needs-validation" method="post" novalidate>
+    <form class="container col-md-12 col-sm-4 formulario needs-validation" method="post" novalidate enctype="multipart/form-data">
         <div class="row g-3 mb-3">
             <div class="col">
                 <label for="NombreMaterial">Nombre de material</label>
@@ -10,13 +10,13 @@
             </div>
             <div class="col p-3">
                 <div class="form-check m-2">
-                    <input class="form-check-input" onclick="showTiraje();" type="radio" name="tipo" id="auditoria" value="checked">
+                    <input class="form-check-input" onclick="showTiraje();" type="radio" name="tipo" id="auditoria" value="Auditoría">
                     <label class="form-check-label" for="tipo">
                         Auditoría
                     </label>
                 </div>
                 <div class="form-check m-2">
-                    <input class="form-check-input" onclick="showISBN();" type="radio" name="tipo" id="compilacion" value="checked">
+                    <input class="form-check-input" onclick="showISBN();" type="radio" name="tipo" id="compilacion" value="Compilación">
                     <label class="form-check-label" for="tipo">
                         Compilación
                     </label>
@@ -24,14 +24,14 @@
             </div>
             <div class="col" id="ISBN">
                 <label for="ISBN">ISBN</label>
-                <input name="ISBN" class="form-control form-control-lg" type="text" placeholder="ISBN" required>
+                <input name="ISBN" class="form-control form-control-lg" type="text" placeholder="ISBN">
                 <div class="invalid-feedback">
                     Es necesario colocar un ISBN
                 </div>
             </div>
             <div class="col" id="Tiraje">
                 <label for="Tiraje">Tiraje</label>
-                <input name="Tiraje" class="form-control form-control-lg" type="text" placeholder="Tiraje" required>
+                <input name="Tiraje" class="form-control form-control-lg" type="number" placeholder="Tiraje" min="0">
                 <div class="invalid-feedback">
                     Es necesario colocar un Tiraje.
                 </div>
@@ -47,21 +47,21 @@
             </div>
             <div class="col">
                 <label for="Versión">Versión</label>
-                <input name="Versión" class="form-control form-control-lg" type="text" placeholder="Versión de material" required>
+                <input name="Versión" class="form-control form-control-lg" type="number" placeholder="Versión de material" min="0" required>
                 <div class="invalid-feedback">
                     Es necesario colocar una versión.
                 </div>
             </div>
             <div class="col">
                 <label for="AñoEdicion">Año de edición</label>
-                <input name="AñoEdicion" class="form-control form-control-lg" type="text" placeholder="Año de edición" required>
+                <input name="AñoEdicion" class="form-control form-control-lg" type="number" placeholder="Año de edición" min="1960" max="2099" value="2023" required>
                 <div class="invalid-feedback">
                     Es necesario colocar un año de edición.
                 </div>
             </div>
             <div class="col">
                 <label for="NoPaginas">Número de páginas</label>
-                <input name="NoPaginas" class="form-control form-control-lg" type="text" placeholder="Número de páginas" required>
+                <input name="NoPaginas" class="form-control form-control-lg" type="number" placeholder="Número de páginas" min="1" required>
                 <div class="invalid-feedback">
                     Es necesario colocar un número de páginas.
                 </div>
