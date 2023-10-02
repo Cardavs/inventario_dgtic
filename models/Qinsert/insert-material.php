@@ -84,8 +84,8 @@
                     }
 
                     //Ruta de Archivo en BD.
-                    $rutaArchivobdPDF ="material/pdf/" . $nombreArchivo. "." . $extensionPDF;
-                    $rutaArchivobdIndice ="material/indice/" . $nombreArchivo . "_Indice." . $extensionIndice;
+                    $rutaArchivobdPDF ="/inventario_dgtic/public/pdf/" . $nombreArchivo. "." . $extensionPDF;
+                    $rutaArchivobdIndice ="/inventario_dgtic/public/indice/" . $nombreArchivo . "_Indice." . $extensionIndice;
 
                     $query = 'INSERT INTO material (MaterialNombre, MaterialISBN, MaterialTiraje, MaterialAutor, MaterialVersion, MaterialEdicion, MaterialPaginas, MaterialSeccion, MaterialArea, MaterialPDF, MaterialIndice) 
                     VALUES 
