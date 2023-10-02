@@ -73,23 +73,24 @@
         *               $datosUsuario['correo'], $datosUsuario['rol']
         */
         public function actualizarUsuario($datosUsuario){
+            var_dump($_POST);
             try {
                 $connect = $this->connection -> conectar();
                 
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $connect->beginTransaction();
                 
-                $query = "UPDATE usuario SET UsuarioNombre = :UsuarioNombre, UsuarioApaterno = :UsuarioApaterno, UsuarioAmaterno = :UsuarioAmaterno, UsuarioCorreo = :UsuarioCorreo, UsuarioRol = :UsuarioRol, Sede_Id = :Sede_Id WHERE Usuario_Id = :Usuario_Id";
+                $query = "UPDATE usuario SET Sede_Id = :Sede_Id, UsuarioNombre = :UsuarioNombre, UsuarioApaterno = :UsuarioApaterno, UsuarioAMaterno = :UsuarioAMaterno, UsuarioCorreo = :UsuarioCorreo, UsuarioRol = :UsuarioRol  WHERE Usuario_Id = :Usuario_Id";
     
                 $queryP = $connect -> prepare($query);
     
                 $queryP->bindValue(":Usuario_Id", $datosUsuario['UserId']);
+                $queryP->bindValue(":Sede_Id", $datosUsuario['SedeUser']);
                 $queryP->bindValue(":UsuarioNombre", $datosUsuario['NombreUser']);
                 $queryP->bindValue(":UsuarioApaterno", $datosUsuario['ApaternoUser']);
-                $queryP->bindValue(":UsuarioAmaterno", $datosUsuario['AmaternoUser']);
+                $queryP->bindValue(":UsuarioAMaterno", $datosUsuario['AmaternoUser']);
                 $queryP->bindValue(":UsuarioCorreo", $datosUsuario['CorreoUser']);
                 $queryP->bindValue(":UsuarioRol", $datosUsuario['RolUser']);
-                $queryP->bindValue(":Sede_Id", $datosUsuario['SedeUser']);
                 
                 $queryP -> execute();
                 

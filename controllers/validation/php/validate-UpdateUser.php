@@ -14,9 +14,13 @@
         //Instancia de la clase DeshabilitarUser para realizar el registro.
         $UpdateUser = new UpdateUser();
         if($UpdateUser->deshabilitarUser($id)){
-            echo 'Usuario Deshabilitado';
+            echo '<script language="javascript">
+                alert("Usuario Deshabilitado");
+                </script>';
         }else{
-            echo 'Error al deshabilitar';
+            echo '<script language="javascript">
+                alert("Error al deshabilitar");
+                </script>';
         }
     }
 
@@ -27,9 +31,13 @@
         //Instancia de la clase DeshabilitarUser para realizar el registro.
         $UpdateUser = new UpdateUser();
         if($UpdateUser->habilitarUser($id)){
-            echo 'Usuario habilitado';
+            echo '<script language="javascript">
+                alert("Usuario habilitado");
+                </script>';
         }else{
-            echo 'error';
+            echo '<script language="javascript">
+                alert("Error al habilitar");
+                </script>';
         }
     }
 
@@ -40,9 +48,13 @@
         //Instancia de la clase DeshabilitarUser para realizar el registro.
         $UpdateUser = new UpdateUser();
         if($UpdateUser->eliminarUser($id)){
-            echo 'Usuario eliminado';
+            echo '<script language="javascript">
+                alert("Usuario eliminado");
+                </script>';
         }else{
-            echo 'error';
+            echo '<script language="javascript">
+                alert("Error al eliminar Usuario");
+                </script>';
         }
     }
 
@@ -82,13 +94,20 @@
         //Llamar al metodo para actualizar datos
         $UpdateUser = new UpdateUser();
         if($UpdateUser -> actualizarUsuario($datosUser)){
-            header("location: $manageAccount");
+            echo '<script language="javascript">
+                alert("Datos Actualizados con exito");
+                window.location.href = "/inventario_dgtic/view/admin/manage-account.php";
+                </script>';
             die();
         }else{
-            echo 'error al acutalizar datos';
+            echo '<script language="javascript">
+                alert("Error al acutalizar datos de Usuario");
+                </script>';
         }
     } elseif (isset($_POST['cancelar'])) {
-        header("location: $manageAccount");
+        echo '<script language="javascript">
+                window.location.href = "/inventario_dgtic/view/admin/manage-account.php";
+                </script>';
         die();
     }
     

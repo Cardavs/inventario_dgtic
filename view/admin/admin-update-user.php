@@ -1,8 +1,11 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
 include(CONNECTION_BD);
+
 include(BD_UPDATE . 'update-user.php');
 include(BD_SELECT . 'select-users.php');
+//Archivo para actualizar al usuario
+include(VALIDATION_PHP . '/validate-UpdateUser.php');
 //Obtieniendo Id del usuario para mostrar datos.
 $id = $_GET['id'];
 
@@ -11,18 +14,10 @@ $datosUser = new SelectUser();
 
 //Llamando a la funcion para realizar el select del usuario a editar
 $userInfo = $datosUser->getDatosUserById($id);
-
-//Archivo para actualizar al usuario
-include(VALIDATION_PHP . '/validate-UpdateUser.php');
-
-
-//url de la pestaña manage account
-$manageAccount = 'manage-account.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
 include(LAYOUT . '/head.php');
 ?>
 

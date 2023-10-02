@@ -5,11 +5,10 @@
  * date: 30/02/2023              *
  * autor: Roan                   *
  *********************************/
-include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
 
-//CLASES
+include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
 include(CONNECTION_BD);
-//DOCUMENTOS
+
 include(BD_SELECT . 'select-users.php');
 include(BD_UPDATE . 'update-user.php');
 include(VALIDATION_PHP . '/validate-UpdateUser.php');
@@ -32,30 +31,6 @@ $userInfo = $datosUser->getDatosUser();
     ?>
 
     <h2 class="titulo">Gestionar Cuentas</h2>
-
-    <!-- <div class="container">
-        <form class="d-flex col-md-2 form-search needs-validation text-container" role="search" method="post" novalidate>
-            <input name="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" required>
-            <div class="input-group mb-3">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Separated link</a></li>
-                </ul>
-                <input type="text" class="form-control" aria-label="Text input with dropdown button">
-            </div>
-
-            <div class="invalid-feedback">
-                Es necesario colocar un filtro.
-            </div>
-            <button name="search" class="btn btn-primary" type="submit">Buscar</button>
-        </form>
-    </div> -->
 
     <div class="container sombra">
         <table class="table tabla-cuenta text-container" id="myTable">
@@ -86,13 +61,13 @@ $userInfo = $datosUser->getDatosUser();
 
             <tbody>
                 <?php
-                foreach ($userInfo as $userInfo) :
+                    foreach ($userInfo as $userInfo) {
                 ?>
                     <form action="" method="post">
                         <tr>
-                            <td>
+                            <th>
                                 <input type="hidden" name="idUser" value="<?php echo $userInfo['Usuario_Id']; ?>">
-                            </td>
+                            </th>
                             <td scope="col">
                                 <?php echo $userInfo['UsuarioNombre'] . ' ' . $userInfo['UsuarioApaterno'] . ' ' . $userInfo['UsuarioAmaterno']; ?>
                             </td>
@@ -109,19 +84,18 @@ $userInfo = $datosUser->getDatosUser();
                                 <?php echo ($userInfo['UsuarioEstado'] == 1) ? "Activo" : "Inactivo"; ?>
                             </td>
                             <td class="btn-tabla-container">
-                                <button name="habilitar" type="submit" class="btn btn-primary btn-tabla">Habilitar</button>
-                                <button name="deshabilitar" type="submit" class="btn btn-primary btn-tabla">Deshabilitar</button>
-                                <button name="editar" type="submit" class="btn btn-primary btn-tabla">Editar</button>
-                                <button name="eliminar" type="submit" class="btn btn-primary btn-tabla">Eliminar</button>
+                                <button type="submit" name="habilitar" class="btn btn-primary btn-tabla">Habilitar</button>
+                                <button type="submit" name="deshabilitar" class="btn btn-primary btn-tabla">Deshabilitar</button>
+                                <button type="submit" name="editar" class="btn btn-primary btn-tabla">Editar</button>
+                                <button type="submit" name="eliminar" class="btn btn-primary btn-tabla">Eliminar</button>
                             </td>
                         </tr>
                     </form>
-                <?php endforeach ?>
+                <?php } ?>
             </tbody>
         </table>
     </div>
-    <script src="/inventario_dgtic/controllers/validation/js/form-validation-empty.js"></script>
-    <script>
+    <!-- <script>
 
         $(document).ready( function () {
             $('#myTable').DataTable({
@@ -142,7 +116,7 @@ $userInfo = $datosUser->getDatosUser();
             });
         } );
 
-    </script>
+    </script> -->
     <?php include(LAYOUT . '/footer.php'); ?>
 </body>
 
