@@ -22,7 +22,7 @@
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $connect->beginTransaction();
                 
-                $query = "SELECT * FROM material";
+                $query = "SELECT * FROM material WHERE EstadoMaterial = True";
                 $queryP = $connect -> prepare($query);
                 $queryP -> execute();
                 $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
