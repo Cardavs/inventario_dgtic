@@ -21,11 +21,13 @@
             $connect = $this->connection->conectar();
 
             $test = 'SELECT COUNT(*) AS total
-            FROM material
-            WHERE MaterialNombre = :nombre';
+                    FROM material
+                    WHERE (MaterialNombre = :nombre AND MaterialAutor = :autor) OR MaterialISBN = :ISBN';
 
             $testP = $connect->prepare($test);
             $testP->bindValue(":nombre", $datosMaterial['nombre']);
+            $testP->bindValue(":autor", $datosMaterial['autor']); // Asegúrate de tener $datosMaterial['autor'] definido
+            $testP->bindValue(":ISBN", $datosMaterial['ISBN']);
             $testP->execute();
 
             $total = $testP->fetchColumn();
@@ -84,8 +86,8 @@
                     }
 
                     //Ruta de Archivo en BD.
-                    $rutaArchivobdPDF ="/inventario_dgtic/public/pdf/" . $nombreArchivo. "." . $extensionPDF;
-                    $rutaArchivobdIndice ="/inventario_dgtic/public/indice/" . $nombreArchivo . "_Indice." . $extensionIndice;
+                    $rutaArchivobdPDF ="/inventario_dgtic/material/pdf/" . $nombreArchivo. "." . $extensionPDF;
+                    $rutaArchivobdIndice ="/inventario_dgtic/material/indice/" . $nombreArchivo . "_Indice." . $extensionIndice;
 
                     $query = 'INSERT INTO material (MaterialNombre, MaterialISBN, MaterialTiraje, MaterialAutor, MaterialVersion, MaterialEdicion, MaterialPaginas, MaterialSeccion, MaterialArea, MaterialPDF, MaterialIndice) 
                     VALUES 
@@ -119,7 +121,7 @@
             }else{
                 //si ya existe el registro
                 echo '<script language="javascript">
-                alert("El nombre de archivo proporcionado ya se encuentra en el sistema");
+                alert("El nombre de archivo o ISBN proporcionado ya se encuentra en el sistema");
                 </script>';
                 return false;
             }
