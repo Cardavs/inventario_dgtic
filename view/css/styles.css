@@ -218,6 +218,17 @@ button{
     width: 92%;
 }
 
+.btn-habilitar{
+    background-color: green;
+    border-color: green;
+}
+
+
+.btn-inhabilitar{
+    background-color: red;
+    border-color: red;
+}
+
 .addInput{
     width: 100%;
 }
@@ -230,6 +241,17 @@ button{
 .btn-tabla:hover{
     background-color: var(--secundario);
 }
+
+.btn-habilitar:hover{
+    background-color: #006E00;
+    border-color: #006E00;
+}
+
+.btn-inhabilitar:hover{
+    background-color: #C80000;
+    border-color: #C80000;
+}
+
 
 /*ADMINISTRAR SEDES*/
 

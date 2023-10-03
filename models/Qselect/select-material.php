@@ -13,7 +13,7 @@
         }
 
         /*
-        * Realiza el select de los materiales registradas en la BD
+        * Realiza el select de los materiales registradas en la BD que estan habilitados
         */
         public function getMaterials(){
             try {
@@ -22,7 +22,24 @@
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $connect->beginTransaction();
                 
-                $query = "SELECT * FROM material WHERE EstadoMaterial = True";
+                $query = "SELECT * FROM material WHERE MaterialEstado = True";
+                $queryP = $connect -> prepare($query);
+                $queryP -> execute();
+                $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
+                
+            } catch (PDOException $ex) {
+                echo 'Error: ' .$ex->getMessage() . die();
+            }
+            return $resultado;
+        }
+        public function getMaterialsAll(){
+            try {
+                $connect = $this->connection -> conectar();
+                
+                $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $connect->beginTransaction();
+                
+                $query = "SELECT * FROM material";
                 $queryP = $connect -> prepare($query);
                 $queryP -> execute();
                 $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
