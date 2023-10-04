@@ -52,7 +52,7 @@
                                 </a>
                             </div>
 
-                            <form action="" method="post">
+                            <form action="/inventario_dgtic\controllers\validation\php\validate-UpdateMaterial.php" method="post">
                                 <input type="hidden" name="idMaterial" value="<?php echo $infoMaterials['Material_Id']; ?>">
                                 <input type="hidden" name="estadoMaterial" value="<?php echo $infoMaterials['MaterialEstado']; ?>">
                                 <button type="submit" name="cambio" class="btn btn-primary btn-tabla btn-CE <?php echo (!$infoMaterials['MaterialEstado']) ? "btn-habilitar" : "btn-inhabilitar"; ?>"><?php echo (!$infoMaterials['MaterialEstado']) ? "Habilitar" : "Inhabilitar"; ?></button>

@@ -10,14 +10,21 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
 include(CONNECTION_BD);
 
 include(BD_SELECT . 'select-material.php');
-include(BD_UPDATE . 'update-material.php');
-include(VALIDATION_PHP . '/validate-UpdateMaterial.php');
+session_start();
 
 
 /* INSTANCIA PARA LA CLASE "SelectMaterials"*/
 $materials = new SelectMaterials();
 //Llamás al método sedes y guardar los datos en la variable "infoSedes"
 $infoMaterials = $materials->getMaterialsAll();
+if (isset($_SESSION['message'])) {
+    $message = $_SESSION['message'];
+    unset($_SESSION['message']); // Limpia la variable de sesión después de usarla
+
+    echo '<script language="javascript">
+        alert("' . $message . '");
+        </script>';
+}
 ?>
 
 

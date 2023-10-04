@@ -52,7 +52,7 @@
         /*
         * Realiza el select de uno los materiales registradas en la BD por ID
         */
-        public function getMaterialsById($materialId){
+        public function getMaterialById($materialId){
             try {
                 $connect = $this->connection -> conectar();
                 
