@@ -73,7 +73,6 @@
         *               $datosUsuario['correo'], $datosUsuario['rol']
         */
         public function actualizarUsuario($datosUsuario){
-            var_dump($_POST);
             try {
                 $connect = $this->connection -> conectar();
                 

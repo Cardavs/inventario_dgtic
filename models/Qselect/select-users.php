@@ -59,7 +59,7 @@
         /**
         * Realiza el SELECT en la tabla de usuario en base a una busqueda por nombre de usuario.
         */
-        public function getUserName($busqueda){
+        public function getUserName($busqueda,$filas){
             try {
                 $connect = $this->connection -> conectar();
                 
@@ -68,11 +68,12 @@
                 
                 $query = "SELECT u.Usuario_Id, u.UsuarioNombre, u.UsuarioApaterno, u.UsuarioAmaterno, u.UsuarioCorreo, u.UsuarioRol, u.UsuarioEstado, s.sedeNombre
                 FROM usuario as u INNER JOIN sedes as s ON u.Sede_Id = s.Sede_Id
-                WHERE u.UsuarioRol NOT LIKE 'administrador' AND u.UsuarioNombre LIKE :busqueda";
+                WHERE u.UsuarioRol NOT LIKE 'administrador' AND u.UsuarioNombre LIKE :busqueda LIMIT :filas";
 
                 $queryP = $connect -> prepare($query);
 
                 $queryP->bindValue(":busqueda", '%'. $busqueda .'%');
+                $queryP->bindValue(":filas", $filas);
 
                 $queryP -> execute();
                 $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
@@ -89,7 +90,7 @@
         /**
         * Realiza el SELECT en la tabla de usuario en base a una busqueda por apellido paterno de usuario.
         */
-        public function getUserApaterno($busqueda){
+        public function getUserApaterno($busqueda,$filas){
             try {
                 $connect = $this->connection -> conectar();
                 
@@ -98,11 +99,12 @@
                 
                 $query = "SELECT u.Usuario_Id, u.UsuarioNombre, u.UsuarioApaterno, u.UsuarioAmaterno, u.UsuarioCorreo, u.UsuarioRol, u.UsuarioEstado, s.sedeNombre
                 FROM usuario as u INNER JOIN sedes as s ON u.Sede_Id = s.Sede_Id
-                WHERE u.UsuarioRol NOT LIKE 'administrador' AND u.UsuarioApaterno LIKE :busqueda";
+                WHERE u.UsuarioRol NOT LIKE 'administrador' AND u.UsuarioApaterno LIKE :busqueda LIMIT :filas";
 
                 $queryP = $connect -> prepare($query);
 
                 $queryP->bindValue(":busqueda", '%'. $busqueda .'%');
+                $queryP->bindValue(":filas", $filas);
 
                 $queryP -> execute();
                 $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
@@ -117,9 +119,9 @@
             }
         }
         /**
-        * Realiza el SELECT en la tabla de usuario en base a una busqueda por apellido paterno de usuario.
+        * Realiza el SELECT en la tabla de usuario en base a una busqueda por apellido materno de usuario.
         */
-        public function getUserAmaterno($busqueda){
+        public function getUserAmaterno($busqueda,$filas){
             try {
                 $connect = $this->connection -> conectar();
                 
@@ -128,11 +130,39 @@
                 
                 $query = "SELECT u.Usuario_Id, u.UsuarioNombre, u.UsuarioApaterno, u.UsuarioAmaterno, u.UsuarioCorreo, u.UsuarioRol, u.UsuarioEstado, s.sedeNombre
                 FROM usuario as u INNER JOIN sedes as s ON u.Sede_Id = s.Sede_Id
-                WHERE u.UsuarioRol NOT LIKE 'administrador' AND u.UsuarioAmaterno LIKE :busqueda";
+                WHERE u.UsuarioRol NOT LIKE 'administrador' AND u.UsuarioAmaterno LIKE :busqueda LIMIT :filas";
 
                 $queryP = $connect -> prepare($query);
 
                 $queryP->bindValue(":busqueda", '%'. $busqueda .'%');
+                $queryP->bindValue(":filas", $filas);
+
+                $queryP -> execute();
+                $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
+                
+            } catch (PDOException $ex) {
+                echo 'Error: ' .$ex->getMessage() . die();
+            }
+                return $resultado;
+        }
+        /**
+        * Realiza el SELECT en la tabla de usuario en base a una busqueda por correo de usuario.
+        */
+        public function getUserCorreo($busqueda,$filas){
+            try {
+                $connect = $this->connection -> conectar();
+                
+                $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $connect->beginTransaction();
+                
+                $query = "SELECT u.Usuario_Id, u.UsuarioNombre, u.UsuarioApaterno, u.UsuarioAmaterno, u.UsuarioCorreo, u.UsuarioRol, u.UsuarioEstado, s.sedeNombre
+                FROM usuario as u INNER JOIN sedes as s ON u.Sede_Id = s.Sede_Id
+                WHERE u.UsuarioRol NOT LIKE 'administrador' AND u.UsuarioCorreo LIKE :busqueda LIMIT :filas";
+
+                $queryP = $connect -> prepare($query);
+
+                $queryP->bindValue(":busqueda", '%'. $busqueda .'%');
+                $queryP->bindValue(":filas", $filas);
 
                 $queryP -> execute();
                 $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);

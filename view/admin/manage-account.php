@@ -12,18 +12,43 @@ include(CONNECTION_BD);
 include(BD_SELECT . 'select-users.php');
 include(BD_UPDATE . 'update-user.php');
 include(VALIDATION_PHP . '/validate-UpdateUser.php');
-
+?>
+<?php
 //Instancia para la consulta de datos de usuario
 $datosUser = new SelectUser();
+$userInfo = [];
 
-//Trae todos los usuarios registrados en la base de datos.
-$userInfo = $datosUser->getDatosUser();
+// BUSQUEDA
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['searchInput'])) {
+    $search = trim($_POST['Busqueda'],  ' \0\x0');
+    $files = $_POST['Filas'];
+
+    // Primero se hace la búsqueda por nombre
+    $userInfo = $datosUser->getUserName($search, $files);
+    
+    // Si no hay registros en la búsqueda por nombre, realiza la búsqueda por apellido paterno.
+    if (empty($userInfo)) {
+        $userInfo = $datosUser->getUserApaterno($search, $files);
+    }
+
+    // Si no hay registros en la búsqueda por apellido paterno, realiza la búsqueda por apellido materno.
+    if (empty($userInfo)) {
+        $userInfo = $datosUser->getUserAmaterno($search, $files);
+    }
+
+    // Si no hay registros en la búsqueda por apellido materno, realiza la búsqueda por correo.
+    if (empty($userInfo)) {
+        $userInfo = $datosUser->getUserCorreo($search, $files);
+    }
+} else {
+    // Si no se ha enviado el formulario, obtiene los datos de usuario sin filtros.
+    $userInfo = $datosUser->getDatosUser();
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 <?php include(LAYOUT . '/head.php'); ?>
-
 <body>
     <?php
     include(LAYOUT . '/header.php');
@@ -31,7 +56,22 @@ $userInfo = $datosUser->getDatosUser();
     ?>
 
     <h2 class="titulo">Gestionar Cuentas</h2>
-
+    <div class="container search">
+        <form class="d-flex col-md-2 form-search needs-validation text-container" role="search" novalidate method="POST">
+            <input class="form-control me-2 text-center" type="text" placeholder="Busqueda" name="Busqueda" id="Busqueda" required>
+            <select class="form-select me-2 text-center" name="Filas" id="numFilas" placeholder="Filas" required>
+                <option value="10">10</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="500">500</option>
+                <option value="1000">1000</option>
+            </select>
+            <div class="invalid-feedback">
+                Es necesario colocar al menos un filtro.
+            </div>
+            <button class="btn btn-primary" type="submit" name="searchInput">Buscar</button>
+        </form>
+    </div>
     <div class="container sombra">
         <table class="table tabla-cuenta text-container" id="myTable">
             <thead class="encabezado">
@@ -95,29 +135,7 @@ $userInfo = $datosUser->getDatosUser();
             </tbody>
         </table>
     </div>
-    <!-- <script>
-
-        $(document).ready( function () {
-            $('#myTable').DataTable({
-                "responsive": true,
-                "pagingType": "simple_numbers",
-                "columnDefs": [
-                    {
-                        "searchable": false,
-                        "orderable": false,
-                        "targets": [-1]
-                    },
-
-                    { 
-                        "visible": false, 
-                        "targets": 0 
-                    },
-                ]
-            });
-        } );
-
-    </script> -->
     <?php include(LAYOUT . '/footer.php'); ?>
+    <script src="/inventario_dgtic/controllers/validation/js/form-validation-empty.js"></script>
 </body>
-
 </html>
