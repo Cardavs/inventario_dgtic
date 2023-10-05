@@ -11,9 +11,15 @@
         $seccionId = $_POST['seccionId'];
         //Se llama al metodo para habilitar la seccion
         if($section -> habilitarSection($seccionId)){
-            echo 'habilitado';
+            echo '<script language="javascript">
+                alert("Seccion Habilitada Correctamente");
+                window.location.href = "/inventario_dgtic/view/admin/admin-manage-section.php";
+            </script>';
         }else{
-            echo 'error';
+            echo '<script language="javascript">
+                alert("Error al Habilitar Seccion. Consulte a un Administrador");
+                window.location.href = "/inventario_dgtic/view/admin/admin-manage-section.php";
+            </script>';
         }
     }
 
@@ -23,9 +29,15 @@
         $seccionId = $_POST['seccionId'];
         //Se llama al metodo para deshabilitar la seccion
         if($section -> deshabilitarSection($seccionId)){
-            echo 'dehabilitado';
+            echo '<script language="javascript">
+                alert("Seccion Deshabilitada Correctamente");
+                window.location.href = "/inventario_dgtic/view/admin/admin-manage-section.php";
+            </script>';
         }else{
-            echo 'error';
+            echo '<script language="javascript">
+                alert("Error al Deshabilitar Seccion. Consulte a un Administrador");
+                window.location.href = "/inventario_dgtic/view/admin/admin-manage-section.php";
+            </script>';
         }
     }
 
@@ -35,9 +47,15 @@
         $seccionId = $_POST['seccionId'];
         //Se llama al metodo para deshabilitar la seccion
         if($section -> eliminarSection($seccionId)){
-            echo 'eliminado';
+            echo '<script language="javascript">
+                alert("Seccion Eliminada Correctamente");
+                window.location.href = "/inventario_dgtic/view/admin/admin-manage-section.php";
+            </script>';
         }else{
-            echo 'error';
+            echo '<script language="javascript">
+                alert("Error al Eliminar Seccion. Consulte a un Administrador");
+                window.location.href = "/inventario_dgtic/view/admin/admin-manage-section.php";
+            </script>';
         }
     }
 
@@ -66,10 +84,15 @@
 
         //llamando al metodo para actualizar informacion
         if($section -> updateSection($datosSection)){
-            echo 'Actualizado';
-            header('location: admin-manage-section.php');
+            echo '<script language="javascript">
+                alert("Seccion Actualizada Correctamente");
+                window.location.href = "/inventario_dgtic/view/admin/admin-manage-section.php";
+            </script>';
         }else{
-            echo 'error';
+            echo '<script language="javascript">
+                alert("Error al Actualizar Seccion. Consulte a un Administrador");
+                window.location.href = "/inventario_dgtic/view/admin/admin-manage-section.php";
+            </script>';
         }
     }
 

@@ -32,9 +32,15 @@
         //Instancia de la clase InsertUser para realizar el registro.
         $insertUser = new InsertUser();
         if($insertUser->insertUser($createUser)){
-            echo 'Usuario registrado';
+            echo '<script language="javascript">
+                alert("Usuario Registrado Correctamente");
+                window.location.href = "/inventario_dgtic/view/admin/create-user.php";
+            </script>';
         }else{
-            echo 'error';
+            echo '<script language="javascript">
+                alert("Error al Crear al Usuario");
+                window.location.href = "/inventario_dgtic/view/admin/create-user.php";
+            </script>';
         }
     }
 

@@ -22,9 +22,15 @@
         //Instancia de la clase InsertSede para realizar el registro.
         $seccionRegistro = new InsertSection();
         if($seccionRegistro -> registrarSeccion($seccion)){
-            echo 'Registro realizado';
+            echo '<script language="javascript">
+                alert("Registro Realizado Correctamente");
+                window.location.href = "/inventario_dgtic/view/admin/admin-manage-section.php";
+            </script>';
         }else{
-            echo 'Registro fallido';
+            echo '<script language="javascript">
+                alert("Registro Fallido. Consulte a un Administrador");
+                window.location.href = "/inventario_dgtic/view/admin/admin-manage-section.php";
+            </script>';
         }
     }
 ?>

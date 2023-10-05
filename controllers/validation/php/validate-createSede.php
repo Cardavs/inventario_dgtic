@@ -23,9 +23,15 @@
         //Instancia de la clase InsertSede para realizar el registro.
         $sedeRegistro = new InsertSede();
         if($sedeRegistro -> registrarSede($sede)){
-            echo 'Registro realizado';
+            echo '<script language="javascript">
+                alert("Registro Realizado Correctamente");
+                window.location.href = "/inventario_dgtic/view/admin/admin-sedes.php";
+            </script>';
         }else{
-            echo 'Registro fallido';
+            echo '<script language="javascript">
+                alert("Registro Fallido, Consulte a un Administrador");
+                window.location.href = "/inventario_dgtic/view/admin/admin-sedes.php";
+            </script>';
         }
     }
 ?>

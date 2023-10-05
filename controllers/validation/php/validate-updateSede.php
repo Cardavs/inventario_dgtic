@@ -11,9 +11,15 @@ $sede = new UpdateSede();
         $sedeId = $_POST['IdSede'];
         //Llamando al metodo habilitarSede de la clase UpdateSede.
         if($sede -> habilitarSede($sedeId)){
-            echo 'Habilitado';
+            echo '<script language="javascript">
+                alert("Sede Habilitada Correctamente");
+                window.location.href = "/inventario_dgtic/view/admin/admin-sedes.php";
+            </script>';
         }else{
-            echo 'Error';
+            echo '<script language="javascript">
+                alert("Error al Habilitar Sede, Consulte a un Administrador");
+                window.location.href = "/inventario_dgtic/view/admin/admin-sedes.php";
+            </script>';
         }
 
     }
@@ -24,9 +30,15 @@ $sede = new UpdateSede();
         $sedeId = $_POST['IdSede'];
         //Llamando al metodo deshabilitarSede de la clase UpdateSede.
         if($sede -> deshabilitarSede($sedeId)){
-            echo 'Deshabilitado';
+            echo '<script language="javascript">
+                alert("Sede Deshabilitada Correctamente");
+                window.location.href = "/inventario_dgtic/view/admin/admin-sedes.php";
+            </script>';
         }else{
-            echo 'Error';
+            echo '<script language="javascript">
+                alert("Error al Deshabilitar Sede, Consulte a un Administrador");
+                window.location.href = "/inventario_dgtic/view/admin/admin-sedes.php";
+            </script>';
         }
     }
 
@@ -36,9 +48,15 @@ $sede = new UpdateSede();
         $sedeId = $_POST['IdSede'];
         //LLamando al metodo eliminarSede de la clase UpdateSede.
         if($sede -> eliminarSede($sedeId)){
-            echo 'Eliminado';
+            echo '<script language="javascript">
+                alert("Sede Eliminada Correctamente");
+                window.location.href = "/inventario_dgtic/view/admin/admin-sedes.php";
+            </script>';
         }else{
-            echo 'Error';
+            echo '<script language="javascript">
+                alert("Error al Eliminar Sede. Consulte a un Administrador");
+                window.location.href = "/inventario_dgtic/view/admin/admin-sedes.php";
+            </script>';
         }
     }
 
@@ -68,7 +86,10 @@ $sede = new UpdateSede();
         );
         //LLamando al metodo actualizarSede de la clase UpdateSede.
         if($sede -> actualizarSede($datosSede)){
-            header("location: admin-sedes.php");
+            echo '<script language="javascript">
+                alert("Datos Actualizados Correctamente");
+                window.location.href = "/inventario_dgtic/view/admin/admin-sedes.php";
+            </script>';
             die();
         }
         

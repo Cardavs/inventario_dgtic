@@ -22,9 +22,15 @@
         //Instancia de la clase InsertSede para realizar el registro.
         $diplomadoRegistro = new InsertDiplomado();
         if($diplomadoRegistro -> registrarDiplomado($diplomado)){
-            echo 'Registro realizado';
+            echo '<script language="javascript">
+                alert("Diplomado Registrado Correctamente");
+                window.location.href = "/inventario_dgtic/view/admin/admin-manage-diplomado.php";
+            </script>';
         }else{
-            echo 'Registro fallido';
+            echo '<script language="javascript">
+                alert("Error al Registrado Diplomado. Consulte a un administrador");
+                window.location.href = "/inventario_dgtic/view/admin/admin-manage-diplomado.php";
+            </script>';
         }
     }
 ?>

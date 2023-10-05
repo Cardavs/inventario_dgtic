@@ -11,9 +11,15 @@
         $diplomadoId = $_POST['diplomadoId'];
         //Se llama al metodo para habilitar la diplomado
         if($diplomado -> habilitardiplomado($diplomadoId)){
-            echo 'habilitado';
+            echo '<script language="javascript">
+                alert("Diplomado Habilitado Correctamente");
+                window.location.href = "/inventario_dgtic/view/admin/admin-manage-diplomado.php";
+            </script>';
         }else{
-            echo 'error';
+            echo '<script language="javascript">
+                alert("Error al Habilitar Diplomado. Consulte a un administrador");
+                window.location.href = "/inventario_dgtic/view/admin/admin-manage-diplomado.php";
+            </script>';
         }
     }
 
@@ -23,9 +29,15 @@
         $diplomadoId = $_POST['diplomadoId'];
         //Se llama al metodo para deshabilitar la diplomado
         if($diplomado -> deshabilitardiplomado($diplomadoId)){
-            echo 'dehabilitado';
+            echo '<script language="javascript">
+                alert("Diplomado Deshabilitado Correctamente");
+                window.location.href = "/inventario_dgtic/view/admin/admin-manage-diplomado.php";
+            </script>';
         }else{
-            echo 'error';
+            echo '<script language="javascript">
+                alert("Error al Deshabilitar Diplomado. Consulte a un administrador");
+                window.location.href = "/inventario_dgtic/view/admin/admin-manage-diplomado.php";
+            </script>';
         }
     }
 
@@ -35,9 +47,15 @@
         $diplomadoId = $_POST['diplomadoId'];
         //Se llama al metodo para deshabilitar la diplomado
         if($diplomado -> eliminardiplomado($diplomadoId)){
-            echo 'eliminado';
+            echo '<script language="javascript">
+                alert("Diplomado Eliminado Correctamente");
+                window.location.href = "/inventario_dgtic/view/admin/admin-manage-diplomado.php";
+            </script>';
         }else{
-            echo 'error';
+            echo '<script language="javascript">
+                alert("Error al Eliminar Diplomado. Consulte a un administrador");
+                window.location.href = "/inventario_dgtic/view/admin/admin-manage-diplomado.php";
+            </script>';
         }
     }
 
@@ -66,10 +84,15 @@
 
         //llamando al metodo para actualizar informacion
         if($diplomado -> updatediplomado($datosdiplomado)){
-            echo 'Actualizado';
-            header('location: admin-manage-diplomado.php');
+            echo '<script language="javascript">
+                alert("Diplomado Actualizado Correctamente");
+                window.location.href = "/inventario_dgtic/view/admin/admin-manage-diplomado.php";
+            </script>';
         }else{
-            echo 'error';
+            echo '<script language="javascript">
+                alert("Error al Actualizar Diplomado. Consulte a un administrador");
+                window.location.href = "/inventario_dgtic/view/admin/admin-manage-diplomado.php";
+            </script>';
         }
     }
 
