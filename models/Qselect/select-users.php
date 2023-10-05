@@ -59,8 +59,12 @@
         /**
         * Realiza el SELECT en la tabla de usuario en base a una busqueda por nombre de usuario.
         */
-        public function getUserName($busqueda,$filas){
+        public function getUserSearch($busqueda, $filas){
             try {
+
+                // Convertir $filas a un número entero
+                $limit = intval($filas);
+
                 $connect = $this->connection -> conectar();
                 
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -68,12 +72,11 @@
                 
                 $query = "SELECT u.Usuario_Id, u.UsuarioNombre, u.UsuarioApaterno, u.UsuarioAmaterno, u.UsuarioCorreo, u.UsuarioRol, u.UsuarioEstado, s.sedeNombre
                 FROM usuario as u INNER JOIN sedes as s ON u.Sede_Id = s.Sede_Id
-                WHERE u.UsuarioRol NOT LIKE 'administrador' AND u.UsuarioNombre LIKE :busqueda LIMIT :filas";
+                WHERE u.UsuarioRol NOT LIKE 'administrador' AND (u.UsuarioNombre LIKE :busqueda OR u.UsuarioApaterno LIKE :busqueda OR u.UsuarioAmaterno LIKE :busqueda OR u.UsuarioCorreo LIKE :busqueda) LIMIT $limit";
 
                 $queryP = $connect -> prepare($query);
 
                 $queryP->bindValue(":busqueda", '%'. $busqueda .'%');
-                $queryP->bindValue(":filas", $filas);
 
                 $queryP -> execute();
                 $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
@@ -84,93 +87,11 @@
             if(sizeof($resultado) > 0){
                 return $resultado;
             }elseif(sizeof($resultado) == 0){
-                return FALSE;
+                echo '<script language="javascript">
+                        alert("No hay datos que coincidan con su busqueda");
+                        window.location.href = "/inventario_dgtic/view/admin/manage-account.php";
+                        </script>';
             }
-        }
-        /**
-        * Realiza el SELECT en la tabla de usuario en base a una busqueda por apellido paterno de usuario.
-        */
-        public function getUserApaterno($busqueda,$filas){
-            try {
-                $connect = $this->connection -> conectar();
-                
-                $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $connect->beginTransaction();
-                
-                $query = "SELECT u.Usuario_Id, u.UsuarioNombre, u.UsuarioApaterno, u.UsuarioAmaterno, u.UsuarioCorreo, u.UsuarioRol, u.UsuarioEstado, s.sedeNombre
-                FROM usuario as u INNER JOIN sedes as s ON u.Sede_Id = s.Sede_Id
-                WHERE u.UsuarioRol NOT LIKE 'administrador' AND u.UsuarioApaterno LIKE :busqueda LIMIT :filas";
-
-                $queryP = $connect -> prepare($query);
-
-                $queryP->bindValue(":busqueda", '%'. $busqueda .'%');
-                $queryP->bindValue(":filas", $filas);
-
-                $queryP -> execute();
-                $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
-                
-            } catch (PDOException $ex) {
-                echo 'Error: ' .$ex->getMessage() . die();
-            }
-            if(sizeof($resultado) > 0){
-                return $resultado;
-            }elseif(sizeof($resultado) == 0){
-                return FALSE;
-            }
-        }
-        /**
-        * Realiza el SELECT en la tabla de usuario en base a una busqueda por apellido materno de usuario.
-        */
-        public function getUserAmaterno($busqueda,$filas){
-            try {
-                $connect = $this->connection -> conectar();
-                
-                $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $connect->beginTransaction();
-                
-                $query = "SELECT u.Usuario_Id, u.UsuarioNombre, u.UsuarioApaterno, u.UsuarioAmaterno, u.UsuarioCorreo, u.UsuarioRol, u.UsuarioEstado, s.sedeNombre
-                FROM usuario as u INNER JOIN sedes as s ON u.Sede_Id = s.Sede_Id
-                WHERE u.UsuarioRol NOT LIKE 'administrador' AND u.UsuarioAmaterno LIKE :busqueda LIMIT :filas";
-
-                $queryP = $connect -> prepare($query);
-
-                $queryP->bindValue(":busqueda", '%'. $busqueda .'%');
-                $queryP->bindValue(":filas", $filas);
-
-                $queryP -> execute();
-                $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
-                
-            } catch (PDOException $ex) {
-                echo 'Error: ' .$ex->getMessage() . die();
-            }
-                return $resultado;
-        }
-        /**
-        * Realiza el SELECT en la tabla de usuario en base a una busqueda por correo de usuario.
-        */
-        public function getUserCorreo($busqueda,$filas){
-            try {
-                $connect = $this->connection -> conectar();
-                
-                $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $connect->beginTransaction();
-                
-                $query = "SELECT u.Usuario_Id, u.UsuarioNombre, u.UsuarioApaterno, u.UsuarioAmaterno, u.UsuarioCorreo, u.UsuarioRol, u.UsuarioEstado, s.sedeNombre
-                FROM usuario as u INNER JOIN sedes as s ON u.Sede_Id = s.Sede_Id
-                WHERE u.UsuarioRol NOT LIKE 'administrador' AND u.UsuarioCorreo LIKE :busqueda LIMIT :filas";
-
-                $queryP = $connect -> prepare($query);
-
-                $queryP->bindValue(":busqueda", '%'. $busqueda .'%');
-                $queryP->bindValue(":filas", $filas);
-
-                $queryP -> execute();
-                $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
-                
-            } catch (PDOException $ex) {
-                echo 'Error: ' .$ex->getMessage() . die();
-            }
-                return $resultado;
         }
     }
 ?>

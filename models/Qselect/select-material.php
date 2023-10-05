@@ -70,5 +70,37 @@
             }
             return $resultado;
         }
+        /*
+        * Realiza el select de uno los materiales registradas en la BD por ID
+        */
+        public function getMaterialSearch($busqueda, $filas){
+            try {
+
+                // Convertir $filas a un número entero
+                $limit = intval($filas);
+
+                $connect = $this->connection -> conectar();
+                
+                $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $connect->beginTransaction();
+                
+                $query = "SELECT * FROM material WHERE MaterialNombre LIKE :busqueda LIMIT $limit";
+                $queryP = $connect -> prepare($query);
+                $queryP->bindValue(":busqueda", '%'. $busqueda .'%');
+                $queryP -> execute();
+                $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
+                
+            } catch (PDOException $ex) {
+                echo 'Error: ' .$ex->getMessage() . die();
+            }
+            if(sizeof($resultado) > 0){
+                return $resultado;
+            }elseif(sizeof($resultado) == 0){
+                echo '<script language="javascript">
+                        alert("No hay datos que coincidan con su busqueda");
+                        window.location.href = "/inventario_dgtic/view/admin/manage-material.php";
+                        </script>';
+            }
+        }
     }
 ?>

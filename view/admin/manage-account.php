@@ -13,38 +13,6 @@ include(BD_SELECT . 'select-users.php');
 include(BD_UPDATE . 'update-user.php');
 include(VALIDATION_PHP . '/validate-UpdateUser.php');
 ?>
-<?php
-//Instancia para la consulta de datos de usuario
-$datosUser = new SelectUser();
-$userInfo = [];
-
-// BUSQUEDA
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['searchInput'])) {
-    $search = trim($_POST['Busqueda'],  ' \0\x0');
-    $files = $_POST['Filas'];
-
-    // Primero se hace la búsqueda por nombre
-    $userInfo = $datosUser->getUserName($search, $files);
-    
-    // Si no hay registros en la búsqueda por nombre, realiza la búsqueda por apellido paterno.
-    if (empty($userInfo)) {
-        $userInfo = $datosUser->getUserApaterno($search, $files);
-    }
-
-    // Si no hay registros en la búsqueda por apellido paterno, realiza la búsqueda por apellido materno.
-    if (empty($userInfo)) {
-        $userInfo = $datosUser->getUserAmaterno($search, $files);
-    }
-
-    // Si no hay registros en la búsqueda por apellido materno, realiza la búsqueda por correo.
-    if (empty($userInfo)) {
-        $userInfo = $datosUser->getUserCorreo($search, $files);
-    }
-} else {
-    // Si no se ha enviado el formulario, obtiene los datos de usuario sin filtros.
-    $userInfo = $datosUser->getDatosUser();
-}
-?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -59,7 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['searchInput'])) {
     <div class="container search">
         <form class="d-flex col-md-2 form-search needs-validation text-container" role="search" novalidate method="POST">
             <input class="form-control me-2 text-center" type="text" placeholder="Busqueda" name="Busqueda" id="Busqueda" required>
-            <select class="form-select me-2 text-center" name="Filas" id="numFilas" placeholder="Filas" required>
+            <select class="form-select me-2 text-center" name="Filas" id="Filas" placeholder="Filas" required>
+                <option value="">Filas a mostrar</option>
                 <option value="10">10</option>
                 <option value="50">50</option>
                 <option value="100">100</option>
@@ -72,6 +41,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['searchInput'])) {
             <button class="btn btn-primary" type="submit" name="searchInput">Buscar</button>
         </form>
     </div>
+    <?php
+        include(VALIDATION_PHP . '/validate-searchUser.php');
+    ?>
     <div class="container sombra">
         <table class="table tabla-cuenta text-container" id="myTable">
             <thead class="encabezado">

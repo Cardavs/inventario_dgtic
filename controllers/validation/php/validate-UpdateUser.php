@@ -16,6 +16,7 @@
         if($UpdateUser->deshabilitarUser($id)){
             echo '<script language="javascript">
                 alert("Usuario Deshabilitado");
+                window.location.href = "/inventario_dgtic/view/admin/manage-account.php";
                 </script>';
         }else{
             echo '<script language="javascript">
@@ -33,10 +34,12 @@
         if($UpdateUser->habilitarUser($id)){
             echo '<script language="javascript">
                 alert("Usuario habilitado");
+                window.location.href = "/inventario_dgtic/view/admin/manage-account.php";
                 </script>';
         }else{
             echo '<script language="javascript">
                 alert("Error al habilitar");
+                window.location.href = "/inventario_dgtic/view/admin/manage-account.php";
                 </script>';
         }
     }
@@ -50,10 +53,12 @@
         if($UpdateUser->eliminarUser($id)){
             echo '<script language="javascript">
                 alert("Usuario eliminado");
+                window.location.href = "/inventario_dgtic/view/admin/manage-account.php";
                 </script>';
         }else{
             echo '<script language="javascript">
                 alert("Error al eliminar Usuario");
+                window.location.href = "/inventario_dgtic/view/admin/manage-account.php";
                 </script>';
         }
     }
@@ -102,11 +107,12 @@
         }else{
             echo '<script language="javascript">
                 alert("Error al acutalizar datos de Usuario");
+                window.location.href = "/inventario_dgtic/view/admin/manage-account.php";
                 </script>';
         }
     } elseif (isset($_POST['cancelar'])) {
         echo '<script language="javascript">
-                window.location.href = "/inventario_dgtic/view/admin/manage-account.php";
+            window.location.href = "/inventario_dgtic/view/admin/manage-account.php";
                 </script>';
         die();
     }

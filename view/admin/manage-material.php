@@ -12,11 +12,6 @@ include(CONNECTION_BD);
 include(BD_SELECT . 'select-material.php');
 session_start();
 
-
-/* INSTANCIA PARA LA CLASE "SelectMaterials"*/
-$materials = new SelectMaterials();
-//Llamás al método sedes y guardar los datos en la variable "infoSedes"
-$infoMaterials = $materials->getMaterialsAll();
 if (isset($_SESSION['message'])) {
     $message = $_SESSION['message'];
     unset($_SESSION['message']); // Limpia la variable de sesión después de usarla
@@ -39,16 +34,26 @@ if (isset($_SESSION['message'])) {
     <?php include(LAYOUT . "/header.php"); ?>
     <?php include(LAYOUT . "/navbar-users/navbarAdmin.php"); ?>
     <h2 class="titulo">Gestionar Material</h2>
-    <!-- <div class="container search">
-        <form class="d-flex col-md-2 form-search needs-validation text-container" role="search" novalidate>
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" required>
+    <div class="container search">
+        <form class="d-flex col-md-2 form-search needs-validation text-container" role="search" novalidate method="POST">
+            <input class="form-control me-2 text-center" type="text" placeholder="Busqueda" name="Busqueda" id="Busqueda" required>
+            <select class="form-select me-2 text-center" name="Filas" id="Filas" placeholder="Filas" required>
+                <option value="">Filas a mostrar</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="500">500</option>
+                <option value="1000">1000</option>
+            </select>
             <div class="invalid-feedback">
-                Es necesario colocar un firltro.
+                Es necesario colocar al menos un filtro.
             </div>
-            <button class="btn btn-primary" type="submit">Buscar</button>
+            <button class="btn btn-primary" type="submit" name="searchInput">Buscar</button>
         </form>
-    </div> -->
-    <!-- <script src="/inventario_dgtic/controllers/validation/js/form-validation-empty.js"></script> -->
+    </div>
+    <script src="/inventario_dgtic/controllers/validation/js/form-validation-empty.js"></script>
+    <?php include(VALIDATION_PHP . '/validate-searchMaterial.php'); ?>
     <?php include(LAYOUT . "/templates/manage-material-template.php"); ?>
 
     <div class="container search mt-3">
