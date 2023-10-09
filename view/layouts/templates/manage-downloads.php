@@ -43,10 +43,10 @@
                             <div class="row p-4">
                                 <select class="form-select form-select-lg mt-4" name="sedeDescarga" id="sede" required >
                                     <option selected disabled value="">Selecciona una sede</option>
-                                    <option value="2">Ciudad Universitaria</option>
-                                    <option value="3">Centro Mascarones</option>
-                                    <option value="4">Centro Polanco</option>
-                                    <option value="5">Todas las sedes</option>
+                                    <option value="1">Ciudad Universitaria</option>
+                                    <option value="2">Centro Mascarones</option>
+                                    <option value="3">Centro Polanco</option>
+                                    <option value="*">Todas las sedes</option>
                                 </select>
                                 <div class="invalid-feedback">
                                     Es necesario colocar una sede.
@@ -58,10 +58,14 @@
             </table>
             <div class="row">
                 <div class="col-md-6 offset-md-3">
-                    <button type="submit" id="buscarButton" class="btn btn-primary btn-tabla">Buscar</button>
+                    <button type="submit" id="buscarButton" name="buscarButton" class="btn btn-primary btn-tabla">Buscar</button>
                 </div>
             </div>
         </form>
+        <?php
+        include(VALIDATION_PHP . '/validate-searchDownloads.php');
+        print_r($infoDownloads);
+        ?>
     </div>
     <script src="/inventario_dgtic/controllers/validation/js/form-validation-empty.js"></script>
     <script src="/inventario_dgtic/view/js/validationFrontend/dateValidation.js"></script>
