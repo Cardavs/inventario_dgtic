@@ -1,4 +1,4 @@
-const buttonSearch = document.querySelector('#buscarButton');
+const buttonSearch = document.querySelector('#searchInput');
 const contenedor = document.querySelector('#errorFecha');
 
 buttonSearch.addEventListener('click', e =>{
