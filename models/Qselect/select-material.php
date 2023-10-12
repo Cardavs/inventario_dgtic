@@ -22,7 +22,7 @@
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $connect->beginTransaction();
                 
-                $query = "SELECT * FROM material WHERE MaterialEstado = True";
+                $query = "SELECT Material_Id, MaterialNombre, MaterialEstado,MaterialISBN, MaterialISBN, MaterialTiraje, MaterialAutor, MaterialVersion, MaterialEdicion, MaterialPaginas, MaterialPDF, MaterialIndice, secciones.SeccionNombre, area.AreaNombre FROM material JOIN secciones ON material.Seccion_Id=secciones.Seccion_Id JOIN area ON material.Area_Id=area.Area_Id WHERE MaterialEstado = True;";
                 $queryP = $connect -> prepare($query);
                 $queryP -> execute();
                 $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
@@ -32,6 +32,9 @@
             }
             return $resultado;
         }
+        /* 
+        Realiza un select de todos los materiales registrados en la BD 
+        */
         public function getMaterialsAll(){
             try {
                 $connect = $this->connection -> conectar();
@@ -39,7 +42,7 @@
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $connect->beginTransaction();
                 
-                $query = "SELECT * FROM material";
+                $query = "SELECT Material_Id, MaterialNombre, MaterialEstado,MaterialISBN, MaterialISBN, MaterialTiraje, MaterialAutor, MaterialVersion, MaterialEdicion, MaterialPaginas, MaterialPDF, MaterialIndice, secciones.SeccionNombre, area.AreaNombre FROM material JOIN secciones ON material.Seccion_Id=secciones.Seccion_Id JOIN area ON material.Area_Id=area.Area_Id;";
                 $queryP = $connect -> prepare($query);
                 $queryP -> execute();
                 $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
@@ -57,13 +60,13 @@
                 $connect = $this->connection -> conectar();
                 
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $connect->beginTransaction();
+                //$connect->beginTransaction();
                 
                 $query = "SELECT * FROM material WHERE Material_Id = :Material_id";
                 $queryP = $connect -> prepare($query);
                 $queryP->bindValue(":Material_id", $materialId);
                 $queryP -> execute();
-                $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
+                $resultado = $queryP->fetch(PDO::FETCH_ASSOC);
                 
             } catch (PDOException $ex) {
                 echo 'Error: ' .$ex->getMessage() . die();

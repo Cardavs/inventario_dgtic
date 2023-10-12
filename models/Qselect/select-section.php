@@ -14,7 +14,7 @@
     /*
     *   Traer los registros de secciones (SeccionNombre, TipoSeccion)
     */
-    public function getSection()
+    public function getSectionAll()
     {
         try {
             $connect = $this -> connection -> conectar(); //Llamamos el método conectar
@@ -27,6 +27,25 @@
             $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $ex) {
             echo 'Error: ' .$ex->getMessage() . die();
+        }
+        return $resultado;
+    }
+    /*
+    *   Traer los registros de secciones que estan habilitados
+    */
+    public function getSection()
+    {
+        try {
+            $connect = $this -> connection -> conectar(); //Llamamos el método conectar
+            $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+           //$connect->beginTransaction();
+
+            $query = "SELECT Seccion_Id, SeccionNombre, TipoSeccion FROM secciones WHERE EstadoSeccion = 1";
+            $queryP = $connect -> prepare($query);
+            $queryP -> execute();
+            $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $ex) {
+            echo 'Error: ' .$ex->getMessage();
         }
         return $resultado;
     }

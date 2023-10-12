@@ -4,6 +4,7 @@ include_once(CONNECTION_BD);
 
 include(BD_UPDATE . 'update-material.php');
 include(BD_SELECT . 'select-material.php');
+include(BD_SELECT . 'select-section.php');
 //Archivo para actualizar al usuario
 //include(VALIDATION_PHP . '/validate-UpdateMaterial.php');
 //Obtieniendo Id del usuario para mostrar datos.
@@ -11,9 +12,11 @@ $id = $_GET['id'];
 
 //Instanciando clase para obtener datos del usuario.
 $datosMaterial = new SelectMaterials();
+$datosSeccion = new SelectSection();
 
 //Llamando a la funcion para realizar el select del usuario a editar
 $materialInfo = $datosMaterial->getMaterialById($id);
+$secciones = $datosSeccion->getSection();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -30,35 +33,35 @@ include(LAYOUT . '/head.php');
         <div class="row g-3 mb-3">
             <div class="col">
                 <label for="NombreMaterial">Nombre de material</label>
-                <input name="NombreMaterial" class="form-control form-control-lg" type="text" placeholder="Nombre de material" value="<?php echo $materialInfo[0]['MaterialNombre'] ?>" required>
+                <input name="NombreMaterial" class="form-control form-control-lg" type="text" placeholder="Nombre de material" value="<?php echo $materialInfo['MaterialNombre'] ?>" required>
                 <div class="invalid-feedback">
                     Es necesario colocar un nombre.
                 </div>
             </div>
             <div class="col p-3">
                 <div class="form-check m-2">
-                    <input class="form-check-input" onclick="showTiraje();" type="radio" name="tipo" id="auditoria" value="Auditoría" <?php if (!is_null($materialInfo[0]['MaterialISBN'])) echo "checked"; ?>>
+                    <input class="form-check-input" onclick="showTiraje();" type="radio" name="tipo" id="auditoria" value="Auditoría" <?php if (!is_null($materialInfo['MaterialISBN'])) echo "checked"; ?>>
                     <label class="form-check-label" for="tipo">
                         Auditoría
                     </label>
                 </div>
                 <div class="form-check m-2">
-                    <input class="form-check-input" onclick="showISBN();" type="radio" name="tipo" id="compilacion" value="Compilación" <?php if (is_null($materialInfo[0]['MaterialISBN'])) echo "checked"; ?>>
+                    <input class="form-check-input" onclick="showISBN();" type="radio" name="tipo" id="compilacion" value="Compilación" <?php if (is_null($materialInfo['MaterialISBN'])) echo "checked"; ?>>
                     <label class="form-check-label" for="tipo">
                         Compilación
                     </label>
                 </div>
             </div>
-            <div class="col" id="ISBN" <?php if (!is_null($materialInfo[0]['MaterialISBN'])) echo 'style="display: block;"'; ?>>
+            <div class="col" id="ISBN" <?php if (!is_null($materialInfo['MaterialISBN'])) echo 'style="display: block;"'; ?>>
                 <label for="ISBN">ISBN</label>
-                <input name="ISBN" class="form-control form-control-lg" type="text" placeholder="ISBN" value="<?php echo $materialInfo[0]['MaterialISBN'] ?>">
+                <input name="ISBN" id="ISBN-id" class="form-control form-control-lg" type="text" placeholder="ISBN" value="<?php echo $materialInfo['MaterialISBN'] ?>">
                 <div class="invalid-feedback">
                     Es necesario colocar un ISBN
                 </div>
             </div>
-            <div class="col" id="Tiraje" <?php if (!is_null($materialInfo[0]['MaterialISBN'])) echo 'style="display: block;"'; ?>>
+            <div class="col" id="Tiraje" <?php if (!is_null($materialInfo['MaterialISBN'])) echo 'style="display: block;"'; ?>>
                 <label for="Tiraje">Tiraje</label>
-                <input name="Tiraje" class="form-control form-control-lg" type="number" placeholder="Tiraje" min="0" value="<?php echo $materialInfo[0]['MaterialTiraje'] ?>">
+                <input name="Tiraje" id="Tiraje-id"class="form-control form-control-lg" type="number" placeholder="Tiraje" min="0" value="<?php echo $materialInfo['MaterialTiraje'] ?>">
                 <div class="invalid-feedback">
                     Es necesario colocar un Tiraje.
                 </div>
@@ -67,28 +70,28 @@ include(LAYOUT . '/head.php');
         <div class="row g-3 mb-3">
             <div class="col">
                 <label for="Autor">Autor</label>
-                <input name="Autor" class="form-control form-control-lg" type="text" placeholder="Autor" required value="<?php echo $materialInfo[0]['MaterialAutor'] ?>">
+                <input name="Autor" class="form-control form-control-lg" type="text" placeholder="Autor" required value="<?php echo $materialInfo['MaterialAutor'] ?>">
                 <div class="invalid-feedback">
                     Es necesario colocar un Autor.
                 </div>
             </div>
             <div class="col">
                 <label for="Versión">Versión</label>
-                <input name="Versión" class="form-control form-control-lg" type="number" placeholder="Versión de material" min="0" value="<?php echo $materialInfo[0]['MaterialVersion'] ?>" required>
+                <input name="Versión" class="form-control form-control-lg" type="number" placeholder="Versión de material" min="0" value="<?php echo $materialInfo['MaterialVersion'] ?>" required>
                 <div class="invalid-feedback">
                     Es necesario colocar una versión.
                 </div>
             </div>
             <div class="col">
                 <label for="AñoEdicion">Año de edición</label>
-                <input name="AñoEdicion" class="form-control form-control-lg" type="number" placeholder="Año de edición" min="1960" max="2099" value="<?php echo $materialInfo[0]['MaterialEdicion'] ?>" required>
+                <input name="AñoEdicion" class="form-control form-control-lg" type="number" placeholder="Año de edición" min="1960" max="2099" value="<?php echo $materialInfo['MaterialEdicion'] ?>" required>
                 <div class="invalid-feedback">
                     Es necesario colocar un año de edición.
                 </div>
             </div>
             <div class="col">
                 <label for="NoPaginas">Número de páginas</label>
-                <input name="NoPaginas" class="form-control form-control-lg" type="number" placeholder="Número de páginas" value="<?php echo $materialInfo[0]['MaterialPaginas'] ?>" min="1" required>
+                <input name="NoPaginas" class="form-control form-control-lg" type="number" placeholder="Número de páginas" value="<?php echo $materialInfo['MaterialPaginas'] ?>" min="1" required>
                 <div class="invalid-feedback">
                     Es necesario colocar un número de páginas.
                 </div>
@@ -99,10 +102,11 @@ include(LAYOUT . '/head.php');
             <div class="col">
                 <label for="seccion">Sección del material</label>
                 <select name="seccion" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" >
-                    <option selected disabled default value="">Selecciona una opción</option>
-                    <option value="Cursos de actualización">Cursos de actualización</option>
-                    <option value="Diplomados">Diplomados</option>
-                    <option value="Institucionales">Institucionales</option>
+                    <option disabled default value="">Selecciona una opción</option>
+                    <?php foreach ($secciones as $seccion){?>
+                        <option value="<?php echo $seccion['Seccion_Id']?>" <?php echo ($seccion['Seccion_Id']==$materialInfo['Seccion_Id'])?"selected":"" ?>><?php echo $seccion['SeccionNombre']." - ".$seccion['TipoSeccion']?></option>
+                        <?php } ?>
+                    
                 </select>
                 <div class="invalid-feedback">
                     Es necesario seleccionar una sección

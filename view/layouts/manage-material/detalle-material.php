@@ -55,11 +55,11 @@
     <div class="row g-9 mb-3">
         <div class="col">
             <label for="seccion">Sección del material</label>
-            <input id="seccion" class="form-control form-control-lg" type="text" placeholder="<?php echo $infoMaterials['MaterialSeccion']; ?>" disabled>
+            <input id="seccion" class="form-control form-control-lg" type="text" placeholder="<?php echo $infoMaterials['SeccionNombre']; ?>" disabled>
         </div>
         <div class="col">
             <label for="area">Área del material</label>
-            <input id="area" class="form-control form-control-lg" type="text" placeholder="<?php echo $infoMaterials['MaterialArea']; ?>" disabled>
+            <input id="area" class="form-control form-control-lg" type="text" placeholder="<?php echo $infoMaterials['AreaNombre']; ?>" disabled>
         </div>
     </div>
 </form>
