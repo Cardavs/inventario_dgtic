@@ -19,7 +19,6 @@ include(CONNECTION_BD);
 <body>
     <?php include(LAYOUT."/header.php");?>
     <?php include(LAYOUT."/navbar-users/navbarAdmin.php"); ?>
-    <?php include(BD_SELECT . 'select-downloads.php'); ?>
     <?php include(LAYOUT."/templates/manage-downloads.php"); ?>
 
     <?php include(LAYOUT."/footer.php");?>

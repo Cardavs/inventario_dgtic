@@ -22,15 +22,23 @@
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $connect->beginTransaction();
                 
-                $query = "SELECT Sede_id, SedeNombre, SedeSiglas, SedeEstado FROM sedes";
+                $query = "SELECT Sede_id, SedeNombre, SedeSiglas, SedeEstado FROM sedes ORDER BY Sede_id";
                 $queryP = $connect -> prepare($query);
                 $queryP -> execute();
                 $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
+
+                // Commit the transaction
+                $connect->commit();
+
+                return $resultado;
                 
             } catch (PDOException $ex) {
-                echo 'Error: ' .$ex->getMessage() . die();
+
+                // Rollback the transaction
+                $connect->rollBack();
+                echo 'Error: ' .$ex->getMessage();
             }
-            return $resultado;
+            
         }
         /*
         * Realiza el select de las sedes registradas en la BD

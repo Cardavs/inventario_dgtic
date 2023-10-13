@@ -1,4 +1,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<?php
+include(BD_SELECT . 'select-sedes.php');
+include(BD_SELECT . 'select-downloads.php');
+?>
 <h2 class="titulo">Buscar Descargas</h2>
 
     <div class="container sombra gestionar-material">
@@ -42,12 +46,16 @@
                         </th>
                         <td class="p-5">
                             <div class="row p-4">
-                                <select class="form-select form-select-lg mt-4" name="sedeDescarga" id="sede" required >
-                                    <option selected disabled value="">Selecciona una sede</option>
-                                    <option value="1">Ciudad Universitaria</option>
-                                    <option value="2">Centro Mascarones</option>
-                                    <option value="3">Centro Polanco</option>
-                                </select>
+                            <select class="form-select form-select-lg" style="margin-top: 2.3rem;" name="sedeDescarga" id="sede" required>
+                                <option selected disabled value="">Selecciona una sede</option>
+                                <?php
+                                $optionSelect = new SelectSedes();
+                                $options = $optionSelect->getSedes();
+                                foreach ($options as $option) {
+                                    echo '<option value="' . $option['Sede_id'] . '">' . $option['SedeNombre'] . '</option>';
+                                }
+                                ?>
+                            </select>
                                 <div class="invalid-feedback">
                                     Es necesario colocar una sede.
                                 </div>
@@ -64,10 +72,8 @@
         </form>
         <?php
             include(VALIDATION_PHP . '/validate-searchDownloads.php');
-            print_r($materialIds);
-            print_r($descargas);
         ?>
-        <div style="width: 500px;">
+        <div style="width: 1000px; margin: 0 auto; margin-top: 50px;">
             <canvas  id="chartjs_bar"></canvas> 
         </div>
 
@@ -76,8 +82,9 @@
                     var myChart = new Chart(ctx, {
                         type: 'bar',
                         data: {
-                            labels:<?php echo json_encode($materialIds); ?>,
+                            labels:<?php echo json_encode($NombreMaterial); ?>,
                             datasets: [{
+                                label: '<?php echo json_encode($SedeNombre); ?>',
                                 backgroundColor: [
                                 "#5969ff",
                                     "#ff407b",

@@ -8,9 +8,13 @@
         $sede = $_POST['sedeDescarga'];
         // Primero se hace la busqueda por nombre
         $infoDownloads = $downloads->getDownloadsSearch($fehca_inicio, $fehca_fin, $sede);
+        $NombreMaterial = $infoDownloads['NombreMaterial'];
+        $descargas = $infoDownloads['descargas'];
+        $SedeNombre = $infoDownloads['SedeNombre'];
     }else{
         $infoDownloads = $downloads->getDownloadsSearch('2023-01-01', '2023-03-01', '1');
-        $materialIds = $infoDownloads['materialIds'];
+        $NombreMaterial = $infoDownloads['NombreMaterial'];
         $descargas = $infoDownloads['descargas'];
+        $SedeNombre = $infoDownloads['SedeNombre'];
     }
 ?>
