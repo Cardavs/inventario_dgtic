@@ -12,6 +12,7 @@ include(BD_SELECT . 'select-downloads.php');
                     <tr class="text-center">
                         <th scope="col" class="encabezado-col">Periodo</th>
                         <th scope="col" class="encabezado-col">Sede</th>
+                        <th scope="col" class="encabezado-col">Datos</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,6 +62,22 @@ include(BD_SELECT . 'select-downloads.php');
                                 </div>
                             </div>
                         </td>
+                        <td class="p-5">
+                            <div class="col p-5">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="tipo" id="auditoria" value="Descargas">
+                                    <label class="form-check-label" for="tipo">
+                                        Descargas
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="tipo" id="compilacion" value="Copias">
+                                    <label class="form-check-label" for="tipo">
+                                        Copias
+                                    </label>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -84,7 +101,7 @@ include(BD_SELECT . 'select-downloads.php');
                         data: {
                             labels:<?php echo json_encode($NombreMaterial); ?>,
                             datasets: [{
-                                label: '<?php echo json_encode($SedeNombre); ?>',
+                                label:<?php echo json_encode($Consulta); ?> + <?php echo json_encode($SedeNombre); ?>,
                                 backgroundColor: [
                                 "#5969ff",
                                     "#ff407b",
