@@ -1,9 +1,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <?php
-include(LAYOUT."/graphics/downloadsGraphics.php");
 include(BD_SELECT . 'select-sedes.php');
 include(BD_SELECT . 'select-downloads.php');
-ob_start();
 ?>
 <h2 class="titulo">Buscar Descargas</h2>
 
@@ -93,8 +91,24 @@ ob_start();
             </div>
         </form>
         <?php
+            include(LAYOUT."/graphics/downloadsGraphics.php");
             include(VALIDATION_PHP . '/validate-searchDownloads.php');
+            // Asignar un valor predeterminado a $nombreArchivo si es null
+            $nombreArchivo = $nombreArchivo ?? null;
+
+            // Verificar si $nombreArchivo no es null y no está vacío
+            if ($nombreArchivo !== null && !empty($nombreArchivo)) {
+                
+                // Enviar el archivo al navegador
+                echo '<div style="text-align: center; margin-left: 370px;">';
+                echo '<a href="' . $nombreArchivo . '">Descargar Reporte Excel</a>';
+                echo '</div>';
+
+            } else {
+                echo '<div style="text-align: center; margin-left: 360px;">---------------------</div>';
+            }
         ?>
+
         <div style="width: 1000px; margin: 0 auto; margin-top: 50px;">
             <canvas  id="chartjs_bar"></canvas> 
         </div>

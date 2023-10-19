@@ -43,7 +43,7 @@
         // Crea una instancia de la clase SelectDownloadsGraphic
         $downloadsGraphic = new SelectDownloadsGraphic();
         // Llama a la función getDownloadsGraphicAll() para generar el archivo y realizar la descarga
-        $downloadsGraphic->getDownloadsGraphicAll();
+        $nombreArchivo = $downloadsGraphic->getDownloadsGraphicAll();
     }else{
         $infoDownloads = $downloads->getDownloadsSearch('2023-01-01', '2023-03-01', '1');
         $NombreMaterial = $infoDownloads['NombreMaterial'];
