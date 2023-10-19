@@ -1,7 +1,9 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <?php
+include(LAYOUT."/graphics/downloadsGraphics.php");
 include(BD_SELECT . 'select-sedes.php');
 include(BD_SELECT . 'select-downloads.php');
+ob_start();
 ?>
 <h2 class="titulo">Buscar Descargas</h2>
 
@@ -23,7 +25,7 @@ include(BD_SELECT . 'select-downloads.php');
                                     <div class="col p-4">
                                         <label for="inicio">Fecha de Inicio</label>
                                         <div class="row">
-                                            <input class="form-control form-control-lg" type="date" name="fechainicio" id="finicio" required>
+                                            <input class="form-control form-control-lg" type="date" name="fechainicio" id="finicio" >
                                             <div class="invalid-feedback">
                                                 Es necesario colocar una fecha inicial.
                                             </div>
@@ -35,7 +37,7 @@ include(BD_SELECT . 'select-downloads.php');
                                     <div class="col p-4">
                                         <label for="inicio">Fecha de Fin</label>
                                         <div class="row">
-                                            <input class="form-control form-control-lg" type="date" name="fechafin" id="ffin" required>
+                                            <input class="form-control form-control-lg" type="date" name="fechafin" id="ffin" >
                                             <div class="invalid-feedback">
                                                 Es necesario colocar una fecha final.
                                             </div>
@@ -47,7 +49,7 @@ include(BD_SELECT . 'select-downloads.php');
                         </th>
                         <td class="p-5">
                             <div class="row p-4">
-                            <select class="form-select form-select-lg" style="margin-top: 2.3rem;" name="sedeDescarga" id="sede" required>
+                            <select class="form-select form-select-lg" style="margin-top: 2.3rem;" name="sedeDescarga" id="sede" >
                                 <option selected disabled value="">Selecciona una sede</option>
                                 <?php
                                 $optionSelect = new SelectSedes();
@@ -65,7 +67,7 @@ include(BD_SELECT . 'select-downloads.php');
                         <td class="p-5">
                             <div class="col p-5">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="tipo" id="auditoria" value="Descargas">
+                                    <input class="form-check-input" type="radio" name="tipo" id="auditoria" value="Descargas" checked>
                                     <label class="form-check-label" for="tipo">
                                         Descargas
                                     </label>
@@ -81,9 +83,12 @@ include(BD_SELECT . 'select-downloads.php');
                     </tr>
                 </tbody>
             </table>
-            <div class="row">
-                <div class="col-md-6 offset-md-3">
-                    <button type="submit" id="searchInput" name="searchInput" class="btn btn-primary btn-tabla">Buscar</button>
+            <div class="row display-flex justify-content-center">
+                <div class="col-md-4">
+                    <button type="submit" id="searchInput" name="searchInput" class="btn btn-primary btn-tabla">Generar Grafico</button>
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" id="downloadInputFilter" name="downloadInputFilter" class="btn btn-primary btn-tabla">Generar Reporte</button>
                 </div>
             </div>
         </form>
