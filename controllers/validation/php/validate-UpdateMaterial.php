@@ -89,6 +89,9 @@ if (isset($_POST['editar'])) {
                 </script>';
         }
     } else*/if (isset($_POST['cancelar'])) {
-        header("Location: /inventario_dgtic/view/admin/manage-material.php");
-        die();
+        echo '<script language="javascript">
+        alert("Salio");
+        </script>';
+        header("Location: /inventario_dgtic/view/admin/create-user.php");
+       // die();
     }

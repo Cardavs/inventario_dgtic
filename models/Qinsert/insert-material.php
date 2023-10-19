@@ -89,9 +89,9 @@
                     $rutaArchivobdPDF ="/inventario_dgtic/material/pdf/" . $nombreArchivo. "." . $extensionPDF;
                     $rutaArchivobdIndice ="/inventario_dgtic/material/indice/" . $nombreArchivo . "_Indice." . $extensionIndice;
 
-                    $query = 'INSERT INTO material (MaterialNombre, MaterialISBN, MaterialTiraje, MaterialAutor, MaterialVersion, MaterialEdicion, MaterialPaginas, MaterialSeccion, MaterialArea, MaterialPDF, MaterialIndice) 
+                    $query = 'INSERT INTO material (MaterialNombre, MaterialISBN, MaterialTiraje, MaterialAutor, MaterialVersion, MaterialEdicion, MaterialPaginas, Area_Id, MaterialPDF, MaterialIndice) 
                     VALUES 
-                    (:MaterialNombre, :MaterialISBN, :MaterialTiraje, :MaterialAutor, :MaterialVersion, :MaterialEdicion, :MaterialPaginas, :MaterialSeccion, :MaterialArea, :MaterialPDF, :MaterialIndice)';
+                    (:MaterialNombre, :MaterialISBN, :MaterialTiraje, :MaterialAutor, :MaterialVersion, :MaterialEdicion, :MaterialPaginas, :Area_Id, :MaterialPDF, :MaterialIndice)';
 
                     $queryP = $connect->prepare($query);
 
@@ -102,8 +102,7 @@
                     $queryP->bindValue(":MaterialVersion", $datosMaterial['version']);
                     $queryP->bindValue(":MaterialEdicion", $datosMaterial['año']);
                     $queryP->bindValue(":MaterialPaginas", $datosMaterial['paginas']);
-                    $queryP->bindValue(":MaterialSeccion", $datosMaterial['seccion']);
-                    $queryP->bindValue(":MaterialArea", $datosMaterial['area']);
+                    $queryP->bindValue(":Area_Id", $datosMaterial['area']);
                     $queryP->bindValue(":MaterialPDF", $rutaArchivobdPDF);
                     $queryP->bindValue(":MaterialIndice", $rutaArchivobdIndice);
 

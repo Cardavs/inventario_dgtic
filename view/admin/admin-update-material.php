@@ -5,6 +5,7 @@ include_once(CONNECTION_BD);
 include(BD_UPDATE . 'update-material.php');
 include(BD_SELECT . 'select-material.php');
 include(BD_SELECT . 'select-section.php');
+include(BD_SELECT . 'select-area.php');
 //Archivo para actualizar al usuario
 //include(VALIDATION_PHP . '/validate-UpdateMaterial.php');
 //Obtieniendo Id del usuario para mostrar datos.
@@ -13,10 +14,12 @@ $id = $_GET['id'];
 //Instanciando clase para obtener datos del usuario.
 $datosMaterial = new SelectMaterials();
 $datosSeccion = new SelectSection();
+$datosArea = new SelectAreas();
 
 //Llamando a la funcion para realizar el select del usuario a editar
 $materialInfo = $datosMaterial->getMaterialById($id);
 $secciones = $datosSeccion->getSection();
+$areas = $datosArea->getAreas();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -61,7 +64,7 @@ include(LAYOUT . '/head.php');
             </div>
             <div class="col" id="Tiraje" <?php if (!is_null($materialInfo['MaterialISBN'])) echo 'style="display: block;"'; ?>>
                 <label for="Tiraje">Tiraje</label>
-                <input name="Tiraje" id="Tiraje-id"class="form-control form-control-lg" type="number" placeholder="Tiraje" min="0" value="<?php echo $materialInfo['MaterialTiraje'] ?>">
+                <input name="Tiraje" id="Tiraje-id" class="form-control form-control-lg" type="number" placeholder="Tiraje" min="0" value="<?php echo $materialInfo['MaterialTiraje'] ?>">
                 <div class="invalid-feedback">
                     Es necesario colocar un Tiraje.
                 </div>
@@ -101,12 +104,12 @@ include(LAYOUT . '/head.php');
         <div class="row g-9 mb-3">
             <div class="col">
                 <label for="seccion">Sección del material</label>
-                <select name="seccion" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" >
+                <select name="seccion" id="seccionSelect" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                     <option disabled default value="">Selecciona una opción</option>
-                    <?php foreach ($secciones as $seccion){?>
-                        <option value="<?php echo $seccion['Seccion_Id']?>" <?php echo ($seccion['Seccion_Id']==$materialInfo['Seccion_Id'])?"selected":"" ?>><?php echo $seccion['SeccionNombre']." - ".$seccion['TipoSeccion']?></option>
-                        <?php } ?>
-                    
+                    <?php foreach ($secciones as $seccion) { ?>
+                        <option value="<?php echo $seccion['Seccion_Id'] ?>" <?php echo ($seccion['Seccion_Id'] == $materialInfo['Seccion_Id']) ? "selected" : "" ?>><?php echo $seccion['SeccionNombre'] ?></option>
+                    <?php } ?>
+
                 </select>
                 <div class="invalid-feedback">
                     Es necesario seleccionar una sección
@@ -114,12 +117,40 @@ include(LAYOUT . '/head.php');
             </div>
             <div class="col">
                 <label for="area">Área del material</label>
-                <select name="area" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" >
+                <select name="area" id="areaSelect" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                     <option selected disabled default value="">Selecciona una opción</option>
-                    <option value="1">Áreas temáticas</option>
-                    <option value="2">Instituciones</option>
-                    <option value="3">Emisiones</option>
+                    <?php foreach ($areas as $area) { 
+                        if($area["Seccion_Id"] == $materialInfo["Seccion_Id"]){?>
+
+                        <option value=<?php echo $area["Area_Id"] ?> <?php echo ($area['Area_Id'] == $materialInfo['Area_Id']) ? "selected" : "" ?>><?php echo $area['AreaNombre'] ?></option>
+                    <?php }} ?>
                 </select>
+
+                <script>
+                    document.getElementById("seccionSelect").addEventListener("change", function() {
+                        var seccionId = this.value;
+                        var areaSelect = document.getElementById("areaSelect");
+
+                        // Limpiar las opciones actuales en el segundo select
+                        areaSelect.innerHTML = "";
+
+                        // Llenar el segundo select con opciones basadas en la selección en el primero
+                        var option = document.createElement("option");
+                        option.text = "Selecciona una opcion"
+                        option.value = "";
+                        option.disabled = true;
+                        areaSelect.appendChild(option);
+                        <?php foreach ($areas as $area) : ?>
+                            if (<?= $area['Seccion_Id'] ?> == seccionId) {
+                                var option = document.createElement("option");
+                                option.text = "<?= $area['AreaNombre'] ?>";
+                                option.value = "<?= $area['Area_Id']?>";
+                                areaSelect.appendChild(option);
+                            }
+                        <?php endforeach; ?>
+                    });
+                </script>
+
                 <div class="invalid-feedback">
                     Es necesario seleccionar un área
                 </div>

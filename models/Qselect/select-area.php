@@ -1,9 +1,9 @@
 <?php 
 /*********************************
- * date: 06/05/2023              *
- * autor: Roan                   *
+ * date: 10/18/2023              *
+ * autor: Ivan                   *
  *********************************/
-    class SelectMaterials{
+    class SelectAreas{
         
         public $connection;
 
@@ -13,16 +13,15 @@
         }
 
         /*
-        * Realiza el select de los materiales registradas en la BD que estan habilitados
+        * Realiza el select de las areas registradas en la BD que estan habilitadas
         */
-        public function getMaterials(){
+        public function getAreas(){
             try {
                 $connect = $this->connection -> conectar();
                 
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                //$connect->beginTransaction();
                 
-                $query = "SELECT Material_Id, MaterialNombre, MaterialEstado, MaterialISBN, MaterialTiraje, MaterialAutor, MaterialVersion, MaterialEdicion, MaterialPaginas, MaterialPDF, MaterialIndice, secciones.SeccionNombre, area.AreaNombre FROM material JOIN area ON material.Area_Id=area.Area_Id JOIN secciones ON area.Seccion_Id=secciones.Seccion_Id WHERE MaterialEstado = True;";
+                $query = "SELECT Area_Id, AreaNombre, Seccion_Id FROM area WHERE AreaEstado = True";
                 $queryP = $connect -> prepare($query);
                 $queryP -> execute();
                 $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
@@ -33,16 +32,15 @@
             return $resultado;
         }
         /* 
-        Realiza un select de todos los materiales registrados en la BD 
+        Realiza un select de todos los areaes registrados en la BD 
         */
-        public function getMaterialsAll(){
+        public function getAreasAll(){
             try {
                 $connect = $this->connection -> conectar();
                 
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                //$connect->beginTransaction();
                 
-                $query = "SELECT Material_Id, MaterialNombre, MaterialEstado, MaterialISBN, MaterialTiraje, MaterialAutor, MaterialVersion, MaterialEdicion, MaterialPaginas, MaterialPDF, MaterialIndice, secciones.SeccionNombre, area.AreaNombre, area.Seccion_Id FROM material JOIN area ON material.Area_Id=area.Area_Id JOIN secciones ON area.Seccion_Id=secciones.Seccion_Id";
+                $query = "SELECT Area_Id, AreaNombre FROM area";
                 $queryP = $connect -> prepare($query);
                 $queryP -> execute();
                 $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
@@ -53,30 +51,30 @@
             return $resultado;
         }
         /*
-        * Realiza el select de uno los materiales registradas en la BD por ID
+        * Realiza el select de un areas registrada en la BD por ID
         */
-        public function getMaterialById($materialId){
+        public function getAreaById($areaId){
             try {
                 $connect = $this->connection -> conectar();
                 
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                //$connect->beginTransaction();
                 
-                $query = "SELECT Material_Id, MaterialNombre, MaterialISBN, MaterialTiraje, MaterialAutor, MaterialVersion, MaterialEdicion, MaterialPaginas, MaterialPDF, MaterialIndice, area.Area_Id, area.Seccion_Id FROM material JOIN area ON material.Area_Id = area.Area_Id WHERE Material_Id = :Material_id";
+                
+                $query = "SELECT AreaNombre, secciones.SeccionNombre FROM area JOIN secciones ON secciones.Seccion_Id = area.Seccion_Id WHERE Area_Id = :Area_id";
                 $queryP = $connect -> prepare($query);
-                $queryP->bindValue(":Material_id", $materialId);
+                $queryP->bindValue(":Area_id", $areaId);
                 $queryP -> execute();
                 $resultado = $queryP->fetch(PDO::FETCH_ASSOC);
                 
             } catch (PDOException $ex) {
-                echo 'Error: ' .$ex->getMessage();
+                echo 'Error: ' .$ex->getMessage() . die();
             }
             return $resultado;
         }
         /*
-        * Realiza el select de uno los materiales registradas en la BD por ID
+        * Realiza la busqueda de una los areas registradas en la BD por ID
         */
-        public function getMaterialSearch($busqueda, $filas){
+        public function getAreaSearch($busqueda, $filas){
             try {
 
                 // Convertir $filas a un número entero
@@ -85,9 +83,9 @@
                 $connect = $this->connection -> conectar();
                 
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                //$connect->beginTransaction();
                 
-                $query = "SELECT * FROM material WHERE MaterialNombre LIKE :busqueda LIMIT $limit";
+                
+                $query = "SELECT * FROM area WHERE AreaNombre LIKE :busqueda LIMIT $limit";
                 $queryP = $connect -> prepare($query);
                 $queryP->bindValue(":busqueda", '%'. $busqueda .'%');
                 $queryP -> execute();
@@ -101,7 +99,7 @@
             }elseif(sizeof($resultado) == 0){
                 echo '<script language="javascript">
                         alert("No hay datos que coincidan con su busqueda");
-                        window.location.href = "/inventario_dgtic/view/admin/manage-material.php";
+                        window.location.href = "/inventario_dgtic/view/admin/manage-area.php";
                         </script>';
             }
         }

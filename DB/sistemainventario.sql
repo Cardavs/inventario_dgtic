@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-10-2023 a las 04:10:50
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.0.28
+-- Tiempo de generación: 19-10-2023 a las 04:08:46
+-- Versión del servidor: 10.4.25-MariaDB
+-- Versión de PHP: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,20 +30,40 @@ SET time_zone = "+00:00";
 CREATE TABLE `area` (
   `Area_Id` int(11) NOT NULL,
   `AreaNombre` varchar(100) NOT NULL,
-  `AreaTipo` varchar(100) NOT NULL,
-  `AreaEstado` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `Seccion_Id` int(11) NOT NULL,
+  `AreaEstado` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `area`
 --
 
-INSERT INTO `area` (`Area_Id`, `AreaNombre`, `AreaTipo`, `AreaEstado`) VALUES
-(1, 'Area1', 'Tipo1', 1),
-(2, 'Area2', 'Tipo2', 1),
-(3, 'Area3', 'Tipo3', 1),
-(4, 'Area4', 'Tipo4', 1),
-(5, 'Area5', 'Tipo5', 1);
+INSERT INTO `area` (`Area_Id`, `AreaNombre`, `Seccion_Id`, `AreaEstado`) VALUES
+(1, 'Apoyo a la Actividad Matemática', 1, 1),
+(2, 'Bases de Datos', 1, 1),
+(3, 'Cómputo para niños y jóvenes', 1, 1),
+(4, 'Desarrollo de aplicaciones para móviles', 1, 0),
+(5, 'Desarrollo web', 1, 0),
+(6, 'Diseño editorial y gráfico', 1, 1),
+(7, 'Herramientas para la administración de proyectos', 1, 1),
+(8, 'Introducción a las tecnologías de información', 1, 1),
+(9, 'Lenguajes de programación', 1, 1),
+(10, 'Ofimática', 1, 1),
+(11, 'Seguridad informática', 1, 1),
+(12, 'Sistemas operativos', 1, 1),
+(13, 'Telecomunicaciones', 1, 1),
+(14, 'Web social', 1, 1),
+(15, 'Usos Educativos De TIC', 1, 1),
+(17, 'Administración de base de datos', 2, 1),
+(18, 'Desarrollo de aplicaciones para dispositivos móviles', 2, 1),
+(19, 'Desarrollo de aplicaciones empresariales con JAVA', 2, 1),
+(20, 'Dirección efectiva de proyectos', 2, 1),
+(21, 'Ingeniería de software ágil', 2, 1),
+(22, 'Integral de telecomunicaciones', 2, 1),
+(23, 'Planeación y construcción de sitios WEB', 2, 1),
+(24, 'Herramientas de cómputo para la educación a distancia', 2, 1),
+(25, 'Area Ejemplo', 3, 1),
+(26, 'Area Ejemplo 2', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -58,7 +78,7 @@ CREATE TABLE `descargas` (
   `Material_Id` int(11) NOT NULL,
   `DescargaFecha` date NOT NULL,
   `DescargaCantidad` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -71,7 +91,7 @@ CREATE TABLE `diplomado` (
   `DiplomadoNombre` varchar(100) NOT NULL,
   `DiplomadoEmision` varchar(50) NOT NULL,
   `DiplomadoEstado` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `diplomado`
@@ -95,7 +115,7 @@ CREATE TABLE `intentoslogin` (
   `UsuarioCorreo` varchar(100) NOT NULL,
   `IntentosLoginFecha` date NOT NULL,
   `IntentosLoginNum` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -105,7 +125,7 @@ CREATE TABLE `intentoslogin` (
 
 CREATE TABLE `material` (
   `Material_Id` int(11) NOT NULL,
-  `MaterialNombre` varchar(100) NOT NULL,
+  `MaterialNombre` varchar(255) NOT NULL,
   `MaterialEstado` tinyint(1) NOT NULL DEFAULT 1,
   `MaterialISBN` varchar(100) DEFAULT NULL,
   `MaterialTiraje` int(11) DEFAULT NULL,
@@ -113,20 +133,21 @@ CREATE TABLE `material` (
   `MaterialVersion` varchar(50) NOT NULL,
   `MaterialEdicion` int(11) DEFAULT NULL,
   `MaterialPaginas` int(11) DEFAULT NULL,
-  `Seccion_Id` int(11) NOT NULL,
   `Area_Id` int(11) NOT NULL,
   `MaterialPDF` varchar(255) NOT NULL,
   `MaterialIndice` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `material`
 --
 
-INSERT INTO `material` (`Material_Id`, `MaterialNombre`, `MaterialEstado`, `MaterialISBN`, `MaterialTiraje`, `MaterialAutor`, `MaterialVersion`, `MaterialEdicion`, `MaterialPaginas`, `Seccion_Id`, `Area_Id`, `MaterialPDF`, `MaterialIndice`) VALUES
-(1, 'MaterialEjemplo1', 1, '23213213213', 2132132132, 'Jon Doe', '1.0', 2015, 23, 1, 1, '/inventario_dgtic/public/pdf/DocumentoPrueba.pdf\'', '/inventario_dgtic/public/pdf/DocumentoPrueba.pdf'),
-(2, 'Material Ejemplo 2', 1, NULL, NULL, 'Jane Doe', '3.0', 2013, 30, 3, 3, '/inventario_dgtic/public/pdf/DocumentoPrueba.pdf', '/inventario_dgtic/public/pdf/DocumentoPrueba.pdf'),
-(3, 'Material Ejempo 3', 1, '231321651', 5, 'Jon Doe', '1.0', 2015, 15, 6, 2, '/inventario_dgtic/public/pdf/Material_Ejempo_3.pdf', '/inventario_dgtic/public/indice/Material_Ejempo_3_Indice.pdf');
+INSERT INTO `material` (`Material_Id`, `MaterialNombre`, `MaterialEstado`, `MaterialISBN`, `MaterialTiraje`, `MaterialAutor`, `MaterialVersion`, `MaterialEdicion`, `MaterialPaginas`, `Area_Id`, `MaterialPDF`, `MaterialIndice`) VALUES
+(1, 'MaterialEjemplo1', 1, '23213213213', 2132132132, 'Jon Doe', '1.0', 2015, 23, 1, '/inventario_dgtic/public/pdf/DocumentoPrueba.pdf\'', '/inventario_dgtic/public/pdf/DocumentoPrueba.pdf'),
+(2, 'Material Ejemplo 2', 1, NULL, NULL, 'Jane Doe', '3.0', 2013, 30, 3, '/inventario_dgtic/public/pdf/DocumentoPrueba.pdf', '/inventario_dgtic/public/pdf/DocumentoPrueba.pdf'),
+(3, 'Material Ejempo 3', 1, '231321651', 5, 'Jon Doe', '1.0', 2015, 15, 20, '/inventario_dgtic/public/pdf/Material_Ejempo_3.pdf', '/inventario_dgtic/public/indice/Material_Ejempo_3_Indice.pdf'),
+(4, 'Material Ejempo 5', 1, NULL, NULL, 'Jane Doe', '5.0', 2015, 23, 20, '/inventario_dgtic/material/pdf/Material_Ejempo_5.pdf', '/inventario_dgtic/material/indice/Material_Ejempo_5_Indice.pdf'),
+(5, 'Material Ejempo 10', 1, NULL, NULL, 'John Wick', '1.0', 2023, 15, 1, '/inventario_dgtic/material/pdf/Material_Ejempo_1.pdf', '/inventario_dgtic/material/indice/Material_Ejempo_1_Indice.pdf');
 
 -- --------------------------------------------------------
 
@@ -137,21 +158,17 @@ INSERT INTO `material` (`Material_Id`, `MaterialNombre`, `MaterialEstado`, `Mate
 CREATE TABLE `secciones` (
   `Seccion_Id` int(11) NOT NULL,
   `SeccionNombre` varchar(100) NOT NULL,
-  `TipoSeccion` varchar(30) NOT NULL,
   `EstadoSeccion` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `secciones`
 --
 
-INSERT INTO `secciones` (`Seccion_Id`, `SeccionNombre`, `TipoSeccion`, `EstadoSeccion`) VALUES
-(1, 'Curso 1', 'Curso de actualización', 1),
-(2, 'Área 1', 'Institucionales', 1),
-(3, 'Curso 2', 'Curso de actualización', 1),
-(4, 'Área 2', 'Institucionales', 1),
-(5, 'Curso 3', 'Curso de actualización', 1),
-(6, 'Área 3', 'Institucionales', 1);
+INSERT INTO `secciones` (`Seccion_Id`, `SeccionNombre`, `EstadoSeccion`) VALUES
+(1, 'Cursos de Actualización', 1),
+(2, 'Diplomados', 1),
+(3, 'Cursos Institucionales', 1);
 
 -- --------------------------------------------------------
 
@@ -164,7 +181,7 @@ CREATE TABLE `sedes` (
   `SedeNombre` varchar(100) NOT NULL,
   `SedeSiglas` varchar(50) NOT NULL,
   `SedeEstado` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `sedes`
@@ -191,7 +208,7 @@ CREATE TABLE `usuario` (
   `UsuarioPassword` varchar(100) NOT NULL,
   `UsuarioEstado` tinyint(1) NOT NULL,
   `UsuarioRol` enum('administrador','CE','Consultor','editor') DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuario`
@@ -213,7 +230,8 @@ INSERT INTO `usuario` (`Usuario_Id`, `Sede_Id`, `UsuarioNombre`, `UsuarioApatern
 -- Indices de la tabla `area`
 --
 ALTER TABLE `area`
-  ADD PRIMARY KEY (`Area_Id`);
+  ADD PRIMARY KEY (`Area_Id`),
+  ADD KEY `area_ibfk_1` (`Seccion_Id`);
 
 --
 -- Indices de la tabla `descargas`
@@ -243,8 +261,7 @@ ALTER TABLE `intentoslogin`
 ALTER TABLE `material`
   ADD PRIMARY KEY (`Material_Id`),
   ADD UNIQUE KEY `MaterialISBN` (`MaterialISBN`),
-  ADD KEY `Area_Id` (`Area_Id`),
-  ADD KEY `Seccion_Id` (`Seccion_Id`);
+  ADD KEY `Area_Id` (`Area_Id`);
 
 --
 -- Indices de la tabla `secciones`
@@ -274,7 +291,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `area`
 --
 ALTER TABLE `area`
-  MODIFY `Area_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Area_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `descargas`
@@ -292,7 +309,7 @@ ALTER TABLE `diplomado`
 -- AUTO_INCREMENT de la tabla `material`
 --
 ALTER TABLE `material`
-  MODIFY `Material_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Material_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `secciones`
@@ -317,6 +334,12 @@ ALTER TABLE `usuario`
 --
 
 --
+-- Filtros para la tabla `area`
+--
+ALTER TABLE `area`
+  ADD CONSTRAINT `area_ibfk_1` FOREIGN KEY (`Seccion_Id`) REFERENCES `secciones` (`Seccion_Id`);
+
+--
 -- Filtros para la tabla `descargas`
 --
 ALTER TABLE `descargas`
@@ -336,8 +359,7 @@ ALTER TABLE `intentoslogin`
 --
 ALTER TABLE `material`
   ADD CONSTRAINT `material_ibfk_1` FOREIGN KEY (`Area_Id`) REFERENCES `area` (`Area_Id`),
-  ADD CONSTRAINT `material_ibfk_2` FOREIGN KEY (`Area_Id`) REFERENCES `area` (`Area_Id`),
-  ADD CONSTRAINT `material_ibfk_3` FOREIGN KEY (`Seccion_Id`) REFERENCES `secciones` (`Seccion_Id`);
+  ADD CONSTRAINT `material_ibfk_2` FOREIGN KEY (`Area_Id`) REFERENCES `area` (`Area_Id`);
 
 --
 -- Filtros para la tabla `usuario`

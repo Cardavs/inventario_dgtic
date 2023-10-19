@@ -27,8 +27,7 @@
         $versionMaterial = trim($_POST['Versión'], ' \t\n\r');
         $añoMaterial = trim($_POST['AñoEdicion'], ' \t\n\r\0\x0');
         $paginasMaterial = trim($_POST['NoPaginas'], ' \t\n\r\0\x0');
-        $seccionMaterial = trim($_POST['seccion'], ' \t\n\r\0\x0');
-        $areaMaterial = trim($_POST['area'], ' \t\n\r\0\x0');
+        $areaMaterial = $_POST['area'];
         if (array_key_exists("material", $_FILES) && array_key_exists("indice", $_FILES)) {
             // Las claves existen en el array
             $archivoMaterial = $_FILES["material"];
@@ -48,7 +47,6 @@
             'version' => $versionMaterial,
             'año' => $añoMaterial,
             'paginas' => $paginasMaterial,
-            'seccion' => $seccionMaterial,
             'area' => $areaMaterial,
             'material' => $archivoMaterial,
             'indice' => $indiceMaterial

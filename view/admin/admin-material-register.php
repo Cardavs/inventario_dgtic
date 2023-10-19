@@ -10,6 +10,14 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
 
 include(CONNECTION_BD);
 include(VALIDATION_PHP . '/validate-createMaterial.php');
+include(BD_SELECT . 'select-section.php');
+include(BD_SELECT . 'select-area.php');
+
+
+$datosSeccion = new SelectSection();
+$datosArea = new SelectAreas();
+$secciones = $datosSeccion->getSection();
+$areas = $datosArea->getAreas();
 ?>
 
 <!DOCTYPE html>
