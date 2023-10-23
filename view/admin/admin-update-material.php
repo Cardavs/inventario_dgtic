@@ -2,12 +2,12 @@
 include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
 include_once(CONNECTION_BD);
 
+
 include(BD_UPDATE . 'update-material.php');
 include(BD_SELECT . 'select-material.php');
 include(BD_SELECT . 'select-section.php');
 include(BD_SELECT . 'select-area.php');
-//Archivo para actualizar al usuario
-//include(VALIDATION_PHP . '/validate-UpdateMaterial.php');
+
 //Obtieniendo Id del usuario para mostrar datos.
 $id = $_GET['id'];
 
@@ -32,11 +32,11 @@ include(LAYOUT . '/head.php');
     <?php include(LAYOUT . "/navbar-users/navbarAdmin.php"); ?>
 
     <h2 class="titulo">Gestionar Material</h2>
-    <form class="container col-md-12 col-sm-4 formulario needs-validation" method="post" novalidate enctype="multipart/form-data">
+    <form action="/inventario_dgtic\controllers\validation\php\validate-UpdateMaterial.php" method="post" class="container col-md-12 col-sm-4 formulario needs-validation" method="post" novalidate enctype="multipart/form-data">
         <div class="row g-3 mb-3">
             <div class="col">
-                <label for="NombreMaterial">Nombre de material</label>
-                <input name="NombreMaterial" class="form-control form-control-lg" type="text" placeholder="Nombre de material" value="<?php echo $materialInfo['MaterialNombre'] ?>" required>
+                <label for="nombreMaterial">Nombre de material</label>
+                <input name="nombreMaterial" class="form-control form-control-lg" type="text" placeholder="Nombre de material" value="<?php echo $materialInfo['MaterialNombre'] ?>" required>
                 <div class="invalid-feedback">
                     Es necesario colocar un nombre.
                 </div>
@@ -72,29 +72,29 @@ include(LAYOUT . '/head.php');
         </div>
         <div class="row g-3 mb-3">
             <div class="col">
-                <label for="Autor">Autor</label>
-                <input name="Autor" class="form-control form-control-lg" type="text" placeholder="Autor" required value="<?php echo $materialInfo['MaterialAutor'] ?>">
+                <label for="autor">Autor</label>
+                <input name="autor" class="form-control form-control-lg" type="text" placeholder="Autor" required value="<?php echo $materialInfo['MaterialAutor'] ?>">
                 <div class="invalid-feedback">
                     Es necesario colocar un Autor.
                 </div>
             </div>
             <div class="col">
-                <label for="Versión">Versión</label>
-                <input name="Versión" class="form-control form-control-lg" type="number" placeholder="Versión de material" min="0" value="<?php echo $materialInfo['MaterialVersion'] ?>" required>
+                <label for="version">Versión</label>
+                <input name="version" class="form-control form-control-lg" type="number" placeholder="Versión de material" min="0" value="<?php echo $materialInfo['MaterialVersion'] ?>" required>
                 <div class="invalid-feedback">
                     Es necesario colocar una versión.
                 </div>
             </div>
             <div class="col">
-                <label for="AñoEdicion">Año de edición</label>
-                <input name="AñoEdicion" class="form-control form-control-lg" type="number" placeholder="Año de edición" min="1960" max="2099" value="<?php echo $materialInfo['MaterialEdicion'] ?>" required>
+                <label for="anioEdicion">Año de edición</label>
+                <input name="anioEdicion" class="form-control form-control-lg" type="number" placeholder="Año de edición" min="1960" max="2099" value="<?php echo $materialInfo['MaterialEdicion'] ?>" required>
                 <div class="invalid-feedback">
                     Es necesario colocar un año de edición.
                 </div>
             </div>
             <div class="col">
-                <label for="NoPaginas">Número de páginas</label>
-                <input name="NoPaginas" class="form-control form-control-lg" type="number" placeholder="Número de páginas" value="<?php echo $materialInfo['MaterialPaginas'] ?>" min="1" required>
+                <label for="noPaginas">Número de páginas</label>
+                <input name="noPaginas" class="form-control form-control-lg" type="number" placeholder="Número de páginas" value="<?php echo $materialInfo['MaterialPaginas'] ?>" min="1" required>
                 <div class="invalid-feedback">
                     Es necesario colocar un número de páginas.
                 </div>
@@ -161,15 +161,18 @@ include(LAYOUT . '/head.php');
                 <label for="subirMaterial" class="form-label">Subir material</label>
                 <input name="material" class="form-control" type="file" id="subirMaterial">
                 <div class="invalid-feedback">
-                    Es necesario subir un archivo.
+                    Es necesario subir el archivo del Material.
                 </div>
             </div>
             <div class="col">
                 <label for="subirIndice" class="form-label">Subir índice</label>
                 <input name="indice" class="form-control" type="file" id="subirIndice">
                 <div class="invalid-feedback">
-                    Es necesario subir un archivo.
+                    Es necesario subir el archivo del Indice.
                 </div>
+            </div>
+            <div>
+                <input type="text" hidden name="idMaterial" value="<?php echo $materialInfo['Material_Id'] ?>">
             </div>
             <div class="col-md-12 text-center">
                 <label for="actualizar"> </label>

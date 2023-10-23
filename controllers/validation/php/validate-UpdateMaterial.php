@@ -54,44 +54,54 @@ if (isset($_POST['editar'])) {
 }
 
     //Actualizar datos de material
-   /* if (isset($_POST['actualizar'])) {
-        //Obtener datos que se van a actualizar.
-        $idUser = $_POST['idUser'];
-        $nombre = $_POST['nombreUser'];
-        $apaterno = $_POST['apaternoUser'];
-        $amaterno = $_POST['amaternoUser'];
-        $correo = $_POST['correoUser'];
-        $rol = $_POST['rolUser'];
-        $sede = $_POST['sedeUser'];
+    if (isset($_POST['actualizar'])) {
 
-        //Crear array para los datos
-        $datosUser = array(
-            'UserId' => $idUser,
-            'NombreUser' => $nombre,
-            'ApaternoUser' => $apaterno,
-            'AmaternoUser' => $amaterno,
-            'CorreoUser' => $correo,
-            'RolUser' => $rol,
-            'SedeUser' => $sede
+        //Crear array para los datos y notiicacion de tipo de material
+        $datosMaterial = array(
+            'idMaterial' => $_POST['idMaterial'],
+            'NombreMaterial' => $_POST['nombreMaterial'],
+            'Autor' => $_POST['autor'],
+            'VersionM' => $_POST['version'],
+            'AnioEdicion' => $_POST['anioEdicion'],
+            'NoPaginas' => $_POST['noPaginas'],
+            'Area' => $_POST['area'],
+            'Isbn' => null,
+            'Tiraje'=>null
         );
 
+        if($_POST['tipo']=="Auditoría"){
+            $datosMaterial['Isbn'] = $_POST['ISBN'];
+            $datosMaterial['Tiraje']=$_POST['Tiraje'];
+        }else{
+            
+        }
+        /*TOMA EN CUENTA QUE UNA ACTUALIZACION DE LOS 
+        ARCHIVOS DE INDICE O MATERIAL SOLO INVOLUCRA 
+        REEMPLAZAR EL ARCHIVO Y NO UN UPDATE A LA BD
+        
+        CONSIDERA QUE SI SE CAMBIA EL NOMBRE, SE DEBE
+        CAMBIAR TAMBIEN EL NOMBRE DEL ARCHIVO Y LA RUTA
+        AKMACENADA
+        */
+        
+
         //Llamar al metodo para actualizar datos
-        $UpdateUser = new UpdateUser();
-        if($UpdateUser -> actualizarMaterial($datosUser)){
+        $UpdateMaterial = new UpdateMaterial();
+        if($UpdateMaterial -> actualizarMaterial($datosMaterial)){
             echo '<script language="javascript">
                 alert("Datos Actualizados con exito");
-                window.location.href = "/inventario_dgtic/view/admin/manage-account.php";
+                window.location.href = "/inventario_dgtic/view/admin/manage-material.php";
                 </script>';
-            die();
+            /*die()*/;
         }else{
             echo '<script language="javascript">
                 alert("Error al acutalizar datos de Material");
                 </script>';
         }
-    } else*/if (isset($_POST['cancelar'])) {
+    } else if (isset($_POST['cancelar'])) {
         echo '<script language="javascript">
         alert("Salio");
         </script>';
-        header("Location: /inventario_dgtic/view/admin/create-user.php");
+        header("Location: /inventario_dgtic/view/admin/manage-material.php");
        // die();
     }
