@@ -53,7 +53,6 @@
                 $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
                 
             } catch (PDOException $ex) {
-                echo 'Hola';
                 echo 'Error: ' .$ex->getMessage();
             }
             if(count($resultado) > 0){
@@ -98,7 +97,6 @@
                 $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
                 
             } catch (PDOException $ex) {
-                echo 'Hola';
                 echo 'Error: ' .$ex->getMessage();
             }
             if(count($resultado) > 0){

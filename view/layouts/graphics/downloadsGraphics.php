@@ -5,17 +5,17 @@ use PhpOffice\PhpSpreadsheet\{Spreadsheet, IOFactory};
 
 class SelectDownloadsGraphic{
 
-  public $connection;
+    public $connection;
 
-  public function __construct()
-  {
+    public function __construct()
+    {
       $this -> connection = new Conexion();
-  }
+    }
 
-  /*
-  * Realiza el select de las descargas registradas en la BD que estan habilitados
-  */
-  public function getDownloadsGraphicAll(){
+    /*
+    * Realiza el select de las descargas registradas en la BD que estan habilitados
+    */
+    public function getAllReport(){
     try {
       $connect = $this->connection->conectar();
       $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -85,14 +85,206 @@ class SelectDownloadsGraphic{
     // Devolver el enlace de descarga
     return $downloadLink;
       
-  } catch (PDOException $ex) {
+    } catch (PDOException $ex) {
       echo '<script language="javascript">
       alert("Error al generar reporte. Consulte a un administrador");
       </script>';
       echo 'Error: ' . $ex->getMessage();
       die();
+    }
+    }
+
+    /*
+    * Realiza el select de un grupo de descargas de acuerdo a una busqueda.
+    */
+    public function getDownloadsReport($fecha_inicio, $fecha_fin, $sede){
+      try {
+          $connect = $this->connection->conectar();
+          $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $connect->beginTransaction();
+
+              $query = "SELECT 
+                m.MaterialNombre AS NombreMaterial, 
+                s.SedeNombre AS SedeNombre, 
+                COUNT(*) AS Descargas
+              FROM descargas d
+              INNER JOIN material m ON d.Material_Id = m.Material_Id
+              INNER JOIN sedes s ON d.Sede_Id = s.Sede_Id
+              WHERE d.Sede_Id = :Sede_Id
+              AND d.DescargaFecha BETWEEN :fecha_inicio AND :fecha_fin
+              GROUP BY m.MaterialNombre;";
+
+          $queryP = $connect->prepare($query);    
+          $queryP->bindValue(":Sede_Id", $sede);
+          $queryP->bindValue(":fecha_inicio", $fecha_inicio);
+          $queryP->bindValue(":fecha_fin", $fecha_fin);
+          $queryP->execute();
+          $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
+
+          if(count($resultado) > 0){
+
+            $NombreMaterial = [];
+            $descargas = [];
+            $SedeNombre = [];
+
+            foreach ($resultado as $data) {
+            $NombreMaterial[] = $data['NombreMaterial'];
+            $descargas[] = $data['Descargas'];
+            $SedeNombre = $data['SedeNombre'];
+            }
+
+            // Crear un nuevo objeto de hoja de cálculo
+            $spreadsheet = new Spreadsheet();
+            $sheet = $spreadsheet->getActiveSheet();
+            $sheet->setTitle("Reporte");
+      
+            $sheet->setCellValue('A1', 'Sede');
+            $sheet->setCellValue('B1', 'NombreMaterial');
+            $sheet->setCellValue('C1', 'Descargas');
+      
+            // Escribir datos en el archivo Excel
+            $row = 2;
+            foreach ($resultado as $data) {
+              $sheet->setCellValue('A' . $row, $data['SedeNombre']);
+              $sheet->setCellValue('B' . $row, $data['NombreMaterial']);
+              $sheet->setCellValue('C' . $row, $data['Descargas']);
+              $row++;
+            }
+    
+            // Crear el objeto Writer
+            $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        
+            // Generar un nombre de archivo único basado en la fecha y la hora actual
+            $nombreArchivo = 'Reporte_General' . date('Ymd') . '.xlsx';
+        
+            // Guardar el archivo en el servidor
+            $rutaCarpeta  = realpath(__DIR__ . '\..\..\..\exceltemp');
+            $rutaArchivo = $rutaCarpeta . '\\' . $nombreArchivo;
+            $writer->save($rutaArchivo);
+        
+            // Codificar el archivo en base64
+            $base64Data = base64_encode(file_get_contents($rutaArchivo));
+        
+            // Eliminar el archivo temporal
+            unlink($rutaArchivo);
+        
+            // Generar el enlace de descarga
+            $downloadLink = 'data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,' . $base64Data;
+        
+            // Devolver el enlace de descarga
+            return ['NombreMaterial' => $NombreMaterial, 'descargas' => $descargas, 'SedeNombre' => $SedeNombre, 'downloadLink' => $downloadLink];
+
+          }else if(sizeof($resultado) == 0){
+            echo '<script language="javascript">
+                    alert("No hay datos que coincidan con su busqueda");
+                    window.location.href = "/inventario_dgtic/view/admin/manage-downloads.php";
+                    </script>';
+        }
+          
+        } catch (PDOException $ex) {
+          echo '<script language="javascript">
+          alert("Error al generar reporte dedescargas. Consulte a un administrador");
+          </script>';
+          echo 'Error: ' . $ex->getMessage();
+          die();
+        }
   }
-}
+
+    /*
+    * Realiza el select de un grupo de descargas de acuerdo a una busqueda.
+    */
+    public function getCopiesReport($fecha_inicio, $fecha_fin, $sede){
+      try {
+          $connect = $this->connection->conectar();
+          $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $connect->beginTransaction();
+
+            $query = "SELECT 
+            m.MaterialNombre AS NombreMaterial, 
+            s.SedeNombre AS SedeNombre, 
+            SUM(d.DescargaCantidad) AS Descargas
+            FROM descargas d
+            INNER JOIN material m ON d.Material_Id = m.Material_Id
+            INNER JOIN sedes s ON d.Sede_Id = s.Sede_Id
+            WHERE d.Sede_Id = :Sede_Id
+            AND d.DescargaFecha BETWEEN :fecha_inicio AND :fecha_fin
+            GROUP BY m.MaterialNombre;";
+
+          $queryP = $connect->prepare($query);    
+          $queryP->bindValue(":Sede_Id", $sede);
+          $queryP->bindValue(":fecha_inicio", $fecha_inicio);
+          $queryP->bindValue(":fecha_fin", $fecha_fin);
+          $queryP->execute();
+          $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
+
+          if(count($resultado) > 0){
+
+            $NombreMaterial = [];
+            $descargas = [];
+            $SedeNombre = [];
+
+            foreach ($resultado as $data) {
+            $NombreMaterial[] = $data['NombreMaterial'];
+            $descargas[] = $data['Descargas'];
+            $SedeNombre = $data['SedeNombre'];
+            }
+
+            // Crear un nuevo objeto de hoja de cálculo
+            $spreadsheet = new Spreadsheet();
+            $sheet = $spreadsheet->getActiveSheet();
+            $sheet->setTitle("Reporte");
+      
+            $sheet->setCellValue('A1', 'Sede');
+            $sheet->setCellValue('B1', 'NombreMaterial');
+            $sheet->setCellValue('C1', 'Copias');
+      
+            // Escribir datos en el archivo Excel
+            $row = 2;
+            foreach ($resultado as $data) {
+              $sheet->setCellValue('A' . $row, $data['SedeNombre']);
+              $sheet->setCellValue('B' . $row, $data['NombreMaterial']);
+              $sheet->setCellValue('C' . $row, $data['Descargas']);
+              $row++;
+            }
+    
+            // Crear el objeto Writer
+            $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        
+            // Generar un nombre de archivo único basado en la fecha y la hora actual
+            $nombreArchivo = 'Reporte_General' . date('Ymd') . '.xlsx';
+        
+            // Guardar el archivo en el servidor
+            $rutaCarpeta  = realpath(__DIR__ . '\..\..\..\exceltemp');
+            $rutaArchivo = $rutaCarpeta . '\\' . $nombreArchivo;
+            $writer->save($rutaArchivo);
+        
+            // Codificar el archivo en base64
+            $base64Data = base64_encode(file_get_contents($rutaArchivo));
+        
+            // Eliminar el archivo temporal
+            unlink($rutaArchivo);
+        
+            // Generar el enlace de descarga
+            $downloadLink = 'data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,' . $base64Data;
+        
+            // Devolver el enlace de descarga
+            return ['NombreMaterial' => $NombreMaterial, 'descargas' => $descargas, 'SedeNombre' => $SedeNombre, 'downloadLink' => $downloadLink];
+
+          }else if(sizeof($resultado) == 0){
+            echo '<script language="javascript">
+                    alert("No hay datos que coincidan con su busqueda");
+                    window.location.href = "/inventario_dgtic/view/admin/manage-downloads.php";
+                    </script>';
+        }
+          
+        } catch (PDOException $ex) {
+          echo '<script language="javascript">
+          alert("Error al generar reporte dedescargas. Consulte a un administrador");
+          </script>';
+          echo 'Error: ' . $ex->getMessage();
+          die();
+        }
+  }
 
 }
 ?>

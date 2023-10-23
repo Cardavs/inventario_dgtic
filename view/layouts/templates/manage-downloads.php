@@ -23,7 +23,7 @@ include(BD_SELECT . 'select-downloads.php');
                                     <div class="col p-4">
                                         <label for="inicio">Fecha de Inicio</label>
                                         <div class="row">
-                                            <input class="form-control form-control-lg" type="date" name="fechainicio" id="finicio" >
+                                            <input class="form-control form-control-lg" type="date" name="fechainicio" id="finicio" required>
                                             <div class="invalid-feedback">
                                                 Es necesario colocar una fecha inicial.
                                             </div>
@@ -35,7 +35,7 @@ include(BD_SELECT . 'select-downloads.php');
                                     <div class="col p-4">
                                         <label for="inicio">Fecha de Fin</label>
                                         <div class="row">
-                                            <input class="form-control form-control-lg" type="date" name="fechafin" id="ffin" >
+                                            <input class="form-control form-control-lg" type="date" name="fechafin" id="ffin" required>
                                             <div class="invalid-feedback">
                                                 Es necesario colocar una fecha final.
                                             </div>
@@ -47,7 +47,7 @@ include(BD_SELECT . 'select-downloads.php');
                         </th>
                         <td class="p-5">
                             <div class="row p-4">
-                            <select class="form-select form-select-lg" style="margin-top: 2.3rem;" name="sedeDescarga" id="sede" >
+                            <select class="form-select form-select-lg" style="margin-top: 2.3rem;" name="sedeDescarga" id="sede" required>
                                 <option selected disabled value="">Selecciona una sede</option>
                                 <?php
                                 $optionSelect = new SelectSedes();
@@ -90,6 +90,7 @@ include(BD_SELECT . 'select-downloads.php');
                 </div>
             </div>
         </form>
+
         <?php
             include(LAYOUT."/graphics/downloadsGraphics.php");
             include(VALIDATION_PHP . '/validate-searchDownloads.php');
@@ -101,14 +102,14 @@ include(BD_SELECT . 'select-downloads.php');
                 
                 // Enviar el archivo al navegador
                 echo '<div style="text-align: center; margin-left: 370px;">';
-                echo '<a href="' . $nombreArchivo . '">Descargar Reporte Excel</a>';
+                echo '<a href="' . $nombreArchivo . '" >Descargar Reporte Excel</a>';
                 echo '</div>';
 
             } else {
                 echo '<div style="text-align: center; margin-left: 360px;">---------------------</div>';
             }
         ?>
-
+        
         <div style="width: 1000px; margin: 0 auto; margin-top: 50px;">
             <canvas  id="chartjs_bar"></canvas> 
         </div>
@@ -151,5 +152,5 @@ include(BD_SELECT . 'select-downloads.php');
         </script>
         
     </div>
-    <script src="/inventario_dgtic/controllers/validation/js/form-validation-empty.js"></script>
+    <script src="/inventario_dgtic/controllers/validation/js/form-validation-empty-report.js"></script>
     <script src="/inventario_dgtic/view/js/validationFrontend/dateValidation.js"></script>
