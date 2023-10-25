@@ -42,16 +42,31 @@
         $fehca_inicio = $_POST['fechainicio'];
         $fehca_fin = $_POST['fechafin'];
         $sede = $_POST['sedeDescarga'];
-        if (empty($fehca_inicio) || empty($fehca_fin) || empty($sede)) {
+        if (empty($fehca_inicio) && empty($fehca_fin) && $sede == 'all') {
+            echo 'Primera condición';
             // Llama a la función getAllReport() para generar el archivo y realizar la descarga
             $nombreArchivo = $downloadsGraphic->getAllReport();
-            // Completar tabla con valores por default
-            $infoDownloads = $downloads->getDownloadsSearch('2023-01-01', '2023-03-01', '1');
-            $NombreMaterial = $infoDownloads['NombreMaterial'];
-            $descargas = $infoDownloads['descargas'];
-            $SedeNombre = $infoDownloads['SedeNombre'];
-            $Consulta = 'Descargas por material realizadas en la Sede: ';
-        }else if($_POST['tipo']=='Descargas'){
+            // Completar tabla con valores por default para propósitos de demostración
+            $NombreMaterial = ['Material A', 'Material B', 'Material C', 'Material D', 'Material E'];
+            $descargas = [50, 30, 70, 45, 90];
+            $SedeNombre = 'Sede Ejemplo';
+            $Consulta = 'Grafico de ejemplo: ';
+        }else if(!empty($fehca_inicio) && !empty($fehca_fin) && $sede == 'all'){
+            echo 'Segunda condición';
+            // Llama a la función getAllReport() para generar el archivo y realizar la descarga
+            $nombreArchivo = $downloadsGraphic->getAllReportDates($fehca_inicio, $fehca_fin);
+            // Completar tabla con valores por default para propósitos de demostración
+            $NombreMaterial = ['Material A', 'Material B', 'Material C', 'Material D', 'Material E'];
+            $descargas = [50, 30, 70, 45, 90];
+            $SedeNombre = 'Sede Ejemplo';
+            $Consulta = 'Grafico de ejemplo: ';
+        }else if(empty($fehca_inicio) && empty($fehca_fin) && $sede != 'all'){
+            echo '<script language="javascript">
+                        alert("Error: Ingrese una fecha de inicio y una fecha de termino");
+                        window.location.href = "/inventario_dgtic/view/admin/manage-downloads.php";
+                        </script>';
+        }else if(!empty($fehca_inicio) && !empty($fehca_fin) && $sede != 'all' && $_POST['tipo']=='Descargas'){
+            echo 'Descargas';
             // Descargamos el Excel con los datos de la grafica:
             $infoReport = $downloadsGraphic->getDownloadsReport($fehca_inicio, $fehca_fin, $sede);
             $NombreMaterial = $infoReport['NombreMaterial'];
@@ -59,7 +74,8 @@
             $SedeNombre = $infoReport['SedeNombre'];
             $Consulta = 'Descargas por material realizadas en la Sede: ';
             $nombreArchivo = $infoReport['downloadLink'];
-        }else{
+        }else if(!empty($fehca_inicio) && !empty($fehca_fin) && $sede != 'all' && $_POST['tipo']=='Copias'){
+            echo 'Copias';
             // Descargamos el Excel con los datos de la grafica:
             $infoReport = $downloadsGraphic->getCopiesReport($fehca_inicio, $fehca_fin, $sede);
             $NombreMaterial = $infoReport['NombreMaterial'];
@@ -69,11 +85,10 @@
             $nombreArchivo = $infoReport['downloadLink'];
         }
     }else{
-        // Completar tabla con valores por default
-        $infoDownloads = $downloads->getDownloadsSearch('2023-01-01', '2023-03-01', '1');
-        $NombreMaterial = $infoDownloads['NombreMaterial'];
-        $descargas = $infoDownloads['descargas'];
-        $SedeNombre = $infoDownloads['SedeNombre'];
-        $Consulta = 'Descargas por material realizadas en la Sede: ';
+        // Completar tabla con valores por default para propósitos de demostración
+        $NombreMaterial = ['Material A', 'Material B', 'Material C', 'Material D', 'Material E'];
+        $descargas = [50, 30, 70, 45, 90];
+        $SedeNombre = 'Sede Ejemplo';
+        $Consulta = 'Grafico de ejemplo: ';
     }
 ?>

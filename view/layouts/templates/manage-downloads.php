@@ -11,7 +11,7 @@ include(BD_SELECT . 'select-downloads.php');
                 <thead>
                     <tr class="text-center">
                         <th scope="col" class="encabezado-col">Periodo</th>
-                        <th scope="col" class="encabezado-col">Sede</th>
+                        <th scope="col" class="encabezado-col" id='sedeCol'>Sede</th>
                         <th scope="col" class="encabezado-col">Datos</th>
                     </tr>
                 </thead>
@@ -45,15 +45,19 @@ include(BD_SELECT . 'select-downloads.php');
                                 
                             </div>
                         </th>
-                        <td class="p-5">
+                        <td class="p-5" id='selectContainer'>
                             <div class="row p-4">
                             <select class="form-select form-select-lg" style="margin-top: 2.3rem;" name="sedeDescarga" id="sede" required>
-                                <option selected disabled value="">Selecciona una sede</option>
                                 <?php
-                                $optionSelect = new SelectSedes();
-                                $options = $optionSelect->getSedes();
-                                foreach ($options as $option) {
-                                    echo '<option value="' . $option['Sede_id'] . '">' . $option['SedeNombre'] . '</option>';
+                                if ($user_type == 'CE'){
+                                    echo '<option value="1">' . "Centro Mascarones" . '</option>';
+                                }else{
+                                    $optionSelect = new SelectSedes();
+                                    $options = $optionSelect->getSedes();
+                                    echo '<option selected value="all">Todas</option>';
+                                    foreach ($options as $option) {
+                                        echo '<option value="' . $option['Sede_id'] . '">' . $option['SedeNombre'] . '</option>';
+                                    }
                                 }
                                 ?>
                             </select>
@@ -90,7 +94,6 @@ include(BD_SELECT . 'select-downloads.php');
                 </div>
             </div>
         </form>
-
         <?php
             include(LAYOUT."/graphics/downloadsGraphics.php");
             include(VALIDATION_PHP . '/validate-searchDownloads.php');
@@ -113,7 +116,6 @@ include(BD_SELECT . 'select-downloads.php');
         <div style="width: 1000px; margin: 0 auto; margin-top: 50px;">
             <canvas  id="chartjs_bar"></canvas> 
         </div>
-
         <script type="text/javascript">
         var ctx = document.getElementById("chartjs_bar").getContext('2d');
                     var myChart = new Chart(ctx, {
