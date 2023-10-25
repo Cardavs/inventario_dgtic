@@ -29,14 +29,12 @@ $infoSection = $section->getSectionById($sectionId);
             <tr>
                 <th> </th>
                 <th>Área</th>
-                <th>Tipo</th>
                 <th> </th>
             </tr>
         </thead>
         <tbody>
             <?php
             foreach ($infoSection as $infoSection) {
-                $tipo = $infoSection['TipoSeccion'];
             ?>
                 <form action="" method="post">
                     <tr>
@@ -46,12 +44,6 @@ $infoSection = $section->getSectionById($sectionId);
                         <th>
                             <input type="text" name="seccionNombre" class="form-control form-control-lg g-3" value="<?php echo $infoSection['SeccionNombre']; ?>">
                         </th>
-                        <td>
-                            <select class="form-select form-select-lg mb-3 form-control-lg" name="TipoSeccion" aria-label=".form-select-lg example" required>
-                                <option <?php echo ($tipo == 'Cursos de actualización') ? "selected" : " "?> value="Cursos de actualización">Cursos de actualización</option>
-                                <option <?php echo ($tipo == 'Institucionales') ? "selected" : " "?> value="Institucionales">Institucionales</option>
-                            </select>
-                        </td>
                         <td class="btn-tabla-container">
                             <button type="submit" name="actualizar" class="btn btn-primary btn-tabla">Actualizar</button>
                             <button type="submit" name="cancelar" class="btn btn-primary btn-tabla">Cancelar</button>

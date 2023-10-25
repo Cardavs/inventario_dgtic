@@ -24,12 +24,11 @@
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $connect->beginTransaction();
 
-                $query = 'INSERT INTO secciones (SeccionNombre, TipoSeccion, EstadoSeccion) VALUES (:SeccionNombre, :TipoSeccion, :EstadoSeccion)';
+                $query = 'INSERT INTO secciones (SeccionNombre , EstadoSeccion) VALUES (:SeccionNombre, :EstadoSeccion)';
 
                 $queryP = $connect->prepare($query);
 
                 $queryP->bindValue(":SeccionNombre", $datosSeccion['nombreSeccion']);
-                $queryP->bindValue(":TipoSeccion", $datosSeccion['tipoSeccion']);
                 $queryP->bindValue(":EstadoSeccion", $datosSeccion['estadoSeccion']);
 
                 $queryP->execute();

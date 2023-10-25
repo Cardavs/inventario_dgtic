@@ -74,12 +74,10 @@
         $seccionId = $_GET['id'];
         //recibiendo los campos que se actualizaran
         $newsection = $_POST['seccionNombre'];
-        $newTipo = $_POST['TipoSeccion'];
         //Guardando todos los datos en un array
         $datosSection = array(
             'id' => $seccionId,
-            'nombre' => $newsection,
-            'tipo' => $newTipo
+            'nombre' => $newsection
         );
 
         //llamando al metodo para actualizar informacion
@@ -108,12 +106,10 @@
         $seccionId = $_GET['id'];
         //recibiendo los campos que se actualizaran
         $newsection = $_POST['seccionNombre'];
-        $newTipo = $_POST['TipoSeccion'];
         //Guardando todos los datos en un array
         $datosSection = array(
             'id' => $seccionId,
-            'nombre' => $newsection,
-            'tipo' => $newTipo
+            'nombre' => $newsection
         );
 
         //llamando al metodo para actualizar informacion

@@ -26,7 +26,7 @@ include(VALIDATION_PHP . '/validate-UpdateUser.php');
     <h2 class="titulo">Gestionar Cuentas</h2>
     <div class="container search">
         <form class="d-flex col-md-2 form-search needs-validation text-container" role="search" novalidate method="POST">
-            <input class="form-control me-2 text-center" type="text" placeholder="Busqueda" name="Busqueda" id="Busqueda" required>
+            <input class="form-control me-2 text-center" type="text" placeholder="Busqueda por nombre, apellido o correo" name="Busqueda" id="Busqueda" required>
             <select class="form-select me-2 text-center" name="Filas" id="Filas" placeholder="Filas" required>
                 <option value="">Filas a mostrar</option>
                 <option value="10">10</option>

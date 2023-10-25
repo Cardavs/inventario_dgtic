@@ -15,7 +15,6 @@ $infoSection = $section->getSection();
             <tr>
                 <th> </th>
                 <th>Área</th>
-                <th>Tipo</th>
                 <th>Estado</th>
                 <th> </th>
             </tr>
@@ -30,7 +29,6 @@ $infoSection = $section->getSection();
                             <input type="hidden" name="seccionId" value="<?php echo $infoSection['Seccion_Id']; ?>">
                         </th>
                         <th><?php echo $infoSection['SeccionNombre']; ?></th>
-                        <td><?php echo $infoSection['TipoSeccion']; ?></td>
                         <td><?php echo ($infoSection['EstadoSeccion'] == 1) ? "Activo" : "Inactivo"; ?></td>
                         <td class="btn-tabla-container">
                             <button type="submit" name="habilitar" class="btn btn-primary btn-tabla">Habilitar</button>

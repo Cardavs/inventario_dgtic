@@ -103,13 +103,12 @@
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $connect->beginTransaction();
                 
-                $query = "UPDATE secciones SET SeccionNombre = :SeccionNombre, TipoSeccion = :TipoSeccion WHERE Seccion_Id = :Seccion_Id";
+                $query = "UPDATE secciones SET SeccionNombre = :SeccionNombre WHERE Seccion_Id = :Seccion_Id";
     
                 $queryP = $connect -> prepare($query);
     
                 $queryP->bindValue(":Seccion_Id", $datosSection['id']);
                 $queryP->bindValue(":SeccionNombre", $datosSection['nombre']);
-                $queryP->bindValue(":TipoSeccion", $datosSection['tipo']);
                 
                 $queryP -> execute();
                 

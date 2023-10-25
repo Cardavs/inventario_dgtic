@@ -9,13 +9,11 @@
         //QUITAR ESPACIOS EN BLANCO U OTRO TIPO DE CARÁCTERES AL INICIO Y AL FINAL DE LA CADENA
         //DESPUÉS SE ALMACENA EN UNA VARIABLE   
         $seccionName = trim($_POST['sectionInput'], ' \t\n\r\0\x0');
-        $tipoSeccion = trim($_POST['tipoSection'], ' \t\r\0\x0');
         $estadoSeccion= trim($_POST['estado'], ' \t\n\r\0\x0');
 
         // almacenar en un array todos los valores ya limpios.
         $seccion = array(
             'nombreSeccion' => $seccionName,
-            'tipoSeccion' => $tipoSeccion,
             'estadoSeccion' => $estadoSeccion
         );
 
