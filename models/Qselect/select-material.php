@@ -105,5 +105,25 @@
                         </script>';
             }
         }
+        /**
+         * Realiza Select que arroja la ruta de los archivos material e indice con el Id de Material
+         */
+        public function getPathsMaterial($materialId){
+            try{
+                $connect = $this->connection -> conectar();
+                
+                $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                //$connect->beginTransaction();
+                
+                $query = "SELECT MaterialPDF, MaterialIndice FROM material WHERE Material_Id = :Material_id";
+                $queryP = $connect -> prepare($query);
+                $queryP->bindValue(":Material_id", $materialId);
+                $queryP -> execute();
+                $resultado = $queryP->fetch(PDO::FETCH_ASSOC);
+            }catch (PDOException $ex) {
+                echo 'Error: ' .$ex->getMessage() . die();
+            }
+            return $resultado;
+        }
     }
 ?>
