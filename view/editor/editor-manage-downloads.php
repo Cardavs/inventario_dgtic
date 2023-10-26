@@ -7,6 +7,7 @@
  *******************************/
 
 include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
+include(CONNECTION_BD);
 ?>
 
 
