@@ -10,6 +10,7 @@ include(BD_SELECT . 'select-downloads.php');
             <table class="table table-borderless">
                 <thead>
                     <tr class="text-center">
+                        <th scope="col" class="encabezado-col">Formato de Salida</th>
                         <th scope="col" class="encabezado-col">Periodo</th>
                         <th scope="col" class="encabezado-col" id='sedeCol'>Sede</th>
                         <th scope="col" class="encabezado-col">Datos</th>
@@ -17,6 +18,18 @@ include(BD_SELECT . 'select-downloads.php');
                 </thead>
                 <tbody>
                     <tr>
+                        <td class="p-5" id='selectContainer'>
+                            <div class="row p-4">
+                                <select class="form-select form-select-lg" style="margin-top: 2.3rem;" name="formatoSalida" id="formato" required>
+                                    <option value="">Seleccione formato</option>
+                                    <option value="Grafico">Grafico</option>
+                                    <option value="Excel">Excel</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Es necesario colocar un formato.
+                                </div>
+                            </div>
+                        </td>
                         <th class="p-5">
                             <div class="col-auto">
                                 <div class="row">
@@ -26,9 +39,6 @@ include(BD_SELECT . 'select-downloads.php');
                                             <input class="form-control form-control-lg" type="date" name="fechainicio" id="finicio" required>
                                             <div class="invalid-feedback">
                                                 Es necesario colocar una fecha inicial.
-                                            </div>
-                                            <div id="errorFecha" class="invalid-feedback">
-
                                             </div>
                                         </div>
                                     </div>
@@ -54,7 +64,8 @@ include(BD_SELECT . 'select-downloads.php');
                                 }else{
                                     $optionSelect = new SelectSedes();
                                     $options = $optionSelect->getSedes();
-                                    echo '<option selected value="all">Todas</option>';
+                                    echo '<option selected value="">Seleccione Sede</option>';
+                                    echo '<option value="all">Todas</option>';
                                     foreach ($options as $option) {
                                         echo '<option value="' . $option['Sede_id'] . '">' . $option['SedeNombre'] . '</option>';
                                     }
@@ -86,11 +97,8 @@ include(BD_SELECT . 'select-downloads.php');
                 </tbody>
             </table>
             <div class="row display-flex justify-content-center">
-                <div class="col-md-4">
-                    <button type="submit" id="searchInput" name="searchInput" class="btn btn-primary btn-tabla">Generar Grafico</button>
-                </div>
-                <div class="col-md-4">
-                    <button type="submit" id="downloadInputFilter" name="downloadInputFilter" class="btn btn-primary btn-tabla">Generar Reporte</button>
+                <div class="col-md-3 d-flex align-items-center justify-content-center">
+                    <button type="submit" id="searchInput" name="searchInput" class="btn btn-primary btn-tabla">Generar</button>
                 </div>
             </div>
         </form>
@@ -104,12 +112,12 @@ include(BD_SELECT . 'select-downloads.php');
             if ($nombreArchivo !== null && !empty($nombreArchivo)) {
                 
                 // Enviar el archivo al navegador
-                echo '<div style="text-align: center; margin-left: 370px;">';
+                echo '<div style="text-align: center;">';
                 echo '<a href="' . $nombreArchivo . '" >Descargar Reporte Excel</a>';
                 echo '</div>';
 
             } else {
-                echo '<div style="text-align: center; margin-left: 360px;">---------------------</div>';
+                echo '<div style="text-align: center;">---------------------</div>';
             }
         ?>
         
