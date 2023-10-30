@@ -21,16 +21,25 @@ class SelectDownloadsGraphic{
       $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
       $query = "SELECT 
-      m.MaterialNombre AS NombreMaterial, 
-      s.SedeNombre AS SedeNombre, 
-      u.UsuarioNombre AS NombreUsuario, 
-      u.UsuarioApaterno AS ApellidoPUsuario, 
-      u.UsuarioAMaterno AS ApellidoMUsuario,
-      d.Descarga_Id AS Descarga_Id, 
-      d.DescargaFecha AS DescargaFecha, 
-      d.DescargaCantidad AS DescargaCantidad
+        m.MaterialNombre AS NombreMaterial,
+        m.MaterialEstado AS MaterialEstado,
+        m.MaterialISBN AS MaterialISBN,
+        m.MaterialTiraje AS MaterialTiraje,
+        m.MaterialAutor AS MaterialAutor,
+        m.MaterialVersion AS MaterialVersion,
+        m.MaterialEdicion AS MaterialEdicion,
+        m.MaterialPaginas AS MaterialPaginas,
+        a.AreaNombre AS AreaNombre,
+        s.SedeNombre AS SedeNombre, 
+        u.UsuarioNombre AS NombreUsuario, 
+        u.UsuarioApaterno AS ApellidoPUsuario, 
+        u.UsuarioAMaterno AS ApellidoMUsuario,
+        d.Descarga_Id AS Descarga_Id, 
+        d.DescargaFecha AS DescargaFecha, 
+        d.DescargaCantidad AS DescargaCantidad
       FROM descargas d
       INNER JOIN material m ON d.Material_Id = m.Material_Id
+      INNER JOIN area a ON m.Area_Id = a.Area_Id
       INNER JOIN sedes s ON d.Sede_Id = s.Sede_Id
       INNER JOIN usuario u ON d.Usuario_Id = u.Usuario_Id;";
       $queryP = $connect->prepare($query);
@@ -44,10 +53,18 @@ class SelectDownloadsGraphic{
 
       $sheet->setCellValue('A1', 'Numero de Descarga');
       $sheet->setCellValue('B1', 'Sede');
-      $sheet->setCellValue('C1', 'Nombre Usuario');
+      $sheet->setCellValue('C1', 'Nombre Usuario Descarga');
       $sheet->setCellValue('D1', 'Nombre Material');
-      $sheet->setCellValue('E1', 'Fecha de Descarga ');
-      $sheet->setCellValue('F1', 'Copias');
+      $sheet->setCellValue('E1', 'Estado Material');
+      $sheet->setCellValue('F1', 'ISBN Material');
+      $sheet->setCellValue('G1', 'Tiraje Material');
+      $sheet->setCellValue('H1', 'Autor Material');
+      $sheet->setCellValue('I1', 'Version Material');
+      $sheet->setCellValue('J1', 'Edición Material');
+      $sheet->setCellValue('K1', 'Paginas Material');
+      $sheet->setCellValue('L1', 'Area Material');
+      $sheet->setCellValue('M1', 'Fecha de Descarga ');
+      $sheet->setCellValue('N1', 'Copias');
 
       // Escribir datos en el archivo Excel
       $row = 2;
@@ -57,10 +74,18 @@ class SelectDownloadsGraphic{
         $sheet->setCellValue('B' . $row, $data['SedeNombre']);
         $sheet->setCellValue('C' . $row, $concatenatedValue);
         $sheet->setCellValue('D' . $row, $data['NombreMaterial']);
-        $sheet->setCellValue('E' . $row, $data['DescargaFecha']);
-        $sheet->setCellValue('F' . $row, $data['DescargaCantidad']);
+        $sheet->setCellValue('E' . $row, $data['MaterialEstado']);
+        $sheet->setCellValue('F' . $row, $data['MaterialISBN']);
+        $sheet->setCellValue('G' . $row, $data['MaterialTiraje']);
+        $sheet->setCellValue('H' . $row, $data['MaterialAutor']);
+        $sheet->setCellValue('I' . $row, $data['MaterialVersion']);
+        $sheet->setCellValue('J' . $row, $data['MaterialEdicion']);
+        $sheet->setCellValue('K' . $row, $data['MaterialPaginas']);
+        $sheet->setCellValue('L' . $row, $data['AreaNombre']);
+        $sheet->setCellValue('M' . $row, $data['DescargaFecha']);
+        $sheet->setCellValue('N' . $row, $data['DescargaCantidad']);
         $row++;
-    }
+      }
 
     // Crear el objeto Writer
     $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
@@ -103,22 +128,22 @@ class SelectDownloadsGraphic{
         $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   
         $query = "SELECT 
-        m.MaterialNombre AS NombreMaterial,
-        m.MaterialEstado AS MaterialEstado,
-        m.MaterialISBN AS MaterialISBN,
-        m.MaterialTiraje AS MaterialTiraje,
-        m.MaterialAutor AS MaterialAutor,
-        m.MaterialVersion AS MaterialVersion,
-        m.MaterialEdicion AS MaterialEdicion,
-        m.MaterialPaginas AS MaterialPaginas,
-        a.AreaNombre AS AreaNombre,  
-        s.SedeNombre AS SedeNombre, 
-        u.UsuarioNombre AS NombreUsuario, 
-        u.UsuarioApaterno AS ApellidoPUsuario, 
-        u.UsuarioAMaterno AS ApellidoMUsuario,
-        d.Descarga_Id AS Descarga_Id, 
-        d.DescargaFecha AS DescargaFecha, 
-        d.DescargaCantidad AS DescargaCantidad
+          m.MaterialNombre AS NombreMaterial,
+          m.MaterialEstado AS MaterialEstado,
+          m.MaterialISBN AS MaterialISBN,
+          m.MaterialTiraje AS MaterialTiraje,
+          m.MaterialAutor AS MaterialAutor,
+          m.MaterialVersion AS MaterialVersion,
+          m.MaterialEdicion AS MaterialEdicion,
+          m.MaterialPaginas AS MaterialPaginas,
+          a.AreaNombre AS AreaNombre,  
+          s.SedeNombre AS SedeNombre, 
+          u.UsuarioNombre AS NombreUsuario, 
+          u.UsuarioApaterno AS ApellidoPUsuario, 
+          u.UsuarioAMaterno AS ApellidoMUsuario,
+          d.Descarga_Id AS Descarga_Id, 
+          d.DescargaFecha AS DescargaFecha, 
+          d.DescargaCantidad AS DescargaCantidad
         FROM descargas d
         INNER JOIN material m ON d.Material_Id = m.Material_Id
         INNER JOIN area a ON m.Area_Id = a.Area_Id
@@ -172,7 +197,7 @@ class SelectDownloadsGraphic{
           $sheet->setCellValue('M' . $row, $data['DescargaFecha']);
           $sheet->setCellValue('N' . $row, $data['DescargaCantidad']);
           $row++;
-      }
+        }
   
       // Crear el objeto Writer
       $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
@@ -216,11 +241,20 @@ class SelectDownloadsGraphic{
           $connect->beginTransaction();
 
               $query = "SELECT 
-                m.MaterialNombre AS NombreMaterial, 
+                m.MaterialNombre AS NombreMaterial,
+                m.MaterialEstado AS MaterialEstado,
+                m.MaterialISBN AS MaterialISBN,
+                m.MaterialTiraje AS MaterialTiraje,
+                m.MaterialAutor AS MaterialAutor,
+                m.MaterialVersion AS MaterialVersion,
+                m.MaterialEdicion AS MaterialEdicion,
+                m.MaterialPaginas AS MaterialPaginas,
+                a.AreaNombre AS AreaNombre, 
                 s.SedeNombre AS SedeNombre, 
                 COUNT(*) AS Descargas
               FROM descargas d
               INNER JOIN material m ON d.Material_Id = m.Material_Id
+              INNER JOIN area a ON m.Area_Id = a.Area_Id
               INNER JOIN sedes s ON d.Sede_Id = s.Sede_Id
               WHERE d.Sede_Id = :Sede_Id
               AND d.DescargaFecha BETWEEN :fecha_inicio AND :fecha_fin
