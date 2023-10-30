@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-10-2023 a las 04:34:00
+-- Tiempo de generación: 30-10-2023 a las 21:20:27
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -167,10 +167,10 @@ CREATE TABLE `material` (
 --
 
 INSERT INTO `material` (`Material_Id`, `MaterialNombre`, `MaterialEstado`, `MaterialISBN`, `MaterialTiraje`, `MaterialAutor`, `MaterialVersion`, `MaterialEdicion`, `MaterialPaginas`, `Area_Id`, `MaterialPDF`, `MaterialIndice`) VALUES
-(1, 'MaterialEjemplo1', 1, '23213213213', 2132132132, 'Jon Doe', '1.0', 2015, 23, 1, '/inventario_dgtic/public/pdf/DocumentoPrueba.pdf\'', '/inventario_dgtic/public/pdf/DocumentoPrueba.pdf'),
-(2, 'Material Ejemplo 2', 1, NULL, NULL, 'Jane Doe', '3.0', 2013, 30, 3, '/inventario_dgtic/public/pdf/DocumentoPrueba.pdf', '/inventario_dgtic/public/pdf/DocumentoPrueba.pdf'),
-(3, 'Material Ejempo 3', 1, '231321651', 5, 'Jon Doe', '1.0', 2015, 15, 20, '/inventario_dgtic/public/pdf/Material_Ejempo_3.pdf', '/inventario_dgtic/public/indice/Material_Ejempo_3_Indice.pdf'),
-(4, 'Material Ejempo 5', 0, NULL, NULL, 'Jane Doe Wick', '5.0', 2015, 23, 20, '/inventario_dgtic/material/indice/Material_Ejempo_5_4.pdf', '/inventario_dgtic/material/indice/Material_Ejempo_5_Indice_4.pdf'),
+(1, 'Material Ejemplo1', 1, '23213213213', 2132132132, 'Jon Doe', '1.0', 2017, 23, 1, '/inventario_dgtic/material/indice/Material_Ejemplo1_1.pdf', '/inventario_dgtic/material/indice/Material_Ejemplo1_Indice_1.pdf'),
+(2, 'Material Ejemplo 2', 1, NULL, NULL, 'Jane Doe', '3.0', 2013, 30, 3, '/inventario_dgtic/material/pdf/DocumentoPrueba.pdf', '/inventario_dgtic/material/indice/DocumentoPrueba.pdf'),
+(3, 'Material Ejempo 3', 1, '231321651', 5, 'Jon Doe', '1.0', 2015, 15, 20, '/inventario_dgtic/material/pdf/Material_Ejempo_3.pdf', '/inventario_dgtic/material/indice/Material_Ejempo_3_Indice.pdf'),
+(4, 'Material Ejempo 50', 0, NULL, NULL, 'Jane Doe Wick', '5.0', 2015, 23, 20, '/inventario_dgtic/material/pdf/Material_Ejempo_50_4.pdf', '/inventario_dgtic/material/indice/Material_Ejempo_50_Indice_4.pdf'),
 (5, 'Material Ejempo 10', 1, NULL, NULL, 'John Wick', '1.0', 2023, 15, 1, '/inventario_dgtic/material/pdf/Material_Ejempo_1.pdf', '/inventario_dgtic/material/indice/Material_Ejempo_1_Indice.pdf');
 
 -- --------------------------------------------------------

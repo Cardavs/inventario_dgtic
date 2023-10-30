@@ -81,33 +81,56 @@ if (isset($_POST['actualizar'])) {
         */
 
 
-    if ((isset($_FILES['material']) && $_FILES['material']['error'] === 0) ||
-        (isset($_FILES['indice']) && $_FILES['indice']['error'] === 0)) {
+    if (is_uploaded_file($_FILES['material']['tmp_name']) && filesize($_FILES['material']['tmp_name']) > 0 && $_FILES['material']['error'] === 0) {
         // Al menos uno de los dos campos ('material' o 'indice') contiene un archivo y no hay errores.
         /**
          * DEFINIR QUE ARCHIVO SE ACTUALIZARA O AMBOS
          * SUBES ARCHIVO Y DAS FORMATO
          * COMPRUEBAS SI CAMBIO NOMBRE
          */
-
-    } else {
-        // Ninguno de los dos campos contiene un archivo o se ha producido un error en ambos.
-        if ($UpdateMaterial->actualizarMaterial($datosMaterial)) {
+        $nombreActual = $_FILES['material']['name'];
+        $nombreReal = $_POST['nombrePDF'];
+        $rutaArchivoPDF = __DIR__ . "/../../../material/pdf/" . $nombreReal;
+        
+        if (move_uploaded_file($_FILES['material']['tmp_name'], $rutaArchivoPDF)) {
             echo '<script language="javascript">
-                    alert("Datos Actualizados con exito");
-                    window.location.href = "/inventario_dgtic/view/admin/manage-material.php";
-                    </script>';
-                /*die()*/;
-        } else {
-            echo '<script language="javascript">
-                    alert("Error al acutalizar datos de Material");
-                    </script>';
+                alert("PDF Actualizado");
+                </script>';
         }
+    } else {
+        echo '<script language="javascript">
+                alert("PDF de material no se cargo, es menor a 1 MB, o hubo un error en la carga, se seguira con la edición sin tocar este archivo");
+                </script>';
+    }
+    if (is_uploaded_file($_FILES['indice']['tmp_name']) && filesize($_FILES['indice']['tmp_name']) > 0 && $_FILES['indice']['error'] === 0) {
+        $nombreActual = $_FILES['indice']['name'];
+        $nombreReal = $_POST['nombreIndice'];
+        $rutaArchivoPDF = __DIR__ . "/../../../material/indice/" . $nombreReal;
+        
+        if (move_uploaded_file($_FILES['indice']['tmp_name'], $rutaArchivoPDF)) {
+            echo '<script language="javascript">
+                alert("Indice PDF Actualizado");
+                </script>';
+        }
+    } else {
+        echo '<script language="javascript">
+                alert("PDF de Indice no se cargo, es menor a 1 MB, o hubo un error en la carga, se seguira con la edición sin tocar este archivo");
+                </script>';
     }
 
-    //Llamar al metodo para actualizar datos
 
-    
+    //Llamar al metodo para actualizar datos
+    if ($UpdateMaterial->actualizarMaterial($datosMaterial)) {
+        echo '<script language="javascript">
+                alert("Datos Actualizados con exito");
+                window.location.href = "/inventario_dgtic/view/admin/manage-material.php";
+                </script>';
+            /*die()*/;
+    } else {
+        echo '<script language="javascript">
+                alert("Error al acutalizar datos de Material");
+                </script>';
+    }
 } else if (isset($_POST['cancelar'])) {
     echo '<script language="javascript">
         alert("Salio");

@@ -110,7 +110,7 @@ class UpdateMaterial
                 $rutaArchivoIndice = "/inventario_dgtic/material/indice/" . $nombreIndice;
             }
             if (rename($rutaArchivoPDF . basename($paths['MaterialPDF']), $rutaArchivoPDF . $nombrePdf)) {
-                $rutaArchivoPDF = "/inventario_dgtic/material/indice/" . $nombrePdf;
+                $rutaArchivoPDF = "/inventario_dgtic/material/pdf/" . $nombrePdf;
             }
             $query = "UPDATE material SET MaterialPDF = :MaterialPDF, MaterialIndice = :Indice WHERE Material_Id = :Material_Id";
             $queryP = $connect->prepare($query);

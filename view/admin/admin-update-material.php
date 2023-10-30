@@ -174,6 +174,8 @@ include(LAYOUT . '/head.php');
             <div>
                 <input type="text" hidden name="idMaterial" value="<?php echo $materialInfo['Material_Id'] ?>">
                 <input type="text" hidden name="nombreViejo" value="<?php echo $materialInfo['MaterialNombre'] ?>">
+                <input type="text" hidden name="nombrePDF" value="<?php echo basename($materialInfo['MaterialPDF']) ?>">
+                <input type="text" hidden name="nombreIndice" value="<?php echo basename($materialInfo['MaterialIndice']) ?>">
             </div>
             <div class="col-md-12 text-center">
                 <label for="actualizar"> </label>
