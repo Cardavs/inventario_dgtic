@@ -6,6 +6,7 @@
     ***********************/
 
     include_once($_SERVER['DOCUMENT_ROOT'].'/inventario_dgtic/dir.php');
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +17,7 @@
     <?php include(LAYOUT."/navbar-users/navbarCE.php");?>
 
     <div class="container caja_welcome">
-        <h1 class="container col-sm-12 col-md-4">Bienvenido @USER</h1>
+        <h1 class="container col-sm-12 col-md-4">Bienvenid@ <?php echo $_SESSION['nombre']?></h1>
     </div>
 
     <?php include(LAYOUT.'/footer.php'); ?>

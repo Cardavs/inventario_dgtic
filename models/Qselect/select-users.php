@@ -93,5 +93,24 @@
                         </script>';
             }
         }
+
+        public function getUserAccess($email) {
+            try {
+                $connect = $this->connection -> conectar();
+                
+                $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $connect->beginTransaction();
+                
+                $query = "SELECT UsuarioNombre, UsuarioCorreo, UsuarioRol, UsuarioEstado, UsuarioPassword FROM usuario WHERE UsuarioCorreo = :email";
+                $queryP = $connect -> prepare($query);
+                $queryP->bindValue(":email", $email);
+                $queryP -> execute();
+                $resultado = $queryP->fetch(PDO::FETCH_ASSOC);
+                
+            } catch (PDOException $ex) {
+                echo 'Error: ' .$ex->getMessage() /*. die()*/;
+            }
+            return $resultado;
+        }
     }
 ?>
