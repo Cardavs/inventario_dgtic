@@ -218,6 +218,10 @@ button{
     width: 92%;
 }
 
+.btn-hab{
+    width: 185%;
+}
+
 .btn-habilitar{
     background-color: green;
     border-color: green;
