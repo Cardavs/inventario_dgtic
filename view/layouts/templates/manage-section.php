@@ -31,10 +31,9 @@ $infoSection = $section->getSection();
                         <th><?php echo $infoSection['SeccionNombre']; ?></th>
                         <td><?php echo ($infoSection['EstadoSeccion'] == 1) ? "Activo" : "Inactivo"; ?></td>
                         <td class="btn-tabla-container">
-                            <button type="submit" name="habilitar" class="btn btn-primary btn-tabla">Habilitar</button>
-                            <button type="submit" name="deshabilitar" class="btn btn-primary btn-tabla">Deshabilitar</button>
                             <button type="submit" name="editar" class="btn btn-primary btn-tabla">Editar</button>
                             <button type="submit" name="eliminar" class="btn btn-primary btn-tabla">Eliminar</button>
+                            <button type="submit" name="<?php echo (!$infoSection['EstadoSeccion']) ? "habilitar" : "deshabilitar"; ?>" class="btn btn-primary btn-tabla btn-hab <?php echo (!$infoSection['EstadoSeccion']) ? "btn-habilitar" : "btn-inhabilitar"; ?>"><?php echo (!$infoSection['EstadoSeccion']) ? "Habilitar" : "Inhabilitar"; ?></button>
                         </td>
                     </tr>
                 </form>

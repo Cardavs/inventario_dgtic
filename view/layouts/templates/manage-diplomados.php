@@ -32,10 +32,9 @@ $infoDiplomado = $diplomado->getDiplomado();
                             <?php echo ($infoDiplomado['DiplomadoEstado'] == 1) ? "Activo" : "Inactivo";  ?>
                         </td>
                         <td class="btn-tabla-container">
-                            <button type="submit" name="habilitar" class="btn btn-primary btn-tabla">Habilitar</button>
-                            <button type="submit" name="deshabilitar" class="btn btn-primary btn-tabla">Deshabilitar</button>
                             <button type="submit" name="editar" class="btn btn-primary btn-tabla">Editar</button>
                             <button type="submit" name="eliminar" class="btn btn-primary btn-tabla">Eliminar</button>
+                            <button type="submit" name="<?php echo (!$infoDiplomado['DiplomadoEstado']) ? "habilitar" : "deshabilitar"; ?>" class="btn btn-primary btn-tabla btn-hab <?php echo (!$infoDiplomado['DiplomadoEstado']) ? "btn-habilitar" : "btn-inhabilitar"; ?>"><?php echo (!$infoDiplomado['DiplomadoEstado']) ? "Habilitar" : "Inhabilitar"; ?></button>
                         </td>
                     </tr>
                 </form>

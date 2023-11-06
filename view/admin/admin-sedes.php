@@ -55,10 +55,9 @@ $infoSedes = $sedes -> getSedes();
                     <td><?php echo $infoSedes['SedeSiglas']; ?></td>
                     <td><?php echo ($infoSedes['SedeEstado'] == 1) ? 'Activo' : 'Inactivo'; ?></td>
                     <td class="btn-tabla-container">
-                        <button type="submit" name="habilitar" class="btn btn-primary btn-tabla">Habilitar</button>
-                        <button type="submit" name="deshabilitar" class="btn btn-primary btn-tabla">Deshabilitar</button>
                         <button type="submit" name="editar" class="btn btn-primary btn-tabla">Editar</button>
                         <button type="submit" name="eliminar" class="btn btn-primary btn-tabla">Eliminar</button>
+                        <button type="submit" name="<?php echo (!$infoSedes['SedeEstado']) ? "habilitar" : "deshabilitar"; ?>" class="btn btn-primary btn-tabla btn-hab <?php echo (!$infoSedes['SedeEstado']) ? "btn-habilitar" : "btn-inhabilitar"; ?>"><?php echo (!$infoSedes['SedeEstado']) ? "Habilitar" : "Inhabilitar"; ?></button>
                     </td>
                 </tr>
                 </form>
