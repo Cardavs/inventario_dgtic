@@ -23,7 +23,8 @@ if (isset($_POST['login'])) {
         </script>';
     }
     
-    if ($access['UsuarioPassword'] == $passw && $access['UsuarioEstado']) {
+    //password_verify($passw, $access['UsuarioPassword'])
+    if (password_verify($passw, $access['UsuarioPassword']) && $access['UsuarioEstado']) {
         $_SESSION['nombre'] = $access['UsuarioNombre'];
         $_SESSION['rol'] = $access['UsuarioRol'];
         $_SESSION['sede'] = $access['Sede_Id'];
@@ -40,7 +41,7 @@ if (isset($_POST['login'])) {
         }
     }else{
         echo '<script language="javascript">
-        alert("Usuario o Contraseña no Válidos");
+        alert(" o Contraseña no Válidos");
         </script>';
     }
 }
