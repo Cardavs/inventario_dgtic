@@ -70,9 +70,21 @@
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $connect->beginTransaction();
                 
-                $query = "SELECT u.Usuario_Id, u.UsuarioNombre, u.UsuarioApaterno, u.UsuarioAmaterno, u.UsuarioCorreo, u.UsuarioRol, u.UsuarioEstado, s.sedeNombre
-                FROM usuario as u INNER JOIN sedes as s ON u.Sede_Id = s.Sede_Id
-                WHERE u.UsuarioRol NOT LIKE 'administrador' AND (u.UsuarioNombre LIKE :busqueda OR u.UsuarioApaterno LIKE :busqueda OR u.UsuarioAmaterno LIKE :busqueda OR u.UsuarioCorreo LIKE :busqueda) LIMIT $limit";
+                $query = 
+                "SELECT 
+                u.Usuario_Id, 
+                u.UsuarioNombre, 
+                u.UsuarioApaterno, 
+                u.UsuarioAmaterno, 
+                u.UsuarioCorreo, 
+                u.UsuarioRol, 
+                u.UsuarioEstado, 
+                s.sedeNombre
+                FROM usuario as u 
+                INNER JOIN sedes as s ON u.Sede_Id = s.Sede_Id
+                WHERE u.UsuarioRol NOT LIKE 'administrador' 
+                AND (u.UsuarioNombre LIKE :busqueda OR u.UsuarioApaterno LIKE :busqueda OR u.UsuarioAmaterno LIKE :busqueda OR u.UsuarioCorreo LIKE :busqueda) 
+                LIMIT $limit";
 
                 $queryP = $connect -> prepare($query);
 
@@ -101,7 +113,19 @@
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $connect->beginTransaction();
                 
-                $query = "SELECT UsuarioNombre, UsuarioCorreo, UsuarioRol, UsuarioEstado, UsuarioPassword FROM usuario WHERE UsuarioCorreo = :email";
+                $query = 
+                "SELECT
+                u.Usuario_Id, 
+                u.UsuarioNombre, 
+                u.UsuarioCorreo, 
+                u.UsuarioRol, 
+                u.UsuarioEstado, 
+                u.UsuarioPassword,
+                u.Sede_Id,
+                s.SedeNombre 
+                FROM usuario as u 
+                INNER JOIN sedes as s ON u.Sede_Id = s.Sede_Id
+                WHERE UsuarioCorreo = :email";
                 $queryP = $connect -> prepare($query);
                 $queryP->bindValue(":email", $email);
                 $queryP -> execute();

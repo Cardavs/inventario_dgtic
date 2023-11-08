@@ -2,6 +2,7 @@
 <?php
 include(BD_SELECT . 'select-sedes.php');
 include(BD_SELECT . 'select-downloads.php');
+session_start();
 ?>
 <h2 class="titulo">Buscar Descargas</h2>
 
@@ -59,8 +60,8 @@ include(BD_SELECT . 'select-downloads.php');
                             <div class="row p-4">
                             <select class="form-select form-select-lg" style="margin-top: 2.3rem;" name="sedeDescarga" id="sede" required>
                                 <?php
-                                if ($user_type == 'CE'){
-                                    echo '<option value="1">' . "Centro Mascarones" . '</option>';
+                                if ($_SESSION['rol'] == 'CE'){
+                                    echo '<option value="' . $_SESSION['sede'] . '">' . $_SESSION['sedenombre'] . '</option>';
                                 }else{
                                     $optionSelect = new SelectSedes();
                                     $options = $optionSelect->getSedes();

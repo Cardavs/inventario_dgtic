@@ -15,9 +15,8 @@
 <body>
     <?php include(LAYOUT.'/header.php');?>
     <?php include(LAYOUT."/navbar-users/navbarCE.php");?>
-
     <div class="container caja_welcome">
-        <h1 class="container col-sm-12 col-md-4">Bienvenid@ <?php echo $_SESSION['nombre']?></h1>
+        <h1 class="container col-sm-12 col-md-4">Bienvenid@ <?php echo $_SESSION['rol']?></h1>
     </div>
 
     <?php include(LAYOUT.'/footer.php'); ?>

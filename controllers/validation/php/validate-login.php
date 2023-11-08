@@ -25,6 +25,9 @@ if (isset($_POST['login'])) {
     
     if ($access['UsuarioPassword'] == $passw && $access['UsuarioEstado']) {
         $_SESSION['nombre'] = $access['UsuarioNombre'];
+        $_SESSION['rol'] = $access['UsuarioRol'];
+        $_SESSION['sede'] = $access['Sede_Id'];
+        $_SESSION['sedenombre'] = $access['SedeNombre'];
         
         if($access['UsuarioRol'] == "administrador"){
             header("Location: /inventario_dgtic/view/admin/admin_welcome.php");
