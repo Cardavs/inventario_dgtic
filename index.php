@@ -33,7 +33,7 @@ include(VALIDATION_PHP . '/validate-login.php');
                 Es necesario colocar su Contraseña.
             </div>
         </div>
-        <div class="row justify-content-sm-center">
+        <div class="row justify-content-sm-center btn-pass">
             <button name="login" class="btn btn-primary botonCreateuser" type="submit" value="login">Iniciar Sesión</button>
         </div>
     </form>

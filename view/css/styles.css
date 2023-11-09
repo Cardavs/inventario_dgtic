@@ -221,6 +221,11 @@ button{
 .btn-hab{
     width: 185%;
 }
+.btn-pass{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
 
 .btn-habilitar{
     background-color: green;

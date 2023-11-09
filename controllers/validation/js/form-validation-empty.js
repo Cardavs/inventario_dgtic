@@ -21,3 +21,7 @@
     );
   });
 })();
+
+function cancelarFormulario(){
+  window,location.href = "/inventario_dgtic/view/admin/manage-account.php";
+}

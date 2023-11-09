@@ -49,7 +49,7 @@
                 $queryP->bindValue(":Usuario_id", $idUser);
                 
                 $queryP -> execute();
-                $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
+                $resultado = $queryP->fetch(PDO::FETCH_ASSOC);
                 
             } catch (PDOException $ex) {
                 echo 'Error: ' .$ex->getMessage() . die();
@@ -137,4 +137,3 @@
             return $resultado;
         }
     }
-?>

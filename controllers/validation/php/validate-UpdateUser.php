@@ -116,5 +116,30 @@
                 </script>';
         die();
     }
-    
-?>
+
+    if (isset($_POST['editarPass'])) {
+         //url de la pestaña admin update user
+         $adminUpdatePassword = 'admin-update-password.php';
+
+         $userId = $_POST['idUser'];
+         //Redireccionando a la página con el id del usuario que se va a editar.
+         header("location: $adminUpdatePassword?id=$userId");
+         die();
+    }
+    if (isset($_POST['EditPassword'])) {
+        $idUser = $_POST['idUser'];
+        $newPassword = $_POST['password'];
+        $nombre = $_POST['Nombre'];
+        $UpdateUser = new UpdateUser();
+        if($UpdateUser->changePasswordbyiD($idUser, password_hash($newPassword, PASSWORD_DEFAULT))){
+            $message = "Contraseña de ".$nombre." actualizada exitosamente";
+        }else{
+            $message = "Error en el cambio de Contraseña de ".$nombre;
+        }
+        echo '<script language="javascript">
+        alert("'.$message.'");
+            window.location.href = "/inventario_dgtic/view/admin/manage-account.php";
+                </script>';
+        die();
+
+    }

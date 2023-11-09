@@ -32,7 +32,7 @@ include(LAYOUT . '/head.php');
     <?php include(LAYOUT . "/navbar-users/navbarAdmin.php"); ?>
 
     <h2 class="titulo">Gestionar Material</h2>
-    <form action="/inventario_dgtic\controllers\validation\php\validate-UpdateMaterial.php" method="post" class="container col-md-12 col-sm-4 formulario needs-validation" method="post" novalidate enctype="multipart/form-data">
+    <form action="/inventario_dgtic\controllers\validation\php\validate-UpdateMaterial.php" class="container col-md-12 col-sm-4 formulario needs-validation" method="post" novalidate enctype="multipart/form-data">
         <div class="row g-3 mb-3">
             <div class="col">
                 <label for="nombreMaterial">Nombre de material</label>
@@ -177,14 +177,12 @@ include(LAYOUT . '/head.php');
                 <input type="text" hidden name="nombrePDF" value="<?php echo basename($materialInfo['MaterialPDF']) ?>">
                 <input type="text" hidden name="nombreIndice" value="<?php echo basename($materialInfo['MaterialIndice']) ?>">
             </div>
-            <div class="col-md-12 text-center">
+            <div class="col-md-12 text-center btn-pass">
                 <label for="actualizar"> </label>
-                <input name="actualizar" class="btn btn-primary botonCreateuser" type="submit" value="Actualizar">
-            </div>
+                <input name="actualizar" class="btn btn-primary botonCreateuser btn-tabla" type="submit" value="Actualizar">
 
-            <div class="col-md-12 text-center">
                 <label for="cancelar"> </label>
-                <input name="cancelar" type="submit" class="btn btn-primary botonCreateuser" value="Cancelar">
+                <input name="cancelar" type="submit" class="btn btn-primary botonCreateuser btn-tabla" value="Cancelar">
             </div>
         </div>
     </form>

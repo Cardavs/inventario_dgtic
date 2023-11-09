@@ -90,7 +90,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
             </div>
         </div>
         <div class="row g-3 mb-3">
-            <div class="col-md-12">
+            <div class="col-md-12 btn-pass">
                 <label for="CrearUsuario"> </label>
                 <button name="CrearUsuario" class="btn btn-primary botonCreateuser" type="submit" value="createUser">Crear Usuario</button>
             </div>
