@@ -1,4 +1,12 @@
 <?php
+session_start();
+if (!isset($_SESSION['nombre']) || $_SESSION['rol'] != 'administrador') {
+    session_destroy();
+
+    // Redirige al usuario al login
+    header("Location: /inventario_dgtic/index.php");
+    exit();
+}
 include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
 include(CONNECTION_BD);
 
@@ -61,32 +69,32 @@ include(LAYOUT . '/head.php');
                 <form class="container col-md-12 col-sm-4 formulario needs-validation" method="post" novalidate>
                     <tr class="usuario">
                         <th scope="col">
-                            <input type="hidden" class="form-control form-control-lg g-3" name="idUser" value="<?php echo $userInfo[0]['Usuario_Id'] ?>">
+                            <input type="hidden" class="form-control form-control-lg g-3" name="idUser" value="<?php echo $userInfo['Usuario_Id'] ?>">
                         </th>
                         <th scope="col">
-                            <input type="text" class="form-control form-control-lg g-3" name="nombreUser" value="<?php echo $userInfo[0]['UsuarioNombre'] ?>">
+                            <input type="text" class="form-control form-control-lg g-3" name="nombreUser" value="<?php echo $userInfo['UsuarioNombre'] ?>">
                         </th>
                         <th scope="col">
-                            <input type="text" class="form-control form-control-lg g-3" name="apaternoUser" value="<?php echo $userInfo[0]['UsuarioApaterno'] ?>">
+                            <input type="text" class="form-control form-control-lg g-3" name="apaternoUser" value="<?php echo $userInfo['UsuarioApaterno'] ?>">
                         </th>
                         <th scope="col">
-                            <input type="text" class="form-control form-control-lg g-3" name="amaternoUser" value="<?php echo $userInfo[0]['UsuarioAmaterno'] ?>">
+                            <input type="text" class="form-control form-control-lg g-3" name="amaternoUser" value="<?php echo $userInfo['UsuarioAmaterno'] ?>">
                         </th>
                         <td>
-                            <input type="text" class="form-control form-control-lg" name="correoUser" value="<?php echo $userInfo[0]['UsuarioCorreo'] ?> ">
+                            <input type="text" class="form-control form-control-lg" name="correoUser" value="<?php echo $userInfo['UsuarioCorreo'] ?> ">
                         </td>
                         <td>
                             <select class="form-select form-select-lg mb-3 form-control-lg" name="rolUser" aria-label="" required>
-                                <option <?php echo ($userInfo[0]['UsuarioRol'] == 'CE') ? "selected" : " " ?> value="CE">Control Escolar</option>
-                                <option <?php echo ($userInfo[0]['UsuarioRol'] == 'Consultor') ? "selected" : " " ?> value="Consultor">Consultor</option>
-                                <option <?php echo ($userInfo[0]['UsuarioRol'] == 'editor') ? "selected" : " " ?> value="editor">Editor</option>
+                                <option <?php echo ($userInfo['UsuarioRol'] == 'CE') ? "selected" : " " ?> value="CE">Control Escolar</option>
+                                <option <?php echo ($userInfo['UsuarioRol'] == 'Consultor') ? "selected" : " " ?> value="Consultor">Consultor</option>
+                                <option <?php echo ($userInfo['UsuarioRol'] == 'editor') ? "selected" : " " ?> value="editor">Editor</option>
                             </select>
                         </td>
                         <td>
                             <select class="form-select form-select-lg mb-3 form-control-lg" name="sedeUser" aria-label=".form-select-lg example" required>
-                                <option <?php echo ($userInfo[0]['sedeNombre'] == 'Centro Mascarones') ? "selected" : " " ?> value="1">Centro Mascarones</option>
-                                <option <?php echo ($userInfo[0]['sedeNombre'] == 'Ciudad Universitaria') ? "selected" : " " ?> value="2">Ciudad Universitaria</option>
-                                <option <?php echo ($userInfo[0]['sedeNombre'] == 'Centro Polanco') ? "selected" : " " ?> value="3">Centro Polanco</option>
+                                <option <?php echo ($userInfo['sedeNombre'] == 'Centro Mascarones') ? "selected" : " " ?> value="1">Centro Mascarones</option>
+                                <option <?php echo ($userInfo['sedeNombre'] == 'Ciudad Universitaria') ? "selected" : " " ?> value="2">Ciudad Universitaria</option>
+                                <option <?php echo ($userInfo['sedeNombre'] == 'Centro Polanco') ? "selected" : " " ?> value="3">Centro Polanco</option>
                             </select>
                         </td>
                         <td class="btn-tabla-container">

@@ -5,6 +5,6 @@
         <a href="/inventario_dgtic/view/editor/editor-manage-diplomados.php">Administrar Diplomados</a>
         <a href="/inventario_dgtic/view/editor/editor-manage-material.php">Gestionar Material</a>
         <a href="/inventario_dgtic/view/editor/editor-manage-password.php">Cambiar Contraseña</a>
-        <a href="/inventario_dgtic/index.php">Cerrar Sesión</a>
+        <a href="/inventario_dgtic/controllers/logout.php">Cerrar Sesión</a>
     </nav>
 </div>

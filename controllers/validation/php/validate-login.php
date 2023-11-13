@@ -42,7 +42,7 @@ if (isset($_POST['login'])) {
         }
     }else{
         echo '<script language="javascript">
-        alert(" o Contraseña no Válidos");
+        alert("Usuario o Contraseña no Válidos");
         </script>';
     }
 }

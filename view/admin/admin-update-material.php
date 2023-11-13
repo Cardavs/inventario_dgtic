@@ -1,7 +1,15 @@
 <?php
+session_start();
+if (!isset($_SESSION['nombre']) || $_SESSION['rol'] != 'administrador') {
+    session_destroy();
+
+    // Redirige al usuario al login
+    header("Location: /inventario_dgtic/index.php");
+    exit();
+}
+
 include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
 include_once(CONNECTION_BD);
-
 
 include(BD_UPDATE . 'update-material.php');
 include(BD_SELECT . 'select-material.php');
