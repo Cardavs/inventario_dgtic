@@ -21,7 +21,7 @@
                 $connect = $this->connection -> conectar();
                 
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $connect->beginTransaction();
+                
                 
                 $query = "SELECT u.Usuario_Id, u.UsuarioNombre, u.UsuarioApaterno, u.UsuarioAmaterno, u.UsuarioCorreo, u.UsuarioRol, u.UsuarioEstado, s.sedeNombre FROM usuario as u INNER JOIN sedes as s ON u.Sede_Id = s.Sede_Id WHERE u.UsuarioRol NOT LIKE 'administrador'";
                 $queryP = $connect -> prepare($query);
@@ -41,7 +41,7 @@
                 $connect = $this->connection -> conectar();
                 
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $connect->beginTransaction();
+                
                 
                 $query = "SELECT u.Usuario_Id, u.UsuarioNombre, u.UsuarioApaterno, u.UsuarioAmaterno, u.UsuarioCorreo, u.UsuarioRol, s.sedeNombre FROM usuario as u INNER JOIN sedes as s ON u.Sede_Id = s.Sede_Id WHERE u.Usuario_Id = :Usuario_id";
 
@@ -68,7 +68,7 @@
                 $connect = $this->connection -> conectar();
                 
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $connect->beginTransaction();
+                
                 
                 $query = 
                 "SELECT 
@@ -111,7 +111,7 @@
                 $connect = $this->connection -> conectar();
                 
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $connect->beginTransaction();
+                
                 
                 $query = 
                 "SELECT
@@ -136,4 +136,27 @@
             }
             return $resultado;
         }
+
+        public function checkPassword($id) {
+            try {
+                $connect = $this->connection -> conectar();
+                
+                $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                
+                $query = 
+                "SELECT
+                u.UsuarioPassword
+                FROM usuario as u 
+                WHERE Usuario_Id = :id";
+                $queryP = $connect -> prepare($query);
+                $queryP->bindValue(":id", $id);
+                $queryP -> execute();
+                $resultado = $queryP->fetch(PDO::FETCH_ASSOC);
+                
+            } catch (PDOException $ex) {
+                echo 'Error: ' .$ex->getMessage() /*. die()*/;
+            }
+            return $resultado;
+        }
+
     }
