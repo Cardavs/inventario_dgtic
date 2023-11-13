@@ -2,7 +2,6 @@
 <?php
 include(BD_SELECT . 'select-sedes.php');
 include(BD_SELECT . 'select-downloads.php');
-session_start();
 ?>
 <h2 class="titulo">Buscar Descargas</h2>
 

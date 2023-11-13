@@ -11,7 +11,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
 include(CONNECTION_BD);
 require_once(BD_SELECT . 'select-material.php');
 require_once(BD_UPDATE . 'update-material.php');
-session_start();
+
 
 
 //CAMBIAR ESTADO DE UN MATERIAL\

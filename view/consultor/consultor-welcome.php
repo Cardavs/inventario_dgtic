@@ -4,9 +4,15 @@
     * date: 28/03/2023    *
     * autor: Roan         *
     ***********************/
-
-    include_once($_SERVER['DOCUMENT_ROOT'].'/inventario_dgtic/dir.php');
     session_start();
+    if (!isset($_SESSION['nombre']) || $_SESSION['rol'] != 'Consultor') {
+        session_destroy();
+    
+        // Redirige al usuario al login
+        header("Location: /inventario_dgtic/index.php");
+        exit();
+    }
+    include_once($_SERVER['DOCUMENT_ROOT'].'/inventario_dgtic/dir.php');
 ?>
 
 <!DOCTYPE html>
