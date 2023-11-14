@@ -62,7 +62,7 @@
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 //$connect->beginTransaction();
                 
-                $query = "SELECT Material_Id, MaterialNombre, MaterialISBN, MaterialTiraje, MaterialAutor, MaterialVersion, MaterialEdicion, MaterialPaginas, MaterialPDF, MaterialIndice, area.Area_Id, area.Seccion_Id FROM material JOIN area ON material.Area_Id = area.Area_Id WHERE Material_Id = :Material_id";
+                $query = "SELECT Material_Id, MaterialNombre, MaterialISBN, MaterialTiraje, MaterialAutor, MaterialVersion, MaterialEdicion, MaterialPaginas, MaterialPDF, MaterialIndice, area.Area_Id, area.Seccion_Id, area.AreaNombre FROM material JOIN area ON material.Area_Id = area.Area_Id WHERE Material_Id = :Material_id";
                 $queryP = $connect -> prepare($query);
                 $queryP->bindValue(":Material_id", $materialId);
                 $queryP -> execute();

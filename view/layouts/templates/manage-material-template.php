@@ -56,11 +56,14 @@
 
                                 <form action="/inventario_dgtic\controllers\validation\php\validate-UpdateMaterial.php" method="post">
                                     <input type="hidden" name="idMaterial" value="<?php echo $infoMaterials['Material_Id']; ?>">
+
                                     <input type="hidden" name="estadoMaterial" value="<?php echo $infoMaterials['MaterialEstado']; ?>">
+
                                     <button type="submit" name="cambio" class="btn btn-primary btn-tabla btn-CE <?php echo (!$infoMaterials['MaterialEstado']) ? "btn-habilitar" : "btn-inhabilitar"; ?>"><?php echo (!$infoMaterials['MaterialEstado']) ? "Habilitar" : "Inhabilitar"; ?></button>
+
                                     <div class="btn-tabla-container">
                                         <button type="submit" name="editar" class="btn btn-primary btn-tabla ">Editar</button>
-                                        <button type="submit" class="btn btn-primary btn-tabla">Descargar</button>
+                                        <button type="submit" name="download" class="btn btn-primary btn-tabla">Descargar</button>
                                     </div>
                                 </form>
                             </td>

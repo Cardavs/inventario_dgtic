@@ -11,7 +11,11 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
 include(CONNECTION_BD);
 require_once(BD_SELECT . 'select-material.php');
 require_once(BD_UPDATE . 'update-material.php');
-
+session_start();
+$user = $_SESSION['rol'];
+if ($user == 'administrador') {
+    $user = "admin";
+}
 
 
 //CAMBIAR ESTADO DE UN MATERIAL\
@@ -33,11 +37,21 @@ if (isset($_POST['cambio'])) {
         $message = "Error al cambiar estado";
     }
     $_SESSION['message'] = $message;
-    header("Location: /inventario_dgtic/view/admin/manage-material.php");
+    header("Location: /inventario_dgtic/view/'.$user.'/'.$user.'-material.php");
     exit;
 }
 
 
+//DESCARGAR MATERIAL
+if (isset($_POST['download'])) {
+    //url de la pestaña admin update user
+    $userUpdateMaterial = '/inventario_dgtic/view/' . $user . '/' . $user . '-download.php';
+
+    $id = $_POST['idMaterial'];
+    //Redireccionando a la página con el id del material que se va a editar.
+    header("location: $userUpdateMaterial?id=$id");
+    die();
+}
 
 
 
@@ -45,11 +59,11 @@ if (isset($_POST['cambio'])) {
 //ACTUALIZAR A UN MATERIAL
 if (isset($_POST['editar'])) {
     //url de la pestaña admin update user
-    $adminUpdateMaterial = '/inventario_dgtic/view/admin/admin-update-material.php';
+    $userUpdateMaterial = '/inventario_dgtic/view/' . $user . '/' . $user . '-update-material.php';
 
     $id = $_POST['idMaterial'];
     //Redireccionando a la página con el id del material que se va a editar.
-    header("location: $adminUpdateMaterial?id=$id");
+    header("location: $userUpdateMaterial?id=$id");
     die();
 }
 
@@ -91,7 +105,7 @@ if (isset($_POST['actualizar'])) {
         $nombreActual = $_FILES['material']['name'];
         $nombreReal = $_POST['nombrePDF'];
         $rutaArchivoPDF = __DIR__ . "/../../../material/pdf/" . $nombreReal;
-        
+
         if (move_uploaded_file($_FILES['material']['tmp_name'], $rutaArchivoPDF)) {
             echo '<script language="javascript">
                 alert("PDF Actualizado");
@@ -106,7 +120,7 @@ if (isset($_POST['actualizar'])) {
         $nombreActual = $_FILES['indice']['name'];
         $nombreReal = $_POST['nombreIndice'];
         $rutaArchivoPDF = __DIR__ . "/../../../material/indice/" . $nombreReal;
-        
+
         if (move_uploaded_file($_FILES['indice']['tmp_name'], $rutaArchivoPDF)) {
             echo '<script language="javascript">
                 alert("Indice PDF Actualizado");
@@ -123,7 +137,7 @@ if (isset($_POST['actualizar'])) {
     if ($UpdateMaterial->actualizarMaterial($datosMaterial)) {
         echo '<script language="javascript">
                 alert("Datos Actualizados con exito");
-                window.location.href = "/inventario_dgtic/view/admin/manage-material.php";
+                window.location.href = "/inventario_dgtic/' . $user . '/' . $user . '-manage-material.php";
                 </script>';
             /*die()*/;
     } else {
@@ -135,6 +149,6 @@ if (isset($_POST['actualizar'])) {
     echo '<script language="javascript">
         alert("Salio");
         </script>';
-    header("Location: /inventario_dgtic/view/admin/manage-material.php");
+    header("Location: /inventario_dgtic/view/$user/$user-manage-material.php");
     // die();
 }

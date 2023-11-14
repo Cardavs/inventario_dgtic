@@ -45,3 +45,9 @@ if (isset($_POST['login'])) {
         </script>';
     }
 }
+/**
+ * ADMIN, EDITOR, CE
+ * 
+ * EDITOR
+ * GESTIONA MATERIAL, SEDES, SECCIONES, DIPLOMADOS
+ */

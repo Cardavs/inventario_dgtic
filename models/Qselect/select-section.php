@@ -63,7 +63,7 @@
             $queryP = $connect -> prepare($query);
             $queryP->bindValue(":Seccion_Id", $sectionId);
             $queryP -> execute();
-            $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
+            $resultado = $queryP->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $ex) {
             echo 'Error: ' .$ex->getMessage() . die();
         }

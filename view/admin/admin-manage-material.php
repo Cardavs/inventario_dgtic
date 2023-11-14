@@ -32,7 +32,7 @@ if (isset($_SESSION['message'])) {
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <?php include(LAYOUT . "/head.php"); ?>
