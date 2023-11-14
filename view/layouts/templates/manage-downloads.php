@@ -2,6 +2,7 @@
 <?php
 include(BD_SELECT . 'select-sedes.php');
 include(BD_SELECT . 'select-downloads.php');
+echo '<script>var sessionRol = "' . $_SESSION['rol'] . '";</script>';
 ?>
 <h2 class="titulo">Buscar Descargas</h2>
 
@@ -89,6 +90,12 @@ include(BD_SELECT . 'select-downloads.php');
                                     <input class="form-check-input" type="radio" name="tipo" id="compilacion" value="Copias">
                                     <label class="form-check-label" for="tipo">
                                         Copias
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="tipo" id="compilacion" value="Todo">
+                                    <label class="form-check-label" for="tipo">
+                                        Todo
                                     </label>
                                 </div>
                             </div>

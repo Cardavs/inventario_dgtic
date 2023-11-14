@@ -67,6 +67,14 @@
                 $descargas = [50, 30, 70, 45, 90];
                 $SedeNombre = 'Sede Ejemplo';
                 $Consulta = 'Grafico de ejemplo: ';
+            }else if(!empty($fehca_inicio) && !empty($fehca_fin) && $sede != 'all' && $_POST['tipo']=='Todo'){
+                // Descargamos el Excel con los datos de la grafica:
+                $nombreArchivo = $downloadsGraphic->getSedeReportDates($fehca_inicio, $fehca_fin, $sede);
+                // Completar tabla con valores por default para propósitos de demostración
+                $NombreMaterial = ['Material A', 'Material B', 'Material C', 'Material D', 'Material E'];
+                $descargas = [50, 30, 70, 45, 90];
+                $SedeNombre = 'Sede Ejemplo';
+                $Consulta = 'Grafico de ejemplo: ';
             }else if(!empty($fehca_inicio) && !empty($fehca_fin) && $sede != 'all' && $_POST['tipo']=='Descargas'){
                 // Descargamos el Excel con los datos de la grafica:
                 $infoReport = $downloadsGraphic->getDownloadsReport($fehca_inicio, $fehca_fin, $sede);
