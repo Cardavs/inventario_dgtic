@@ -14,6 +14,8 @@ if (!isset($_SESSION['nombre']) || $_SESSION['rol'] != 'CE') {
     exit();
 }
 include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
+include(CONNECTION_BD);
+session_start();
 ?>
 
 

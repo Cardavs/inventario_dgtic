@@ -16,7 +16,7 @@
                 $connect = $this->connection -> conectar();
                 
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $connect->beginTransaction();
+                
                 
                 $query = "SELECT * FROM descargas";
                 $queryP = $connect -> prepare($query);
@@ -35,7 +35,7 @@
             try {
                 $connect = $this->connection->conectar();
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $connect->beginTransaction();
+                
 
                     $query = "SELECT m.MaterialNombre AS NombreMaterial, s.SedeNombre AS SedeNombre, COUNT(*) AS Descargas
                     FROM descargas d
@@ -79,7 +79,7 @@
             try {
                 $connect = $this->connection->conectar();
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $connect->beginTransaction();
+                
 
                     $query = "SELECT m.MaterialNombre AS NombreMaterial, s.SedeNombre AS SedeNombre, SUM(d.DescargaCantidad) AS Descargas
                     FROM descargas d

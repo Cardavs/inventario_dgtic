@@ -155,12 +155,20 @@
                 
                 $queryP -> execute();
                 
-                return $connect->commit();
-    
-            } catch (PDOException $ex) {
-                echo 'Error: ' .$ex->getMessage() . die();
-                return FALSE;
-            }
+                $affectedRows = $queryP->rowCount();
+
+                if ($affectedRows === 0) {
+                    throw new Exception('No rows affected by the update query. User ID: ' . $idUser);
+                }
+
+                    return $connect->commit();
+                } catch (PDOException $ex) {
+                    echo 'Error: ' .var_dump($ex);
+                    return FALSE;
+                } catch (Exception $ex) {
+                    echo 'Error: ' .var_dump($ex);
+                    return FALSE;
+                }
         }
     }
 ?>

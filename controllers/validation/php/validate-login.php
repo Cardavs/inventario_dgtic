@@ -25,6 +25,7 @@ if (isset($_POST['login'])) {
     
     //password_verify($passw, $access['UsuarioPassword'])
     if (password_verify($passw, $access['UsuarioPassword']) && $access['UsuarioEstado']) {
+        $_SESSION['id'] = $access['Usuario_Id'];
         $_SESSION['nombre'] = $access['UsuarioNombre'];
         $_SESSION['rol'] = $access['UsuarioRol'];
         $_SESSION['sede'] = $access['Sede_Id'];
