@@ -8,9 +8,9 @@
         ?>
         <div class="col p-3">
             <div class="form-check m-2">
-                <input class="form-check-input" type="radio" name="tipo" id="auditoria" checked disabled>
+                <input class="form-check-input" type="radio" name="tipo" id="Autoría" checked disabled>
                 <label class="form-check-label m-2" for="tipo">
-                    Auditoría
+                    Autoría
                 </label>
             </div>
         </div>
@@ -25,7 +25,7 @@
         <?php }else{?>
             <div class="col p-3">
             <div class="form-check m-2">
-                <input class="form-check-input" type="radio" name="tipo" id="auditoria" checked disabled>
+                <input class="form-check-input" type="radio" name="tipo" id="Autoría" checked disabled>
                 <label class="form-check-label m-2" for="tipo">
                     Compilación
                 </label>

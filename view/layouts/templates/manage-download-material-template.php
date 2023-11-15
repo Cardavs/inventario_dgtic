@@ -1,4 +1,4 @@
-<form action="/inventario_dgtic\controllers\validation\php\validate-UpdateMaterial.php" class="container col-md-12 col-sm-4 formulario needs-validation" method="post" novalidate enctype="multipart/form-data">
+<form action="/inventario_dgtic\controllers\validation\php\validate-UpdateMaterial.php" class="container col-md-12 col-sm-4 formulario needs-validation" method="post" novalidate>
     <div class="row g-3 mb-3">
         <div class="col">
             <label for="nombreMaterial">Nombre de material</label>
@@ -6,9 +6,9 @@
         </div>
         <div class="col p-3">
             <div class="form-check m-2">
-                <input class="form-check-input" onclick="showTiraje();" type="radio" name="tipo" id="auditoria" value="Auditoría" <?php if (!is_null($materialInfo['MaterialISBN'])) echo "checked"; ?> disabled>
+                <input class="form-check-input" onclick="showTiraje();" type="radio" name="tipo" id="Autoría" value="Autoría" <?php if (!is_null($materialInfo['MaterialISBN'])) echo "checked"; ?> disabled>
                 <label class="form-check-label" for="tipo">
-                    Auditoría
+                    Autoría
                 </label>
             </div>
             <div class="form-check m-2">
@@ -65,8 +65,12 @@
     <div class="row g-3 mb-3">
         <div class="col">
             <label for="downloadCount">Número de Descargas</label>
-            <input name="downloadCount" class="form-control form-control-lg" type="number" min="1" value="1" required>
+            <input name="downloadCount" class="form-control form-control-lg needs-validation" type="number" min="1" value="1" required>
+            <div class="invalid-feedback">
+                Es necesario que el número de descargas sea mayor a 0
+            </div>
         </div>
+
     </div>
     <div class="row g-3 mb-3">
         <div>
@@ -77,7 +81,7 @@
             <input name="download2" class="btn btn-primary botonCreateuser btn-tabla" type="submit" value="Descargar">
 
             <label for="cancelar"> </label>
-            <input name="cancelar" type="submit" class="btn btn-primary botonCreateuser btn-tabla" value="Cancelar">
+            <input name="cancelar" type="button" class="btn btn-primary botonCreateuser btn-tabla" value="Cancelar" onclick="cancelarFormularioM()">
         </div>
     </div>
 </form>

@@ -10,9 +10,9 @@
         </div>
         <div class="col p-3">
             <div class="form-check m-2">
-                <input class="form-check-input" onclick="showTiraje();" type="radio" name="tipo" id="auditoria" value="Auditoría">
+                <input class="form-check-input" onclick="showTiraje();" type="radio" name="tipo" id="Autoría" value="Autoría">
                 <label class="form-check-label" for="tipo">
-                    Auditoría
+                    Autoría
                 </label>
             </div>
             <div class="form-check m-2">

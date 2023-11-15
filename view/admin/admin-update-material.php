@@ -51,9 +51,9 @@ include(LAYOUT . '/head.php');
             </div>
             <div class="col p-3">
                 <div class="form-check m-2">
-                    <input class="form-check-input" onclick="showTiraje();" type="radio" name="tipo" id="auditoria" value="Auditoría" <?php if (!is_null($materialInfo['MaterialISBN'])) echo "checked"; ?>>
+                    <input class="form-check-input" onclick="showTiraje();" type="radio" name="tipo" id="Autoría" value="Autoría" <?php if (!is_null($materialInfo['MaterialISBN'])) echo "checked"; ?>>
                     <label class="form-check-label" for="tipo">
-                        Auditoría
+                        Autoría
                     </label>
                 </div>
                 <div class="form-check m-2">
@@ -190,7 +190,7 @@ include(LAYOUT . '/head.php');
                 <input name="actualizar" class="btn btn-primary botonCreateuser btn-tabla" type="submit" value="Actualizar">
 
                 <label for="cancelar"> </label>
-                <input name="cancelar" type="submit" class="btn btn-primary botonCreateuser btn-tabla" value="Cancelar">
+                <input name="cancelar" type="button" class="btn btn-primary botonCreateuser btn-tabla" value="Cancelar" onclick="cancelarFormularioM()">
             </div>
         </div>
     </form>

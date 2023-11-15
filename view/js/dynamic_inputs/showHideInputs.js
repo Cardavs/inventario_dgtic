@@ -6,7 +6,7 @@ const TirajeInput = document.getElementById('Tiraje-id');
 
 //Constantes para almacenar el estado de los radio button
 const inputISBN = document.getElementById('compilacion');
-const inputTiraje = document.getElementById('auditoria');
+const inputTiraje = document.getElementById('Autoría');
 
 //Función para mostrar el campo ISBN
 function showISBN (){

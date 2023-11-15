@@ -81,7 +81,7 @@ echo '<script>var sessionRol = "' . $_SESSION['rol'] . '";</script>';
                         <td class="p-5">
                             <div class="col p-5">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="tipo" id="auditoria" value="Descargas" checked>
+                                    <input class="form-check-input" type="radio" name="tipo" id="Autoría" value="Descargas" checked>
                                     <label class="form-check-label" for="tipo">
                                         Descargas
                                     </label>

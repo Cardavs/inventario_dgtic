@@ -11,6 +11,8 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
 include(CONNECTION_BD);
 require_once(BD_SELECT . 'select-material.php');
 require_once(BD_UPDATE . 'update-material.php');
+require_once(BD_INSERT . 'insert-descargas.php');
+
 session_start();
 $user = $_SESSION['rol'];
 if ($user == 'administrador') {
@@ -54,6 +56,49 @@ if (isset($_POST['download'])) {
 }
 
 
+if (isset($_POST['download2'])) {
+    $idMaterial = $_POST['idMaterial'];
+    $datosDescarga = array(
+        'cantidad' => $_POST['downloadCount'],
+        'idMaterial' => $idMaterial,
+        'fecha' => date('Y-m-d'),
+        'idUsuario' => $_SESSION['id'],
+        'idSede' => $_SESSION['sede']
+    );
+    $InsertDownload = new InsertDescargas();
+    if ($InsertDownload->registrarDescarga($datosDescarga)) {
+        echo '<script language="javascript">
+                alert("Descarga Registrada ");
+                </script>';
+
+        $SelectMaterial = new SelectMaterials();
+        $archivos = $SelectMaterial->getPathsMaterial($idMaterial);
+        $dir = realpath(__DIR__ . "/../../../../" . dirname($archivos['MaterialPDF']));
+        $name = basename($archivos['MaterialPDF']);
+        $path = $dir . "/" . $name;
+
+        if (file_exists($path)) {
+            header('Content-Type: application/pdf');
+            //header('Content-Disposition: inline; filename=' . basename($path));
+            header('Content-Disposition: attachment; filename=' . basename($path));
+            header('Content-Length: ' . filesize($path));
+            
+            readfile($path);
+        } else {
+            echo '<script language="javascript">
+                alert("PDF no encontrado");
+                </script>';
+        }
+        
+    } else {
+        echo '<script language="javascript">
+                alert("ERROR Descarga No Registrada");
+                </script>';
+    }
+    
+}
+
+
 
 
 //ACTUALIZAR A UN MATERIAL
@@ -79,8 +124,8 @@ if (isset($_POST['actualizar'])) {
         'AnioEdicion' => $_POST['anioEdicion'],
         'NoPaginas' => $_POST['noPaginas'],
         'Area' => $_POST['area'],
-        'Isbn' => $_POST['tipo'] == "Auditoría" ? $_POST['ISBN'] : null,
-        'Tiraje' => $_POST['tipo'] == "Auditoría" ? $_POST['Tiraje'] : null,
+        'Isbn' => $_POST['tipo'] == "Autoría" ? $_POST['ISBN'] : null,
+        'Tiraje' => $_POST['tipo'] == "Autoría" ? $_POST['Tiraje'] : null,
         'cambioNombre' => $_POST['nombreViejo'] == $_POST['nombreMaterial'] ? false : true
     );
 
@@ -137,7 +182,7 @@ if (isset($_POST['actualizar'])) {
     if ($UpdateMaterial->actualizarMaterial($datosMaterial)) {
         echo '<script language="javascript">
                 alert("Datos Actualizados con exito");
-                window.location.href = "/inventario_dgtic/' . $user . '/' . $user . '-manage-material.php";
+                window.location.href = "/inventario_dgtic/view/' . $user . '/manage-material.php";
                 </script>';
             /*die()*/;
     } else {
@@ -149,6 +194,6 @@ if (isset($_POST['actualizar'])) {
     echo '<script language="javascript">
         alert("Salio");
         </script>';
-    header("Location: /inventario_dgtic/view/$user/$user-manage-material.php");
+    header("Location: /inventario_dgtic/view/$user/manage-material.php");
     // die();
 }

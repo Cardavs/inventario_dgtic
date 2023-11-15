@@ -1,10 +1,10 @@
 <?php
-
 /*********************************
  * pantalla: descargar material  *
  * date: 11/11/2023              *
  * autor: Iván                   *
  *********************************/
+
 session_start();
 if (!isset($_SESSION['nombre']) || $_SESSION['rol'] != 'administrador') {
     session_destroy();
