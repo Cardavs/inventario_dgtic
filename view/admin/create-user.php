@@ -68,7 +68,6 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
                 <select class="form-select form-select-lg mb-3" name="rol" aria-label="" required>
                     <option selected disabled value="">Selecciona un rol</option>
                     <option value="CE">Control Escolar</option>
-                    <option value="Consultor">Consultor</option>
                     <option value="Editor">Editor</option>
                 </select>
                 <div class="invalid-feedback">

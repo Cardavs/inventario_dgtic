@@ -63,7 +63,6 @@ include(LAYOUT . '/head.php');
                 <label for="Rol">Rol de usuario</label>
                 <select class="form-select form-select-lg mb-3 form-control-lg" name="Rol" aria-label="" disabled>
                     <option <?php echo ($userInfo['UsuarioRol'] == 'CE') ? "selected" : " " ?> value="CE">Control Escolar</option>
-                    <option <?php echo ($userInfo['UsuarioRol'] == 'Consultor') ? "selected" : " " ?> value="Consultor">Consultor</option>
                     <option <?php echo ($userInfo['UsuarioRol'] == 'editor') ? "selected" : " " ?> value="editor">Editor</option>
                 </select>
             </div>

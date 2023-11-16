@@ -4,7 +4,7 @@
             <label for="NombreMaterial">Nombre de Material</label>
             <input id="NombreMaterial" class="form-control form-control-lg" type="text" placeholder="<?php echo $infoMaterials['MaterialNombre'];?>" disabled>
         </div>
-        <?php if (!is_null($infoMaterials['MaterialISBN']) and !is_null($infoMaterials['MaterialTiraje'])) {
+        <?php if ($infoMaterials['MaterialISBN']!="N/A" and $infoMaterials['MaterialTiraje']!=0) {
         ?>
         <div class="col p-3">
             <div class="form-check m-2">

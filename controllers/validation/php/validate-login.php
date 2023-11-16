@@ -35,9 +35,7 @@ if (isset($_POST['login'])) {
             header("Location: /inventario_dgtic/view/admin/admin_welcome.php");
         }elseif($access['UsuarioRol'] == "CE"){
             header("Location: /inventario_dgtic/view/CE/CE-welcome.php");
-        }elseif($access['UsuarioRol'] == "Consultor"){
-            header("Location: /inventario_dgtic/view/consultor/consultor-welcome.php");
-        }else{
+        }elseif($access['UsuarioRol'] == "editor"){
             header("Location: /inventario_dgtic/view/editor/editor-welcome.php");
         }
     }else{

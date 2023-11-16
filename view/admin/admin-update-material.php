@@ -57,20 +57,20 @@ include(LAYOUT . '/head.php');
                     </label>
                 </div>
                 <div class="form-check m-2">
-                    <input class="form-check-input" onclick="showISBN();" type="radio" name="tipo" id="compilacion" value="Compilación" <?php if (is_null($materialInfo['MaterialISBN'])) echo "checked"; ?>>
+                    <input class="form-check-input" onclick="showISBN();" type="radio" name="tipo" id="compilacion" value="Compilación" <?php if ($materialInfo['MaterialISBN']=="N/A") echo "checked"; ?>>
                     <label class="form-check-label" for="tipo">
                         Compilación
                     </label>
                 </div>
             </div>
-            <div class="col" id="ISBN" <?php if (!is_null($materialInfo['MaterialISBN'])) echo 'style="display: block;"'; ?>>
+            <div class="col" id="ISBN" <?php if ($materialInfo['MaterialISBN']!="N/A") echo 'style="display: block;"'; ?>>
                 <label for="ISBN">ISBN</label>
                 <input name="ISBN" id="ISBN-id" class="form-control form-control-lg" type="text" placeholder="ISBN" value="<?php echo $materialInfo['MaterialISBN'] ?>">
                 <div class="invalid-feedback">
                     Es necesario colocar un ISBN
                 </div>
             </div>
-            <div class="col" id="Tiraje" <?php if (!is_null($materialInfo['MaterialISBN'])) echo 'style="display: block;"'; ?>>
+            <div class="col" id="Tiraje" <?php if ($materialInfo['MaterialISBN']!="N/A") echo 'style="display: block;"'; ?>>
                 <label for="Tiraje">Tiraje</label>
                 <input name="Tiraje" id="Tiraje-id" class="form-control form-control-lg" type="number" placeholder="Tiraje" min="0" value="<?php echo $materialInfo['MaterialTiraje'] ?>">
                 <div class="invalid-feedback">

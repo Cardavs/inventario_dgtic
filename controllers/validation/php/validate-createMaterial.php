@@ -15,13 +15,13 @@
         if(!empty($_POST['ISBN'])){
             $ISBNMaterial = trim($_POST['ISBN'], ' \t\n\r');
         }else{
-            $ISBNMaterial = null;
+            $ISBNMaterial = 'N/A';
         }
         //Validamos si Tiraje es nulo para evitar errores.
         if(!empty($_POST['Tiraje'])){
             $tirajeMaterial = trim($_POST['Tiraje'], ' \t\n\r');
         }else{
-            $tirajeMaterial = null;
+            $tirajeMaterial = 0;
         }
         $autorMaterial = trim($_POST['Autor'], ' \t\n\r\0\x0');
         $versionMaterial = trim($_POST['Versión'], ' \t\n\r');

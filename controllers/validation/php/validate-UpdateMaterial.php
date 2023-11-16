@@ -124,8 +124,8 @@ if (isset($_POST['actualizar'])) {
         'AnioEdicion' => $_POST['anioEdicion'],
         'NoPaginas' => $_POST['noPaginas'],
         'Area' => $_POST['area'],
-        'Isbn' => $_POST['tipo'] == "Autoría" ? $_POST['ISBN'] : null,
-        'Tiraje' => $_POST['tipo'] == "Autoría" ? $_POST['Tiraje'] : null,
+        'Isbn' => $_POST['tipo'] == "Autoría" ? $_POST['ISBN'] : "N/A",
+        'Tiraje' => $_POST['tipo'] == "Autoría" ? $_POST['Tiraje'] : 0,
         'cambioNombre' => $_POST['nombreViejo'] == $_POST['nombreMaterial'] ? false : true
     );
 
