@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-11-2023 a las 08:39:02
+-- Tiempo de generación: 16-11-2023 a las 22:25:29
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -78,7 +78,31 @@ CREATE TABLE `descargas` (
   `Material_Id` int(11) NOT NULL,
   `DescargaFecha` date NOT NULL,
   `DescargaCantidad` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ;
+
+--
+-- Volcado de datos para la tabla `descargas`
+--
+
+INSERT INTO `descargas` (`Descarga_Id`, `Sede_Id`, `Usuario_Id`, `Material_Id`, `DescargaFecha`, `DescargaCantidad`) VALUES
+(19, 1, 1, 1, '2023-01-01', 3),
+(20, 1, 2, 2, '2023-02-02', 4),
+(21, 1, 3, 3, '2023-03-03', 5),
+(22, 2, 4, 1, '2023-04-04', 6),
+(23, 2, 5, 2, '2023-05-05', 1),
+(24, 2, 6, 3, '2023-06-06', 2),
+(25, 3, 1, 1, '2023-07-07', 3),
+(26, 3, 2, 2, '2023-08-08', 4),
+(27, 3, 3, 3, '2023-09-09', 5),
+(28, 1, 3, 1, '2023-10-10', 6),
+(29, 1, 1, 2, '2023-11-11', 1),
+(30, 1, 2, 3, '2023-12-12', 2),
+(31, 2, 6, 1, '2023-01-01', 3),
+(32, 2, 1, 2, '2023-02-02', 4),
+(33, 2, 3, 3, '2023-03-03', 2),
+(34, 3, 5, 1, '2023-04-04', 1),
+(35, 3, 4, 2, '2023-05-05', 5),
+(36, 3, 6, 3, '2023-06-06', 1);
 
 -- --------------------------------------------------------
 
@@ -90,7 +114,7 @@ CREATE TABLE `diplomado` (
   `Diplomado_Id` int(11) NOT NULL,
   `DiplomadoNombre` varchar(100) NOT NULL,
   `DiplomadoEmision` varchar(50) NOT NULL,
-  `DiplomadoEstado` tinyint(1) NOT NULL
+  `DiplomadoEstado` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -127,8 +151,8 @@ CREATE TABLE `material` (
   `Material_Id` int(11) NOT NULL,
   `MaterialNombre` varchar(255) NOT NULL,
   `MaterialEstado` tinyint(1) NOT NULL DEFAULT 1,
-  `MaterialISBN` varchar(100) DEFAULT NULL,
-  `MaterialTiraje` int(11) DEFAULT NULL,
+  `MaterialISBN` char(13) NOT NULL DEFAULT 'N/A',
+  `MaterialTiraje` int(11) NOT NULL DEFAULT 0,
   `MaterialAutor` varchar(100) NOT NULL,
   `MaterialVersion` varchar(50) NOT NULL,
   `MaterialEdicion` int(11) DEFAULT NULL,
@@ -143,11 +167,11 @@ CREATE TABLE `material` (
 --
 
 INSERT INTO `material` (`Material_Id`, `MaterialNombre`, `MaterialEstado`, `MaterialISBN`, `MaterialTiraje`, `MaterialAutor`, `MaterialVersion`, `MaterialEdicion`, `MaterialPaginas`, `Area_Id`, `MaterialPDF`, `MaterialIndice`) VALUES
-(1, 'MaterialEjemplo1', 1, '23213213213', 2132132132, 'Jon Doe', '1.0', 2015, 23, 1, '/inventario_dgtic/public/pdf/DocumentoPrueba.pdf\'', '/inventario_dgtic/public/pdf/DocumentoPrueba.pdf'),
-(2, 'Material Ejemplo 2', 1, NULL, NULL, 'Jane Doe', '3.0', 2013, 30, 3, '/inventario_dgtic/public/pdf/DocumentoPrueba.pdf', '/inventario_dgtic/public/pdf/DocumentoPrueba.pdf'),
-(3, 'Material Ejempo 3', 1, '231321651', 5, 'Jon Doe', '1.0', 2015, 15, 20, '/inventario_dgtic/public/pdf/Material_Ejempo_3.pdf', '/inventario_dgtic/public/indice/Material_Ejempo_3_Indice.pdf'),
-(4, 'Material Ejempo 5', 1, NULL, NULL, 'Jane Doe', '5.0', 2015, 23, 20, '/inventario_dgtic/material/pdf/Material_Ejempo_5.pdf', '/inventario_dgtic/material/indice/Material_Ejempo_5_Indice.pdf'),
-(5, 'Material Ejempo 10', 1, NULL, NULL, 'John Wick', '1.0', 2023, 15, 1, '/inventario_dgtic/material/pdf/Material_Ejempo_1.pdf', '/inventario_dgtic/material/indice/Material_Ejempo_1_Indice.pdf');
+(1, 'MaterialEjemplo1', 1, '23213213213', 2132132132, 'Jon Doe', '1.0', 2015, 23, 1, '/inventario_dgtic/material/pdf/Material_Ejemplo_1_1.pdf', '/inventario_dgtic/material/indice/Material_Ejemplo_1_Indice_1.pdf'),
+(2, 'Material Ejemplo 2', 1, 'N/A', 0, 'Jane Doe', '3.0', 2013, 30, 3, '/inventario_dgtic/material/pdf/Material_Ejemplo_2_2.pdf', '/inventario_dgtic/material/indice/Material_Ejemplo_2_Indice_2.pdf'),
+(3, 'Material Ejempo 3', 1, '231321651', 5, 'Jon Doe', '1.0', 2015, 15, 20, '/inventario_dgtic/material/pdf/Material_Ejemplo_3_3.pdf', '/inventario_dgtic/material/indice/Material_Ejemplo_3_Indice.pdf'),
+(4, 'Material Ejemplo 5', 1, 'N/A', 0, 'Jane Doe', '5.0', 2015, 23, 20, '/inventario_dgtic/material/pdf/Material_Ejemplo_5_4.pdf', '/inventario_dgtic/material/indice/Material_Ejemplo_4.pdf'),
+(5, 'Material Ejempo 10', 1, 'N/A', 0, 'John Wick', '1.0', 2023, 15, 1, '/inventario_dgtic/material/pdf/Material_Ejempo_50_4.pdf', '/inventario_dgtic/material/indice/Material_Ejempo_5_Indice_4.pdf');
 
 -- --------------------------------------------------------
 
@@ -158,7 +182,7 @@ INSERT INTO `material` (`Material_Id`, `MaterialNombre`, `MaterialEstado`, `Mate
 CREATE TABLE `secciones` (
   `Seccion_Id` int(11) NOT NULL,
   `SeccionNombre` varchar(100) NOT NULL,
-  `EstadoSeccion` int(11) NOT NULL
+  `EstadoSeccion` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -179,8 +203,8 @@ INSERT INTO `secciones` (`Seccion_Id`, `SeccionNombre`, `EstadoSeccion`) VALUES
 CREATE TABLE `sedes` (
   `Sede_Id` int(11) NOT NULL,
   `SedeNombre` varchar(100) NOT NULL,
-  `SedeSiglas` varchar(50) NOT NULL,
-  `SedeEstado` varchar(50) NOT NULL
+  `SedeSiglas` char(10) NOT NULL,
+  `SedeEstado` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -188,9 +212,9 @@ CREATE TABLE `sedes` (
 --
 
 INSERT INTO `sedes` (`Sede_Id`, `SedeNombre`, `SedeSiglas`, `SedeEstado`) VALUES
-(1, 'Centro Mascarones', 'CM', '1'),
-(2, 'Ciudad Universitaria', 'CU', '1'),
-(3, 'Centro Polanco', 'CP', '1');
+(1, 'Centro Mascarones', 'CM', 1),
+(2, 'Ciudad Universitaria', 'CU', 1),
+(3, 'Centro Polanco', 'CP', 1);
 
 -- --------------------------------------------------------
 
@@ -206,8 +230,8 @@ CREATE TABLE `usuario` (
   `UsuarioAMaterno` varchar(100) NOT NULL,
   `UsuarioCorreo` varchar(100) NOT NULL,
   `UsuarioPassword` varchar(100) NOT NULL,
-  `UsuarioEstado` tinyint(1) NOT NULL,
-  `UsuarioRol` enum('administrador','CE','Consultor','editor') DEFAULT NULL
+  `UsuarioEstado` tinyint(1) NOT NULL DEFAULT 1,
+  `UsuarioRol` enum('administrador','CE','editor') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -218,9 +242,9 @@ INSERT INTO `usuario` (`Usuario_Id`, `Sede_Id`, `UsuarioNombre`, `UsuarioApatern
 (1, 1, 'Angel', 'Argonza', 'Roblero', 'correo1@correo.com', '$2y$10$9Nagdb5FdYbEPmXHmtCJXOSPMFsfDxkf4Mdghf.JxnxJciD.OZ2/W', 1, 'administrador'),
 (2, 3, 'Rogelio', 'Sánchez', 'Gómez', 'correo2@correo.com', '$2y$10$4eHd6VpW00OdtVXVYxNrO.4W7qKDqzJmsdxoAjRalBTsgsQRfifDO', 1, 'CE'),
 (3, 3, 'Fernando', 'Robles', 'Pérez', 'correo3@correo.com', '$2y$10$dUTYQK5AYKyUnGja2H.pEOh1uFicPiLnph4Y6UrxFCRAEtWVsFwpi', 0, 'CE'),
-(4, 2, 'Sandra', 'Mendez', 'Chavez', 'correo4@correo.com', '$2y$10$WQvo4Pd2U1PRtXDKLnIXV.2PpxuRTriJZPOlOwE4XlKnnH8yxhpSO', 0, 'Consultor'),
+(4, 2, 'Sandra', 'Mendez', 'Chavez', 'correo4@correo.com', '$2y$10$WQvo4Pd2U1PRtXDKLnIXV.2PpxuRTriJZPOlOwE4XlKnnH8yxhpSO', 0, 'editor'),
 (5, 1, 'María', 'Rosal', 'Hernández', 'correo5@correo.com', '$2y$10$i6s.mekI1tXgbuMZJ.auSumHCnJvRRaTXv/jE8iVgE.Gdwb6GsZGC', 1, 'editor'),
-(6, 1, 'Felicia', 'Piña', 'Salgado', 'correo6@correo.com', '$2y$10$dQR8DtbqCLkqQR7idolHN.v1bx8ZhdfcKHhFw9B6P2mkQHVRqNeh2', 1, 'Consultor');
+(6, 1, 'Felicia', 'Piña', 'Salgado', 'correo6@correo.com', '$2y$10$dQR8DtbqCLkqQR7idolHN.v1bx8ZhdfcKHhFw9B6P2mkQHVRqNeh2', 1, 'CE');
 
 --
 -- Índices para tablas volcadas
@@ -260,7 +284,6 @@ ALTER TABLE `intentoslogin`
 --
 ALTER TABLE `material`
   ADD PRIMARY KEY (`Material_Id`),
-  ADD UNIQUE KEY `MaterialISBN` (`MaterialISBN`),
   ADD KEY `Area_Id` (`Area_Id`);
 
 --
@@ -343,9 +366,9 @@ ALTER TABLE `area`
 -- Filtros para la tabla `descargas`
 --
 ALTER TABLE `descargas`
-  ADD CONSTRAINT `descargas_ibfk_1` FOREIGN KEY (`Sede_Id`) REFERENCES `sedes` (`Sede_Id`),
-  ADD CONSTRAINT `descargas_ibfk_2` FOREIGN KEY (`Usuario_Id`) REFERENCES `usuario` (`Usuario_Id`),
-  ADD CONSTRAINT `descargas_ibfk_3` FOREIGN KEY (`Material_Id`) REFERENCES `material` (`Material_Id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `descargas_ibfk_1` FOREIGN KEY (`Sede_Id`) REFERENCES `sedes` (`Sede_Id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `descargas_ibfk_2` FOREIGN KEY (`Usuario_Id`) REFERENCES `usuario` (`Usuario_Id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `descargas_ibfk_3` FOREIGN KEY (`Material_Id`) REFERENCES `material` (`Material_Id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `intentoslogin`
