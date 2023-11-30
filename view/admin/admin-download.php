@@ -1,4 +1,5 @@
 <?php
+
 /*********************************
  * pantalla: descargar material  *
  * date: 11/11/2023              *
@@ -50,6 +51,15 @@ $seccioninfo = $datoSeccion->getSectionById($materialInfo['Seccion_Id']);
     <?php include(LAYOUT . "/templates/manage-download-material-template.php"); ?>
 
     <?php include(LAYOUT . "/footer.php"); ?>
+
+    <script>
+      /*  // JavaScript para redirigir después de enviar el formulario
+        document.getElementById('descargaForm').addEventListener('submit', function() {
+            setTimeout(function() {
+                window.location.href = "manage-material.php";
+            }, 2500); // Redirige después de 5 segundos
+        });*/
+    </script>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-<form action="/inventario_dgtic\controllers\validation\php\validate-UpdateMaterial.php" class="container col-md-12 col-sm-4 formulario needs-validation" method="post" novalidate>
+<form id="descargaForm" action="/inventario_dgtic\controllers\validation\php\validate-UpdateMaterial.php" class="container col-md-12 col-sm-4 formulario needs-validation" method="post" novalidate>
     <div class="row g-3 mb-3">
         <div class="col">
             <label for="nombreMaterial">Nombre de material</label>
@@ -18,12 +18,12 @@
                 </label>
             </div>
         </div>
-        <div class="col" id="ISBN" <?php if (!is_null($materialInfo['MaterialISBN'])) echo 'style="display: block;"'; ?>>
+        <div class="col" id="ISBN" <?php if (($materialInfo['MaterialISBN'])!="N/A") echo 'style="display: block;"'; ?>>
             <label for="ISBN">ISBN</label>
             <input name="ISBN" id="ISBN-id" class="form-control form-control-lg" type="text" placeholder="ISBN" value="<?php echo $materialInfo['MaterialISBN'] ?>" readonly>
 
         </div>
-        <div class="col" id="Tiraje" <?php if (!is_null($materialInfo['MaterialISBN'])) echo 'style="display: block;"'; ?>>
+        <div class="col" id="Tiraje" <?php if ($materialInfo['MaterialISBN']!="N/A") echo 'style="display: block;"'; ?>>
             <label for="Tiraje">Tiraje</label>
             <input name="Tiraje" id="Tiraje-id" class="form-control form-control-lg" type="number" placeholder="Tiraje" min="0" value="<?php echo $materialInfo['MaterialTiraje'] ?>" readonly>
         </div>
@@ -65,7 +65,7 @@
     <div class="row g-3 mb-3">
         <div class="col">
             <label for="downloadCount">Número de Descargas</label>
-            <input name="downloadCount" class="form-control form-control-lg needs-validation" type="number" min="1" value="1" required>
+            <input name="downloadCount" class="form-control form-control-lg needs-validation" type="number" min="1" required>
             <div class="invalid-feedback">
                 Es necesario que el número de descargas sea mayor a 0
             </div>

@@ -39,7 +39,7 @@ if (isset($_POST['cambio'])) {
         $message = "Error al cambiar estado";
     }
     $_SESSION['message'] = $message;
-    header("Location: /inventario_dgtic/view/'.$user.'/'.$user.'-material.php");
+    header("Location: /inventario_dgtic/view/$user/manage-material.php");
     exit;
 }
 
@@ -67,10 +67,6 @@ if (isset($_POST['download2'])) {
     );
     $InsertDownload = new InsertDescargas();
     if ($InsertDownload->registrarDescarga($datosDescarga)) {
-        echo '<script language="javascript">
-                alert("Descarga Registrada ");
-                </script>';
-
         $SelectMaterial = new SelectMaterials();
         $archivos = $SelectMaterial->getPathsMaterial($idMaterial);
         $dir = realpath(__DIR__ . "/../../../../" . dirname($archivos['MaterialPDF']));
@@ -78,24 +74,25 @@ if (isset($_POST['download2'])) {
         $path = $dir . "/" . $name;
 
         if (file_exists($path)) {
+            header('Content-Description: File Transfer');
             header('Content-Type: application/pdf');
-            //header('Content-Disposition: inline; filename=' . basename($path));
             header('Content-Disposition: attachment; filename=' . basename($path));
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
             header('Content-Length: ' . filesize($path));
-            
             readfile($path);
+            exit();
         } else {
             echo '<script language="javascript">
-                alert("PDF no encontrado");
+                alert("ERROR PDF no encontrado");
                 </script>';
         }
-        
     } else {
         echo '<script language="javascript">
                 alert("ERROR Descarga No Registrada");
                 </script>';
     }
-    
 }
 
 

@@ -6,7 +6,7 @@
  * autor: Roan                   *
  *********************************/
 
- session_start();
+session_start();
 if (!isset($_SESSION['nombre']) || $_SESSION['rol'] != 'administrador') {
     session_destroy();
 
@@ -30,12 +30,13 @@ if (isset($_SESSION['message'])) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-    <?php include(LAYOUT . "/head.php"); ?>
+    <?php include(LAYOUT . "/head.php");
+    ?>
+
 </head>
 
 <body>
