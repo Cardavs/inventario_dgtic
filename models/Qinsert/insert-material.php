@@ -53,8 +53,8 @@
                     $extensionIndice = pathinfo($nombreIndice, PATHINFO_EXTENSION);
 
                     //Ruta donde se va a guardar el archivo
-                    $rutaArchivoPDF = __DIR__ . "/../../material/pdf/" . $nombrePdf;
-                    $rutaArchivoIndice = __DIR__ . "/../../material/indice/" . $nombreIndice;
+                    $rutaArchivoPDF = PDF . $nombrePdf;
+                    $rutaArchivoIndice = INDICE . $nombreIndice;
 
                     move_uploaded_file($datosMaterial['material']["tmp_name"], $rutaArchivoPDF);
                     move_uploaded_file($datosMaterial['indice']["tmp_name"], $rutaArchivoIndice);

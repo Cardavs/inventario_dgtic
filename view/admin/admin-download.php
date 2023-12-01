@@ -47,9 +47,9 @@ $seccioninfo = $datoSeccion->getSectionById($materialInfo['Seccion_Id']);
     <?php include(LAYOUT . "/navbar-users/navbarAdmin.php"); ?>
     <h2 class="titulo">Descargar Material</h2>
 
-    <script src="/inventario_dgtic/controllers/validation/js/form-validation-empty.js"></script>
+    
     <?php include(LAYOUT . "/templates/manage-download-material-template.php"); ?>
-
+    <script src="/inventario_dgtic/controllers/validation/js/form-validation-empty.js"></script>
     <?php include(LAYOUT . "/footer.php"); ?>
 
     <script>

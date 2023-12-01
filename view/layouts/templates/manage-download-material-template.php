@@ -65,7 +65,7 @@
     <div class="row g-3 mb-3">
         <div class="col">
             <label for="downloadCount">Número de Descargas</label>
-            <input name="downloadCount" class="form-control form-control-lg needs-validation" type="number" min="1" required>
+            <input name="downloadCount" class="form-control form-control-lg needs-validation" type="number" min="1" value="0" required>
             <div class="invalid-feedback">
                 Es necesario que el número de descargas sea mayor a 0
             </div>

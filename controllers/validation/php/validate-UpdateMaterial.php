@@ -69,9 +69,8 @@ if (isset($_POST['download2'])) {
     if ($InsertDownload->registrarDescarga($datosDescarga)) {
         $SelectMaterial = new SelectMaterials();
         $archivos = $SelectMaterial->getPathsMaterial($idMaterial);
-        $dir = realpath(__DIR__ . "/../../../../" . dirname($archivos['MaterialPDF']));
         $name = basename($archivos['MaterialPDF']);
-        $path = $dir . "/" . $name;
+        $path = PDF . $name;
 
         if (file_exists($path)) {
             header('Content-Description: File Transfer');
@@ -146,7 +145,7 @@ if (isset($_POST['actualizar'])) {
          */
         $nombreActual = $_FILES['material']['name'];
         $nombreReal = $_POST['nombrePDF'];
-        $rutaArchivoPDF = __DIR__ . "/../../../material/pdf/" . $nombreReal;
+        $rutaArchivoPDF = PDF . $nombreReal; 
 
         if (move_uploaded_file($_FILES['material']['tmp_name'], $rutaArchivoPDF)) {
             echo '<script language="javascript">
@@ -161,7 +160,7 @@ if (isset($_POST['actualizar'])) {
     if (is_uploaded_file($_FILES['indice']['tmp_name']) && filesize($_FILES['indice']['tmp_name']) > 0 && $_FILES['indice']['error'] === 0) {
         $nombreActual = $_FILES['indice']['name'];
         $nombreReal = $_POST['nombreIndice'];
-        $rutaArchivoPDF = __DIR__ . "/../../../material/indice/" . $nombreReal;
+        $rutaArchivoPDF = INDICE . $nombreReal;
 
         if (move_uploaded_file($_FILES['indice']['tmp_name'], $rutaArchivoPDF)) {
             echo '<script language="javascript">

@@ -103,13 +103,13 @@ class UpdateMaterial
             $nombreArchivo = str_replace(' ', '_', $nombreMaterial);
             $nombrePdf = $nombreArchivo . "_" . $id . ".pdf";
             $nombreIndice = $nombreArchivo . "_Indice_" . $id . ".pdf";
-            $rutaArchivoPDF = __DIR__ . "/../../material/pdf/";
-            $rutaArchivoIndice = __DIR__ . "/../../material/indice/";
+            $rutaArchivoPDF = "";
+            $rutaArchivoIndice = "";
 
-            if (rename($rutaArchivoIndice . basename($paths['MaterialIndice']), $rutaArchivoIndice . $nombreIndice)) {
+            if (rename(INDICE . basename($paths['MaterialIndice']), INDICE . $nombreIndice)) {
                 $rutaArchivoIndice = "/inventario_dgtic/material/indice/" . $nombreIndice;
             }
-            if (rename($rutaArchivoPDF . basename($paths['MaterialPDF']), $rutaArchivoPDF . $nombrePdf)) {
+            if (rename(PDF . basename($paths['MaterialPDF']), PDF . $nombrePdf)) {
                 $rutaArchivoPDF = "/inventario_dgtic/material/pdf/" . $nombrePdf;
             }
             $query = "UPDATE material SET MaterialPDF = :MaterialPDF, MaterialIndice = :Indice WHERE Material_Id = :Material_Id";

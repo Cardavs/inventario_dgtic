@@ -1,31 +1,39 @@
-// starter JavaScript for disabling form submissions if there are invalid fields
 (() => {
   "use strict";
 
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  const forms = document.querySelectorAll(".needs-validation");
+  // Select the first element with the class "needs-validation"
+  const form = document.querySelector(".needs-validation");
 
-  // Loop over them and prevent submission
-  Array.from(forms).forEach((form) => {
+  // Check if the element is found
+  if (form) {
     form.addEventListener(
       "submit",
       (event) => {
         if (!form.checkValidity()) {
           event.preventDefault();
           event.stopPropagation();
+        } else {
+          if (form.id === "descargaForm") {
+            alert("Descarga inciada, en breve se redireccionara.");
+            setTimeout(() => {
+              window.location.href = "manage-material.php";
+            }, 2500);
+          }
         }
 
         form.classList.add("was-validated");
       },
       false
     );
-  });
+  } else {
+    console.error("No element with class 'needs-validation' found.");
+  }
 })();
 
-function cancelarFormularioA(){
+function cancelarFormularioA() {
   window.location.href = "manage-account.php";
 }
 
-function cancelarFormularioM(){
+function cancelarFormularioM() {
   window.location.href = "manage-material.php";
 }

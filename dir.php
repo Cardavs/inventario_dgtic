@@ -9,4 +9,6 @@
     define('BD_UPDATE_USER', ROOT_PATH . 'view/admin/admin-update-user.php');
     define('MANAGE-ACCOUNT', ROOT_PATH . 'view/admin/manage-account.php');
     define('ALERT', ROOT_PATH . 'controllers/alertas.php');
+    define('PDF',ROOT_PATH.'material/pdf/');
+    define('INDICE',ROOT_PATH.'material/indice/');
 ?>
