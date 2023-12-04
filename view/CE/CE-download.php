@@ -7,7 +7,7 @@
  *********************************/
 
 session_start();
-if (!isset($_SESSION['nombre']) || $_SESSION['rol'] != 'administrador') {
+if (!isset($_SESSION['nombre']) || $_SESSION['rol'] != 'CE') {
     session_destroy();
 
     // Redirige al usuario al login
@@ -51,6 +51,7 @@ $seccioninfo = $datoSeccion->getSectionById($materialInfo['Seccion_Id']);
     <?php include(LAYOUT . "/templates/manage-download-material-template.php"); ?>
     <script src="/inventario_dgtic/controllers/validation/js/form-validation-empty.js"></script>
     <?php include(LAYOUT . "/footer.php"); ?>
+
 </body>
 
 </html>

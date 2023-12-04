@@ -20,14 +20,18 @@
             //Se realiza la conexión a la base de datos.
             $connect = $this->connection->conectar();
 
-            $test = 'SELECT COUNT(*) AS total
-                    FROM material
-                    WHERE (MaterialNombre = :nombre AND MaterialAutor = :autor) OR MaterialISBN = :ISBN';
+            $test = "SELECT COUNT(*) AS total
+            FROM material
+            WHERE (MaterialNombre = :nombre 
+                   AND MaterialAutor = :autor 
+                   AND MaterialVersion = :versionM)
+                   OR (MaterialISBN = :ISBN AND MaterialISBN <> 'N/A')";
 
             $testP = $connect->prepare($test);
             $testP->bindValue(":nombre", $datosMaterial['nombre']);
             $testP->bindValue(":autor", $datosMaterial['autor']); // Asegúrate de tener $datosMaterial['autor'] definido
             $testP->bindValue(":ISBN", $datosMaterial['ISBN']);
+            $testP->bindValue(":versionM", $datosMaterial['version']);
             $testP->execute();
 
             $total = $testP->fetchColumn();
@@ -56,7 +60,12 @@
                     $rutaArchivoPDF = PDF . $nombrePdf;
                     $rutaArchivoIndice = INDICE . $nombreIndice;
 
-                    move_uploaded_file($datosMaterial['material']["tmp_name"], $rutaArchivoPDF);
+                    if (!move_uploaded_file($datosMaterial['material']["tmp_name"], $rutaArchivoPDF)) {
+                        echo '<script language="javascript">
+                        alert("Error al cargar el archivo");
+                        </script>';
+                    }
+
                     move_uploaded_file($datosMaterial['indice']["tmp_name"], $rutaArchivoIndice);
 
                     //Función para renombrar los archivos una vez que esten guardados en su carpeta

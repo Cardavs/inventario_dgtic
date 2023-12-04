@@ -136,9 +136,11 @@
                 Es necesario subir un archivo.
             </div>
         </div>
-        <div class="col-md-12 text-center">
+        <div class="col-md-12 text-center btn-pass">
             <label for="guardarMaterial"> </label>
-            <input name="guardarMaterial" class="btn btn-primary botonCreateuser" type="submit" value="Guardar material">
+            <input name="guardarMaterial" class="btn btn-primary botonCreateuser btn-tabla" type="submit" value="Guardar material">
+            <label for="cancelar"> </label>
+                <input name="cancelar" type="button" class="btn btn-primary botonCreateuser btn-tabla" value="Cancelar" onclick="cancelarFormularioM()">
         </div>
     </div>
 </form>

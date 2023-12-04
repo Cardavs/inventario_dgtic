@@ -63,5 +63,6 @@
                 alert("El Registro no ha podido ser realizado");
                 </script>';
         }
+        header('Location: manage-material.php');
     }
 ?>
