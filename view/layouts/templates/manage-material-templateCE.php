@@ -43,10 +43,14 @@
                             </div>
                         </div>
                         <div class="btn-tabla-container">
+
                             <a href=<?php echo $infoMaterials['MaterialIndice']; ?>>
                                 <button type="button" class="btn btn-primary btn-tabla">Índice</button>
                             </a>
-                            <button type="button" class="btn btn-primary btn-tabla">Descargar</button>
+                            <form action="/inventario_dgtic\controllers\validation\php\validate-UpdateMaterial.php" method="post">
+                                <input type="hidden" name="idMaterial" value="<?php echo $infoMaterials['Material_Id']; ?>">
+                                <button type="submit" name="download" class="btn btn-primary btn-tabla">Descargar</button>
+                            </form>
                         </div>
                     </td>
                 </tr>
