@@ -24,7 +24,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
     <?php include(LAYOUT . '/header.php'); ?>
     <?php include(LAYOUT . "/navbar-users/navbarEditor.php"); ?>
 
-    <?php include(LAYOUT . "/templates/manage-diplomados.php"); ?>
+    <?php include(LAYOUT . "/templates/manage-areas.php"); ?>
 
     <?php include(LAYOUT . '/footer.php'); ?>
 </body>

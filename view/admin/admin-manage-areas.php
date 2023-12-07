@@ -14,6 +14,15 @@ if (!isset($_SESSION['nombre']) || $_SESSION['rol'] != 'administrador') {
     exit();
 }
 include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
+include_once(CONNECTION_BD);
+if (isset($_SESSION['message'])) {
+    $message = $_SESSION['message'];
+    unset($_SESSION['message']); // Limpia la variable de sesión después de usarla
+
+    echo '<script language="javascript">
+        alert("' . $message . '");
+        </script>';
+}
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +33,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/inventario_dgtic/dir.php');
     <?php include(LAYOUT . '/header.php'); ?>
     <?php include(LAYOUT . "/navbar-users/navbarAdmin.php"); ?>
 
-    <?php include(LAYOUT . "/templates/manage-diplomados.php"); ?>
+    <?php include(LAYOUT . "/templates/manage-areas.php"); ?>
 
     <?php include(LAYOUT . '/footer.php'); ?>
 </body>

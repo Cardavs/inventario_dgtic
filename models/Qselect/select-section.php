@@ -40,7 +40,7 @@
             $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
            //$connect->beginTransaction();
 
-            $query = "SELECT Seccion_Id, SeccionNombre, EstadoSeccion FROM secciones";
+            $query = "SELECT Seccion_Id, SeccionNombre, EstadoSeccion FROM secciones WHERE EstadoSeccion=1";
             $queryP = $connect -> prepare($query);
             $queryP -> execute();
             $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);

@@ -1,40 +1,41 @@
 <?php
-include(BD_SELECT . 'select-diplomados.php');
-include(VALIDATION_PHP . '/validate-createDiplomado.php');
-include(VALIDATION_PHP . '/validate-update-diplomado.php');
+include(BD_SELECT . 'select-area.php');
+include(VALIDATION_PHP . '/validate-createArea.php');
+include(VALIDATION_PHP . '/validate-update-area.php');
 //instancia de la clase SelectDiplomados
-$diplomado = new SelectDiplomados();
-//Guardar la información de los diplomados
-$infoDiplomado = $diplomado->getDiplomado();
+$area = new SelectAreas();
+//Guardar la información de los areas
+$infoAreas = $area->getAllInfoAllAreas();
 ?>
-<h1 class="titulo">Administrar Diplomados</h1>
+<h1 class="titulo">Administrar Areas</h1>
 <div class="container text-container sombra">
     <table class="table tabla-sede">
         <thead class="encabezado">
             <tr>
                 <th> </th>
-                <th>Diplomado</th>
-                <th>Emisión</th>
+                <th>Area</th>
+                <th>Seccion</th>
                 <th>Estado</th>
                 <th> </th>
             </tr>
         </thead>
         <tbody>
             <?php
-            foreach ($infoDiplomado as $infoDiplomado) {
+            foreach ($infoAreas as $infoArea) {
             ?>
                 <form action="" method="post">
                     <tr>
-                        <th> <input type="hidden" name="diplomadoId" value="<?php echo $infoDiplomado['Diplomado_Id']; ?>"></th>
-                        <th><?php echo $infoDiplomado['DiplomadoNombre']; ?></th>
-                        <td><?php echo $infoDiplomado['DiplomadoEmision']; ?></td>
+                        <th> <input type="hidden" name="areaId" value="<?php echo $infoArea['Area_Id']; ?>"></th>
+                        <th><?php echo $infoArea['AreaNombre']; ?></th>
+                        <td><?php echo $infoArea['SeccionNombre']; ?></td>
                         <td>
-                            <?php echo ($infoDiplomado['DiplomadoEstado'] == 1) ? "Activo" : "Inactivo";  ?>
+                            <?php echo ($infoArea['AreaEstado'] == 1) ? "Activo" : "Inactivo";  ?>
                         </td>
                         <td class="btn-tabla-container">
+                            <input type="hidden" name="estadoArea" value="<?php echo $infoArea['AreaEstado']; ?>">
                             <button type="submit" name="editar" class="btn btn-primary btn-tabla">Editar</button>
                             <button type="submit" name="eliminar" class="btn btn-primary btn-tabla">Eliminar</button>
-                            <button type="submit" name="<?php echo (!$infoDiplomado['DiplomadoEstado']) ? "habilitar" : "deshabilitar"; ?>" class="btn btn-primary btn-tabla btn-hab <?php echo (!$infoDiplomado['DiplomadoEstado']) ? "btn-habilitar" : "btn-inhabilitar"; ?>"><?php echo (!$infoDiplomado['DiplomadoEstado']) ? "Habilitar" : "Inhabilitar"; ?></button>
+                            <button type="submit" name="cambio" class="btn btn-primary btn-tabla btn-hab <?php echo (!$infoArea['AreaEstado']) ? "btn-habilitar" : "btn-inhabilitar"; ?>"><?php echo (!$infoArea['AreaEstado']) ? "Habilitar" : "Inhabilitar"; ?></button>
                         </td>
                     </tr>
                 </form>
@@ -53,3 +54,4 @@ $infoDiplomado = $diplomado->getDiplomado();
     </div>
 </div>
 <script src="/inventario_dgtic/view/js/dynamic_inputs/addDiplomaed.js"></script>
+<script src="/inventario_dgtic/controllers/validation/js/form-validation-empty.js"></script>

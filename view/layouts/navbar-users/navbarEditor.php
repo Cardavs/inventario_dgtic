@@ -4,7 +4,7 @@
         <a href="/inventario_dgtic/view/editor/manage-material.php">Gestionar Material</a>
         <a href="/inventario_dgtic/view/editor/editor-manage-downloads.php">Reportes Descargas</a>
         <a href="/inventario_dgtic/view/editor/editor-manage-section.php">Gestionar Secciones</a>
-        <a href="/inventario_dgtic/view/editor/editor-manage-diplomados.php">Gestionar Diplomados</a>
+        <a href="/inventario_dgtic/view/editor/editor-manage-areas.php">Gestionar Areas</a>
         <a href="/inventario_dgtic/view/editor/editor-manage-password.php">Cambiar Contraseña</a> 
         <a href="/inventario_dgtic/controllers/logout.php">Cerrar Sesión</a>
     </nav>

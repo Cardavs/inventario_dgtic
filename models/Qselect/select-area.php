@@ -60,7 +60,7 @@
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 
                 
-                $query = "SELECT AreaNombre, secciones.SeccionNombre FROM area JOIN secciones ON secciones.Seccion_Id = area.Seccion_Id WHERE Area_Id = :Area_id";
+                $query = "SELECT a.AreaNombre, s.SeccionNombre, a.Seccion_Id FROM area AS a JOIN secciones AS s ON s.Seccion_Id = a.Seccion_Id WHERE a.Area_Id = :Area_id";
                 $queryP = $connect -> prepare($query);
                 $queryP->bindValue(":Area_id", $areaId);
                 $queryP -> execute();
@@ -102,6 +102,25 @@
                         window.location.href = "/inventario_dgtic/view/admin/manage-area.php";
                         </script>';
             }
+        }
+        /* 
+        Realiza un select de todos los areaes registrados en la BD 
+        */
+        public function getAllInfoAllAreas(){
+            try {
+                $connect = $this->connection -> conectar();
+                
+                $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                
+                $query = "SELECT A.Area_Id, A.AreaNombre, A.AreaEstado, S.SeccionNombre, S.Seccion_Id FROM area AS A INNER JOIN secciones AS S ON S.Seccion_Id=A.Seccion_Id";
+                $queryP = $connect -> prepare($query);
+                $queryP -> execute();
+                $resultado = $queryP->fetchAll(PDO::FETCH_ASSOC);
+                
+            } catch (PDOException $ex) {
+                echo 'Error: ' .$ex->getMessage() . die();
+            }
+            return $resultado;
         }
     }
 ?>

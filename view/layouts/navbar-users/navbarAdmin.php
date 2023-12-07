@@ -6,7 +6,7 @@
         <a href="/inventario_dgtic/view/admin/manage-material.php">Gestionar Material</a>
         <a href="/inventario_dgtic/view/admin/manage-downloads.php">Reportes de Descargas</a>
         <a href="/inventario_dgtic/view/admin/admin-manage-section.php">Gestionar Secciones</a>
-        <a href="/inventario_dgtic/view/admin/admin-manage-diplomado.php">Gestionar Diplomados</a>
+        <a href="/inventario_dgtic/view/admin/admin-manage-areas.php">Gestionar Areas</a>
         <a href="/inventario_dgtic/controllers/logout.php">Cerrar Sesión</a>
     </nav>
 </div>
