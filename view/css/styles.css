@@ -1,3 +1,8 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
 /*Variables globales*/
 :root{
     /*Paleta de colores*/
@@ -69,6 +74,15 @@ header{
     background-color: var(--principal);
  }
 /*FOOTER*/
+
+footer{
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    bottom: auto;
+    left: 0;
+}
+
 .textoF{
     text-decoration: none;
     color: var(--texto1);
@@ -142,6 +156,7 @@ header{
 
 /*CREAR USUARIOS*/
 .formulario{
+    bottom: 0;
     font-size: 1.5rem;
     padding: 8rem;
     border-radius: 1rem;
