@@ -1,9 +1,9 @@
 <?php
 
 /*********************************
- * pantalla: Gestionar diplomados *
- * date: 21/03/2023               *
- * autor: Roan                    *
+ * pantalla: Gestionar areas      *
+ * date: 11/12/2023               *
+ * autor: Ivan                    *
  **********************************/
 session_start();
 if (!isset($_SESSION['nombre']) || $_SESSION['rol'] != 'administrador') {
@@ -24,7 +24,7 @@ if (isset($_SESSION['message'])) {
         </script>';
 }
 ?>
-
+ 
 <!DOCTYPE html>
 <html lang="es">
 <?php include(LAYOUT . '/head.php'); ?>

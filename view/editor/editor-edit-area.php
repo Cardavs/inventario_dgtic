@@ -1,6 +1,12 @@
 <?php
+/*********************************
+ * pantalla: Gestionar areas      *
+ * date: 11/12/2023               *
+ * autor: Iván                    *
+ **********************************/
+
 session_start();
-if (!isset($_SESSION['nombre']) || $_SESSION['rol'] != 'administrador') {
+if (!isset($_SESSION['nombre']) || $_SESSION['rol'] != 'editor') {
     session_destroy();
 
     // Redirige al usuario al login

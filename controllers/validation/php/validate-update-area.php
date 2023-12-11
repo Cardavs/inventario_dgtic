@@ -61,23 +61,23 @@ if (isset($_POST['cambio'])) {
 
     //Dentro de la ventana para editar la area
     //si selecciona el boton de actualizar
-    /*if(isset($_POST['actualizar'])){
-        //recibiendo el id por el metodo GET
-        $areaId = $_GET['id'];
+    if(isset($_POST['actualizar'])){
+        //recibiendo el id por el metodo POST
+        $areaId = $_POST['idArea'];
         //recibiendo los campos que se actualizaran
         $newarea = $_POST['areaNombre'];
-        $newEmision = $_POST['areaEmision'];
+        $newSeccion = $_POST['areaSeccion'];
         //Guardando todos los datos en un array
         $datosarea = array(
             'id' => $areaId,
             'nombre' => $newarea,
-            'emision' => $newEmision
+            'idSeccion' => $newSeccion
         );
 
         //llamando al metodo para actualizar informacion
-        if($area -> updatearea($datosarea)){
+        if($area -> updateArea($datosarea)){
             echo '<script language="javascript">
-                alert("Area Actualizado Correctamente");
+                alert("Area Actualizada Correctamente");
                 window.location.href = "/inventario_dgtic/view/'.$user.'/'.$user.'-manage-areas.php";
             </script>';
         }else{
@@ -93,33 +93,4 @@ if (isset($_POST['cambio'])) {
     if(isset($_POST['cancelar'])){
         header('location: '.$user.'-manage-areas.php');
     }
-    //Dentro de la ventana para editar la area
-    //si selecciona el boton de actualizar
-    if(isset($_POST['actualizarEditor'])){
-        //recibiendo el id por el metodo GET
-        $areaId = $_GET['id'];
-        //recibiendo los campos que se actualizaran
-        $newarea = $_POST['areaNombre'];
-        $newEmision = $_POST['areaEmision'];
-        //Guardando todos los datos en un array
-        $datosarea = array(
-            'id' => $areaId,
-            'nombre' => $newarea,
-            'emision' => $newEmision
-        );
-
-        //llamando al metodo para actualizar informacion
-        if($area -> updatearea($datosarea)){
-            echo 'Actualizado';
-            header('location: '.$user.'-manage-areass.php');
-        }else{
-            echo 'error';
-        }
-    }
-
-    //Dentro de la ventana para editar la area
-    //si selecciona el boton de actualizar
-    if(isset($_POST['cancelarEditor'])){
-        header('location: '.$user.'-manage-areass.php');
-    }*/
 ?>

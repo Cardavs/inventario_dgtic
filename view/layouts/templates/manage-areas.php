@@ -48,7 +48,7 @@ $infoAreas = $area->getAllInfoAllAreas();
     <div class="container text-center">
         <div class="row justify-content-start">
             <div class="col-2 ">
-                <button type="button" id="addInput" class="btn btn-primary btn-tabla">Agregar Diplomado</button>
+                <button type="button" id="addInput" class="btn btn-primary btn-tabla">Agregar Area</button>
             </div>
         </div>
     </div>

@@ -6,11 +6,11 @@ include(VALIDATION_PHP . '/validate-update-section.php');
 //Instancia de la clase SelectSection
 $section = new SelectSection();
 //Guardar información de secciones
-$infoSection = $section->getSection();
+$infoSection = $section->getSectionAll();
 ?>
 <h1 class="titulo">Administrar Secciones</h1>
 <div class="container text-container sombra">
-    <table class="table tabla-sede">
+    <table class="table tabla-sede"> 
         <thead class="encabezado">
             <tr>
                 <th> </th>

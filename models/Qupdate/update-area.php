@@ -88,9 +88,9 @@
     
                 $queryP = $connect -> prepare($query);
     
-                $queryP->bindValue(":Area_Id", $datosArea['nombre']);
+                $queryP->bindValue(":AreaNombre", $datosArea['nombre']);
                 $queryP->bindValue(":Seccion_Id", $datosArea['idSeccion']);
-                $queryP->bindValue(":AreaNombre", $datosArea['id']);
+                $queryP->bindValue(":Area_Id", $datosArea['id']);
                 
                 $queryP -> execute();
                 
